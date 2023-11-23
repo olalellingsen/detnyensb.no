@@ -1,18 +1,20 @@
-import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import About from "./pages/About";
+import Music from "./pages/Music";
+import Concerts from "./pages/Concerts";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
     <>
       <Navbar />
       <div className="pt-24 h-screen">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </BrowserRouter>
+        <Home />
+        <About />
+        <Music />
+        <Concerts />
+        <Contact />
       </div>
     </>
   );
