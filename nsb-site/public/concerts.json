@@ -1,0 +1,20 @@
+[
+  {
+    "title": "NSBs julekonsert",
+    "image": "https://scontent.fosl3-2.fna.fbcdn.net/v/t39.30808-6/402515309_18186701539304128_6196755811620769455_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=1MqRNKY0qEkAX-ZjgEq&_nc_ht=scontent.fosl3-2.fna&oh=00_AfBaxIGLaG5fR8v1kZ-r_TqkB1KayYKtSM51AuVe5GYiBQ&oe=6564EBA3",
+    "date": "18.12.23",
+    "time": "20:00",
+    "location": "Parkteatret",
+    "tickets": "https://www.ticketmaster.no/event/729081?fbclid=IwAR09V9Xooqb1fwMMCkL5P-I8TkHs--RSO1jdV-nRjfNwk3Bh_z95Y_tLsW4",
+    "description": ""
+  },
+  {
+    "title": "Concert 2",
+    "image": "concert2.jpg",
+    "date": "2023-12-15",
+    "time": "20:00",
+    "location": "Venue 2",
+    "tickets": "Ticket Link 2",
+    "description": "Description of Concert 2"
+  }
+]

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <>
-      <nav className="fixed h-24 p-4 flex justify-between w-full">
+      <nav className="fixed h-24 p-4 flex justify-between w-full bg-white">
         <img src={logo} alt="logo" className="bandLogo" />
         <h1 className="hidden">Det Nye Norske Storband</h1>
         <div className="hidden sm:flex gap-8 p-4 text-lg">
@@ -15,7 +15,9 @@ function Navbar() {
           <ul>Musikk</ul>
           <ul>Kontakt</ul>
         </div>
-        <Menu className="sm:hidden w-16 h-16" />
+        <div className="sm:hidden pt-2">
+          <Menu size={50} />
+        </div>
       </nav>
     </>
   );

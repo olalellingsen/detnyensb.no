@@ -2,5 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.bandLogo {
+.card {
+  @apply bg-primary rounded-lg shadow-lg text-white p-4;
+}
+
+h2 {
+  @apply text-lg font-bold;
 }

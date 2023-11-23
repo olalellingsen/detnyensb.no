@@ -11,10 +11,10 @@ function App() {
       <Navbar />
       <div className="pt-24 h-screen">
         <Home />
-        <About />
+        {/* <About />
         <Music />
         <Concerts />
-        <Contact />
+        <Contact /> */}
       </div>
     </>
   );
