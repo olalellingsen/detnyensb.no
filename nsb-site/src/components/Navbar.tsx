@@ -13,12 +13,12 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-24 p-4 flex justify-between w-full bg-white">
+      <nav className="fixed h-24 p-4 sm:px-6 flex justify-between w-full bg-white">
         <img src={logo} alt="logo" className="bandLogo" />
         <div className="hidden sm:flex gap-8 p-4 text-lg">
           <ul>Hjem</ul>
           <ul>Om oss</ul>
-          <ul>Musikk</ul>
+          {/* <ul>Musikk</ul> */}
           <ul>Kontakt</ul>
         </div>
         <div className="sm:hidden pt-2" onClick={() => setIsMenuOpen(true)}>
@@ -27,7 +27,7 @@ function Navbar() {
       </nav>
       {isMenuOpen && (
         <div
-          className="fixed top-0 left-0 w-screen h-screen bg-primary"
+          className="fixed sm:hidden top-0 left-0 w-screen h-screen bg-primary"
           onClick={closeMenu}
         >
           {/* logo and cross */}
@@ -40,10 +40,11 @@ function Navbar() {
 
           {/* menu */}
           <div className="p-6">
-            <ul className="text-3xl text-white grid gap-2">
+            <ul className="text-5xl text-white grid gap-2">
               <li onClick={closeMenu}>Hjem</li>
               <li onClick={closeMenu}>Om oss</li>
-              <li onClick={closeMenu}>Musikk</li>
+              {/* <li onClick={closeMenu}>Kalender</li> */}
+              {/* <li onClick={closeMenu}>Musikk</li> */}
               <li onClick={closeMenu}>Kontakt</li>
             </ul>
           </div>
