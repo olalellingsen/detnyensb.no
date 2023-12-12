@@ -7,7 +7,7 @@ function Home() {
     <div className="h-full px-2">
       <h1 className="text-3xl text-center">Det Nye Norske Storband</h1>
       <img src={homeImage} alt="" />
-      <div className="">
+      <div className="mt-8">
         <h2 className="flex justify-center my-2">Neste konsert:</h2>
         <Concerts nextConcertOnly />
       </div>
