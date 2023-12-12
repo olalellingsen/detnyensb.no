@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .card {
-  @apply bg-primary rounded-lg shadow-lg text-white p-4;
+  @apply bg-primary rounded-lg shadow-xl text-white p-4 sm:w-3/4;
 }
 
 h2 {

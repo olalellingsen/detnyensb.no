@@ -2,20 +2,22 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Music from "./pages/Music";
-import Concerts from "./pages/Concerts";
+import Calendar from "./pages/Calendar";
 import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
       <Navbar />
-      <div className="pt-24 h-screen">
+      <div className="pt-24 p-3 sm:pt-24 sm:p-6 ">
         <Home />
         {/* <About />
         <Music />
-        <Concerts />
+        <Calendar />
         <Contact /> */}
       </div>
+      <Footer />
     </>
   );
 }
