@@ -4,7 +4,7 @@ export default {
   theme: {
     colors: {
       primary: "#bf1e2e",
-      primaryLight: "#e53e4d",
+      rimaryLight: "#e53e4d",
       white: "#fff",
     },
     extend: {},

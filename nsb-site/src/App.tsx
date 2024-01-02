@@ -10,12 +10,12 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="pt-24 p-3 sm:pt-24 sm:p-6 ">
+      <div className="pt-24 p-3 sm:pt-24 sm:p-6 md:px-10 lg:px-24 2xl:px-36 grid gap-12">
         <Home />
-        {/* <About />
-        <Music />
-        <Calendar />
-        <Contact /> */}
+        <About />
+        {/* <Music /> */}
+        {/* <Calendar /> */}
+        {/* <Contact /> */}
       </div>
       <Footer />
     </>

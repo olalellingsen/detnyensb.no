@@ -15,7 +15,7 @@ function Concerts({ nextConcertOnly }: { nextConcertOnly?: boolean }) {
   }
 
   return (
-    <div className="grid gap-2">
+    <div className="grid grid-cols-1 px-4 sm:px-20 md:p-0 md:w-1/2">
       <div>
         {displayedConcerts.map((concert: ConcertProps) => (
           <Concert

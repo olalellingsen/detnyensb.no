@@ -14,7 +14,12 @@ function Navbar() {
   return (
     <>
       <nav className="fixed h-24 p-4 sm:px-6 flex justify-between w-full bg-white">
-        <img src={logo} alt="logo" className="bandLogo" />
+        <div className="flex">
+          <img src={logo} alt="logo" className="bandLogo" />
+          <h1 className="pt-3.5 px-4 hidden md:flex">
+            Det Nye Norske Storband
+          </h1>
+        </div>
         <div className="hidden sm:flex gap-8 p-4 text-lg">
           <ul>Hjem</ul>
           <ul>Om oss</ul>

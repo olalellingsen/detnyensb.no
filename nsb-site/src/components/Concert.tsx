@@ -27,7 +27,7 @@ function Concert({
 }: ConcertProps) {
   return (
     <div className="card grid gap-2">
-      <h2 className="flex justify-center">{title}</h2>
+      <h2 className="flex justify-center sm:justify-start">{title}</h2>
       <div className="grid sm:grid-cols-2 gap-4">
         <img src={image} alt={"Image of " + title} className="rounded-md" />
         <div className="flex flex-wrap gap-4 sm:mt-0 sm:flex-col">
