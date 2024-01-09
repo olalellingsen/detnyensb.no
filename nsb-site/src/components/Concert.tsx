@@ -1,15 +1,15 @@
 import React from "react";
-import { Calendar } from "lucide-react";
+import { Calendar, Underline } from "lucide-react";
 import { Clock } from "lucide-react";
 import { MapPin } from "lucide-react";
 import { Ticket } from "lucide-react";
 
 export interface ConcertProps {
-  title: string;
+  title?: string;
   image?: string;
-  date: string;
-  time: string;
-  location: string;
+  date?: string;
+  time?: string;
+  location?: string;
   locationLink?: string;
   ticketLink?: string;
   description?: string;
@@ -29,7 +29,9 @@ function Concert({
     <div className="card grid gap-2">
       <h2 className="flex justify-center sm:justify-start">{title}</h2>
       <div className="grid sm:grid-cols-2 gap-4">
-        <img src={image} alt={"Image of " + title} className="rounded-md" />
+        {image !== undefined && (
+          <img src={image} alt={"Image of " + title} className="rounded-md" />
+        )}
         <div className="flex flex-wrap gap-4 sm:mt-0 sm:flex-col">
           <div className="flex gap-1">
             <Calendar />
@@ -41,17 +43,23 @@ function Concert({
           </div>
           <div className="flex gap-1">
             <MapPin />
-            <a className="underline" href={locationLink}>
+            <a
+              className={locationLink !== " " ? "underline" : ""}
+              href={locationLink}
+            >
               {location}
             </a>
           </div>
-          <div className="flex gap-1">
-            <Ticket />
-            <a className="underline" href={ticketLink}>
-              Kjøp billetter
-            </a>
-          </div>
-          <p>{description}</p>
+
+          {ticketLink !== "" && (
+            <div className="flex gap-1">
+              <Ticket />
+              <a className="underline" href={ticketLink}>
+                Kjøp billetter
+              </a>
+            </div>
+          )}
+          {description !== "" && <p>{description}</p>}
         </div>
       </div>
     </div>
