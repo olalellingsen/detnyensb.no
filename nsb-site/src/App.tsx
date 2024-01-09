@@ -14,7 +14,7 @@ function App() {
         <Home />
         {/* <About /> */}
         {/* <Music /> */}
-        <Concerts upcoming={true} />
+        <Concerts upcoming={true} past={true} />
         {/* <Contact /> */}
       </div>
       {/* <Footer /> */}

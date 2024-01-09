@@ -94,14 +94,20 @@ function Concerts({ nextOnly, past, upcoming }: Props) {
       {upcoming && (
         <div>
           <h1>Upcoming concerts</h1>
+
           {upcomingConcerts.map((concert) => (
-            <Concert {...concert} />
+            <div className="m-4">
+              <Concert {...concert} />
+            </div>
           ))}
         </div>
       )}
       {past && (
         <div>
           <h1>Past concerts</h1>
+          {pastConcerts.map((concert) => (
+            <Concert {...concert} />
+          ))}
         </div>
       )}
       {/* Render other necessary components */}
