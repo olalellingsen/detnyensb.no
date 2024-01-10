@@ -1,7 +1,11 @@
 import React from "react";
 
-function Contact() {
-  return <div className="h-full border">Contact</div>;
+function Contact({ id }: { id: string }) {
+  return (
+    <div id={id} className="h-full border">
+      Contact
+    </div>
+  );
 }
 
 export default Contact;

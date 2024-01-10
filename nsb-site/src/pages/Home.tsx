@@ -5,7 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import Concerts from "../components/Concerts";
 
-function Home() {
+function Home({ id }: { id: string }) {
   const [homeImage, setHomeImage] = useState("");
   const storage = getStorage();
   const imagesRef = ref(storage, "home.jpg");
@@ -30,14 +30,17 @@ function Home() {
   }, [imagesRef]); // Dependency on imagesRef to re-fetch data when the image changes
 
   return (
-    <div className="h-full px-2">
-      <h1 className="md:hidden">Det Nye Norske Storband</h1>
+    <div className="h-full px-2" id={id}>
+      <h1 className="lg:hidden">Det Nye Norske Storband</h1>
       <img src={homeImage} alt="" className="my-4" />
-      <div className="mt-8">
-        <h2 className="flex justify-center my-2 md:justify-start">
-          Neste konsert:
-        </h2>
-        <Concerts nextOnly={true} />
+      <div className="grid md:grid-cols-2">
+        <div className="mt-8">
+          <h2 className="flex justify-center my-2 md:justify-start">
+            Neste konsert:
+          </h2>
+          <Concerts nextOnly={true} id="" />
+        </div>
+        <div>{/* Spotify player here */}</div>
       </div>
     </div>
   );

@@ -8,9 +8,10 @@ interface Props {
   nextOnly?: boolean;
   past?: boolean;
   upcoming?: boolean;
+  id: string;
 }
 
-function Concerts({ nextOnly, past, upcoming }: Props) {
+function Concerts({ nextOnly, past, upcoming, id }: Props) {
   const [concertData, setConcertData] = useState<DocumentData[]>([]);
   const [upcomingConcerts, setUpcomingConcerts] = useState<ConcertProps[]>([]);
   const [pastConcerts, setPastConcerts] = useState<ConcertProps[]>([]);

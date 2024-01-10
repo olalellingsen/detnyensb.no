@@ -9,9 +9,9 @@ import oslokommune from "../assets/images/sponsor-icons/Oslo-logo-sort-RGB.png";
 
 function Footer() {
   return (
-    <div className="mt-4 py-4 px-4 border-t sm:text-center">
+    <div className="mt-4 py-4 px-4 sm:text-center bg-primary text-white">
       <h3>Våre samarbeidspartnere:</h3>
-      <div className="underline font-extralight py-2 grid sm:grid-cols-3 lg:grid-cols-6">
+      <div className="underline font-extralight py-4 grid sm:grid-cols-3 lg:grid-cols-6">
         <a href="https://www.homeworkspace.no/">Home Workspace</a>
 
         <a href="https://sparebankstiftelsen.no/">Sparebankstiftelsen</a>
