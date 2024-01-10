@@ -11,7 +11,7 @@ interface Props {
 }
 
 function Concerts({ nextOnly, past, upcoming }: Props) {
-  const [concertData, setConcertData] = useState<DocumentData[]>([]); // Set the type to DocumentData array
+  const [concertData, setConcertData] = useState<DocumentData[]>([]);
   const [upcomingConcerts, setUpcomingConcerts] = useState<ConcertProps[]>([]);
   const [pastConcerts, setPastConcerts] = useState<ConcertProps[]>([]);
 
@@ -21,8 +21,9 @@ function Concerts({ nextOnly, past, upcoming }: Props) {
         const querySnapshot = await getDocs(collection(db, "Concerts"));
         const concertData = querySnapshot.docs.map((doc) =>
           doc.data()
-        ) as DocumentData[]; // Cast to DocumentData[]
+        ) as DocumentData[];
         setConcertData(concertData);
+        filterConcertData(concertData); // Call filterConcertData after data is fetched
       } catch (error) {
         console.error(
           "Error connecting to Firestore or accessing Storage:",
@@ -30,12 +31,12 @@ function Concerts({ nextOnly, past, upcoming }: Props) {
         );
       }
     };
+
     fetchData();
-    filterConcertData();
   }, []); // Dependency on imagesRef to re-fetch data when the image changes
 
   // Filter concertData into nextConcert, upcomingConcerts and pastConcerts
-  function filterConcertData() {
+  function filterConcertData(concertData: DocumentData[]) {
     // Filter upcoming concerts
     const upcomingConcerts = concertData.filter((concert) => {
       const concertDate = new Date(concert.date.toDate());
