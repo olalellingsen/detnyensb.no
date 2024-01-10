@@ -16,7 +16,7 @@ function App() {
         <Home id="home" />
         <About id="about" />
         <Music id="music" />
-        {/* <Concerts id="concerts" upcoming={true} past={true} /> */}
+        <Concerts id="concerts" upcoming={true} past={true} />
         <Contact id="contact" />
       </div>
       <Footer />

@@ -107,9 +107,17 @@ function Concerts({ nextOnly, past, upcoming, id }: Props) {
       {past && (
         <div>
           <h1>Past concerts</h1>
-          {pastConcerts.map((concert) => (
-            <Concert {...concert} />
-          ))}
+          <ul>
+            {pastConcerts.map((concert) => (
+              <li>
+                <div className="flex gap-8">
+                  <p>{concert.title}</p>
+                  <p>{concert.location}</p>
+                  <p>{concert.date}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
       {/* Render other necessary components */}
