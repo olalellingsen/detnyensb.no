@@ -27,7 +27,7 @@ function Concert({
 }: ConcertProps) {
   return (
     <div className="card grid gap-2">
-      <h2 className="flex justify-center sm:justify-start">{title}</h2>
+      <h2 className="flex justify-start">{title}</h2>
       <div className="grid sm:grid-cols-2 gap-4">
         {image !== undefined && (
           <img src={image} alt={"Image of " + title} className="rounded-md" />
@@ -51,7 +51,7 @@ function Concert({
             </a>
           </div>
 
-          {ticketLink !== "" && (
+          {ticketLink !== undefined && ticketLink !== "" && (
             <div className="flex gap-1">
               <Ticket />
               <a className="underline" href={ticketLink}>

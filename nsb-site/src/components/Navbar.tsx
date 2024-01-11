@@ -8,15 +8,27 @@ import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const closeMenu = () => {
+  function closeMenu() {
     setIsMenuOpen(false);
-  };
+  }
+
+  function clickLink() {
+    setTimeout(() => {
+      closeMenu();
+    }, 200); // Replace 1000 with the number of milliseconds you want to wait
+  }
 
   return (
     <>
       <nav className="fixed h-24 p-4 sm:px-6 flex justify-between w-full bg-white">
         <div className="flex">
-          <img src={logo} alt="logo" className="bandLogo" />
+          <Link to="home" smooth={true} duration={800} offset={-100}>
+            <img
+              src={logo}
+              alt="logo"
+              className="w-16 hover:scale-105 hover:cursor-pointer transition-transform"
+            />
+          </Link>
           <h1 className="pt-3.5 px-4 hidden lg:flex">
             Det Nye Norske Storband
           </h1>
@@ -27,7 +39,7 @@ function Navbar() {
             smooth={true}
             duration={800}
             offset={-100}
-            className="hover:underline hover:cursor-pointer"
+            className="navLink"
           >
             Hjem
           </Link>
@@ -36,7 +48,7 @@ function Navbar() {
             smooth={true}
             duration={800}
             offset={-100}
-            className="hover:underline hover:cursor-pointer"
+            className="navLink"
           >
             Om oss
           </Link>
@@ -45,7 +57,7 @@ function Navbar() {
             smooth={true}
             duration={800}
             offset={-100}
-            className="hover:underline hover:cursor-pointer"
+            className="navLink"
           >
             Musikk
           </Link>
@@ -54,7 +66,7 @@ function Navbar() {
             smooth={true}
             duration={800}
             offset={-100}
-            className="hover:underline hover:cursor-pointer"
+            className="navLink"
           >
             Kalender
           </Link>
@@ -63,7 +75,7 @@ function Navbar() {
             smooth={true}
             duration={800}
             offset={-100}
-            className="hover:underline hover:cursor-pointer"
+            className="navLink"
           >
             Kontakt
           </Link>
@@ -82,51 +94,46 @@ function Navbar() {
             </div>
           </div>
 
-          {/* menu */}
+          {/* mobile menu */}
           <div className="p-6">
             <ul className="text-5xl text-white grid gap-4">
               <Link
                 to="home"
-                smooth={true}
-                duration={800}
                 offset={-100}
-                onClick={closeMenu}
+                className="hover:underline"
+                onClick={clickLink}
               >
                 Hjem
               </Link>
               <Link
                 to="about"
-                smooth={true}
-                duration={800}
                 offset={-100}
-                onClick={closeMenu}
+                className="hover:underline"
+                onClick={clickLink}
               >
                 Om oss
               </Link>
               <Link
                 to="music"
-                smooth={true}
-                duration={800}
                 offset={-100}
-                onClick={closeMenu}
+                className="hover:underline"
+                onClick={clickLink}
               >
                 Musikk
               </Link>
               <Link
                 to="concerts"
-                smooth={true}
-                duration={800}
                 offset={-100}
-                onClick={closeMenu}
+                className="hover:underline"
+                onClick={clickLink}
               >
                 Kalender
               </Link>
               <Link
                 to="contact"
-                smooth={true}
-                duration={800}
                 offset={-100}
-                onClick={closeMenu}
+                className="hover:underline"
+                onClick={clickLink}
               >
                 Kontakt
               </Link>

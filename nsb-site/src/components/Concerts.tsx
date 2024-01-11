@@ -15,16 +15,18 @@ function Concerts({ nextOnly, past, upcoming, id }: Props) {
   const [concertData, setConcertData] = useState<DocumentData[]>([]);
   const [upcomingConcerts, setUpcomingConcerts] = useState<ConcertProps[]>([]);
   const [pastConcerts, setPastConcerts] = useState<ConcertProps[]>([]);
+  const [uniqueConcertIds, setUniqueConcertIds] = useState<Set<string>>(
+    new Set()
+  );
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "Concerts"));
-        const concertData = querySnapshot.docs.map((doc) =>
+        const newConcertData = querySnapshot.docs.map((doc) =>
           doc.data()
         ) as DocumentData[];
-        setConcertData(concertData);
-        filterConcertData(concertData); // Call filterConcertData after data is fetched
+        setConcertData(newConcertData);
       } catch (error) {
         console.error(
           "Error connecting to Firestore or accessing Storage:",
@@ -34,47 +36,49 @@ function Concerts({ nextOnly, past, upcoming, id }: Props) {
     };
 
     fetchData();
-  }, []); // Dependency on imagesRef to re-fetch data when the image changes
+  }, [id]); // Add 'id' as a dependency to refetch data when 'id' changes
 
-  // Filter concertData into nextConcert, upcomingConcerts and pastConcerts
-  function filterConcertData(concertData: DocumentData[]) {
-    // Filter upcoming concerts
-    const upcomingConcerts = concertData.filter((concert) => {
-      const concertDate = new Date(concert.date.toDate());
-      const today = new Date();
-      return concertDate > today;
-    });
+  useEffect(() => {
+    filterConcertData();
+  }, [concertData]); // Update the filtered data whenever concertData changes
 
-    // Filter past concerts
-    const pastConcerts = concertData.filter((concert) => {
-      const concertDate = new Date(concert.date.toDate());
-      const today = new Date();
-      return concertDate < today;
-    });
+  function filterConcertData() {
+    const today = new Date();
+    const upcomingConcerts = concertData
+      .filter((concert) => {
+        const concertDate = new Date(concert.date.toDate());
+        return concertDate > today;
+      })
+      .map((concert) => ({
+        title: concert.title.toString(),
+        date: concert.date.toDate().toLocaleDateString(),
+        time: concert.date.toDate().toLocaleTimeString().slice(0, -3),
+        location: concert.location,
+        locationLink: concert.locationLink,
+        ticketLink: concert.ticketLink,
+        description: concert.description,
+      }));
 
-    upcomingConcerts.forEach((concert) => {
-      setUpcomingConcerts((c) =>
-        c.concat({
-          title: concert.title.toString(),
-          date: concert.date.toDate().toLocaleDateString(),
-          time: concert.date.toDate().toLocaleTimeString().slice(0, -3),
-          location: concert.location,
-          locationLink: concert.locationLink,
-          ticketLink: concert.ticketLink,
-          description: concert.description,
-        })
-      );
-    });
+    const pastConcerts = concertData
+      .filter((concert) => {
+        const concertDate = new Date(concert.date.toDate());
+        return concertDate < today;
+      })
+      .map((concert) => ({
+        title: concert.title,
+        date: concert.date.toDate().toLocaleDateString("no-NO"),
+        location: concert.location,
+      }));
 
-    pastConcerts.forEach((concert) => {
-      setPastConcerts((c) =>
-        c.concat({
-          title: concert.title,
-          date: concert.date.toDate().toLocaleDateString("no-NO"),
-          location: concert.location,
-        })
-      );
-    });
+    // Use Set to keep track of unique concert IDs
+    const newUniqueConcertIds = new Set([
+      ...concertData.map((concert) => concert.id),
+    ]);
+
+    // Check for new data to avoid duplicates
+    setUpcomingConcerts(upcomingConcerts);
+    setPastConcerts(pastConcerts);
+    setUniqueConcertIds(newUniqueConcertIds);
   }
 
   return (
@@ -95,19 +99,18 @@ function Concerts({ nextOnly, past, upcoming, id }: Props) {
       )}
       {upcoming && (
         <div>
-          <h1>Upcoming concerts</h1>
-
-          {upcomingConcerts.map((concert) => (
-            <div className="m-4">
+          <h1>Kommende konserter</h1>
+          <div className="grid gap-4 sm:grid-cols-2 mt-2">
+            {upcomingConcerts.map((concert) => (
               <Concert {...concert} />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
       {past && (
-        <div>
-          <h1>Past concerts</h1>
-          <ul>
+        <div className="pt-8">
+          <h1>Tidligere konserter</h1>
+          <ul className="pt-2">
             {pastConcerts.map((concert) => (
               <li>
                 <div className="flex gap-8">
