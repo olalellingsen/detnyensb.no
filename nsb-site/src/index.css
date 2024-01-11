@@ -25,3 +25,11 @@ h2 {
 p {
   @apply text-lg;
 }
+
+.album {
+  @apply w-full;
+}
+
+.single {
+  @apply w-full;
+}
