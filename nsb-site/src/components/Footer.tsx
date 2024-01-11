@@ -10,21 +10,28 @@ import oslokommune from "../assets/images/sponsor-icons/Oslo-logo-sort-RGB.png";
 function Footer() {
   return (
     <div className="mt-4 py-4 px-4 sm:text-center bg-primary text-white">
-      <h3>Våre samarbeidspartnere:</h3>
+      <h2>Våre samarbeidspartnere:</h2>
       <div className="underline font-extralight py-4 grid sm:grid-cols-3 lg:grid-cols-6">
-        <a href="https://www.homeworkspace.no/">Home Workspace</a>
-
-        <a href="https://sparebankstiftelsen.no/">Sparebankstiftelsen</a>
-
-        <a href="https://ostnorsk.jazzinorge.no/">Østnorsk Jazzsenter</a>
-
-        <a href="https://jazzforum.jazzinorge.no/">Norsk Jazzforum</a>
-
-        <a href="https://www.kulturdirektoratet.no/">Kulturdirektoratet</a>
-
-        <a href="https://www.oslo.kommune.no/etater-foretak-og-ombud/kulturetaten/#gref">
-          Oslo Kommune
-        </a>
+        <p>
+          <a href="https://www.homeworkspace.no/">Home Workspace</a>
+        </p>
+        <p>
+          <a href="https://sparebankstiftelsen.no/">Sparebankstiftelsen</a>
+        </p>
+        <p>
+          <a href="https://ostnorsk.jazzinorge.no/">Østnorsk Jazzsenter</a>
+        </p>
+        <p>
+          <a href="https://jazzforum.jazzinorge.no/">Norsk Jazzforum</a>
+        </p>
+        <p>
+          <a href="https://www.kulturdirektoratet.no/">Kulturdirektoratet</a>
+        </p>
+        <p>
+          <a href="https://www.oslo.kommune.no/etater-foretak-og-ombud/kulturetaten/#gref">
+            Oslo Kommune
+          </a>
+        </p>
       </div>
       {/* <div className="p-4 grid px-12 justify-center gap-5 sm:flex flex-wrap">
         <div className="flex gap-2">

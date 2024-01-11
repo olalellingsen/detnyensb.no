@@ -21,3 +21,7 @@ h2 {
 .soMeIcon {
   @apply hover:cursor-pointer stroke-white;
 }
+
+p {
+  @apply text-lg;
+}

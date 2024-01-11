@@ -11,10 +11,10 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="pt-24 p-3 sm:pt-24 sm:p-6 md:px-10 lg:px-24 2xl:px-36 grid gap-12">
+      <div className="pt-24 px-1 sm:pt-24 sm:p-6 md:px-10 lg:px-24 2xl:px-48 grid gap-12">
         <Home id="home" />
-        <About id="about" />
         <Music id="music" />
+        <About id="about" />
         <Concerts id="concerts" upcoming={true} past={true} />
         <Contact id="contact" />
       </div>

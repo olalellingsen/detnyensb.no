@@ -46,15 +46,6 @@ function Navbar() {
             Hjem
           </Link>
           <Link
-            to="about"
-            smooth={true}
-            duration={800}
-            offset={-100}
-            className="navLink"
-          >
-            Om oss
-          </Link>
-          <Link
             to="music"
             smooth={true}
             duration={800}
@@ -64,13 +55,22 @@ function Navbar() {
             Musikk
           </Link>
           <Link
+            to="about"
+            smooth={true}
+            duration={800}
+            offset={-100}
+            className="navLink"
+          >
+            Om oss
+          </Link>
+          <Link
             to="concerts"
             smooth={true}
             duration={800}
             offset={-100}
             className="navLink"
           >
-            Kalender
+            Konserter
           </Link>
           <Link
             to="contact"
