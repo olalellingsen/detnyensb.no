@@ -17,3 +17,7 @@ h2 {
 .navLink {
   @apply hover:cursor-pointer hover:border-b-2 hover:border-primary mb-1;
 }
+
+.soMeIcon {
+  @apply hover:cursor-pointer stroke-white;
+}

@@ -30,7 +30,7 @@ function Home({ id }: { id: string }) {
   }, [imagesRef]); // Dependency on imagesRef to re-fetch data when the image changes
 
   return (
-    <div className="h-full px-2" id={id}>
+    <div className="h-full" id={id}>
       <h1 className="lg:hidden">Det Nye Norske Storband</h1>
       <img src={homeImage} alt="" className="my-4" />
       <div className="grid md:grid-cols-2">

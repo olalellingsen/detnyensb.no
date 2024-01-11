@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
+
 import logo from "../assets/logo.png";
 import { Link } from "react-scroll";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import SoMe from "./SoMe";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -95,8 +97,8 @@ function Navbar() {
           </div>
 
           {/* mobile menu */}
-          <div className="p-6">
-            <ul className="text-5xl text-white grid gap-4">
+          <div className="p-6 pt-0">
+            <ul className="text-5xl text-white grid gap-3">
               <Link
                 to="home"
                 offset={-100}
@@ -138,6 +140,13 @@ function Navbar() {
                 Kontakt
               </Link>
             </ul>
+          </div>
+          <div className="absolute bottom-4 w-full px-8">
+            <div className="flex justify-between gap-4">
+              <SoMe face={true} />
+              <SoMe insta={true} />
+              <SoMe yt={true} />
+            </div>
           </div>
         </div>
       )}
