@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
 
 import logo from "../assets/logo.png";
 import { Link } from "react-scroll";
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import SoMe from "./SoMe";
 
 function Navbar() {
@@ -46,15 +45,6 @@ function Navbar() {
             Hjem
           </Link>
           <Link
-            to="music"
-            smooth={true}
-            duration={800}
-            offset={-100}
-            className="navLink"
-          >
-            Musikk
-          </Link>
-          <Link
             to="about"
             smooth={true}
             duration={800}
@@ -62,6 +52,15 @@ function Navbar() {
             className="navLink"
           >
             Om oss
+          </Link>
+          <Link
+            to="music"
+            smooth={true}
+            duration={800}
+            offset={-100}
+            className="navLink"
+          >
+            Musikk
           </Link>
           <Link
             to="concerts"
@@ -73,7 +72,7 @@ function Navbar() {
             Konserter
           </Link>
           <Link
-            to="contact"
+            to="footer"
             smooth={true}
             duration={800}
             offset={-100}
@@ -129,10 +128,10 @@ function Navbar() {
                 className="hover:underline"
                 onClick={clickLink}
               >
-                Kalender
+                Konserter
               </Link>
               <Link
-                to="contact"
+                to="footer"
                 offset={-100}
                 className="hover:underline"
                 onClick={clickLink}

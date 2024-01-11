@@ -36,7 +36,6 @@ function Home({ id }: { id: string }) {
       <img src={homeImage} alt="" className="my-4 sm:hidden" />
       <img src={homeImageWide} alt="" className="my-4 hidden sm:block" />
       <div>
-        <h2 className="flex justify-center my-2">Neste konsert:</h2>
         <div className="md:w-2/3 xl:w-1/2 mx-auto">
           <Concerts nextOnly={true} id="" />
         </div>

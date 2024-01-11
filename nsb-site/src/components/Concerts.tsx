@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
 import Concert, { ConcertProps } from "./Concert";
-import { set } from "firebase/database";
 
 interface Props {
   nextOnly?: boolean;
-  past?: boolean;
-  upcoming?: boolean;
   id: string;
 }
 
-function Concerts({ nextOnly, past, upcoming, id }: Props) {
+function Concerts({ nextOnly, id }: Props) {
   const [concertData, setConcertData] = useState<DocumentData[]>([]);
   const [upcomingConcerts, setUpcomingConcerts] = useState<ConcertProps[]>([]);
   const [pastConcerts, setPastConcerts] = useState<ConcertProps[]>([]);
@@ -73,10 +70,11 @@ function Concerts({ nextOnly, past, upcoming, id }: Props) {
   }
 
   return (
-    <div>
+    <div id={id}>
       {/* Render components using concertData */}
       {nextOnly && (
         <div>
+          <h1>Neste konsert:</h1>
           <Concert
             title={upcomingConcerts[0]?.title}
             date={upcomingConcerts[0]?.date}
@@ -88,32 +86,33 @@ function Concerts({ nextOnly, past, upcoming, id }: Props) {
           />
         </div>
       )}
-      {upcoming && (
+      {!nextOnly && (
         <div>
-          <h1>Kommende konserter</h1>
-          <div className="grid gap-4 md:grid-cols-2 mt-2 mx-auto 2xl:w-2/3">
-            {upcomingConcerts.map((concert) => (
-              <Concert {...concert} />
-            ))}
+          <div>
+            <h1>Kommende konserter</h1>
+            <div className="grid gap-4 md:grid-cols-2 mt-2 mx-auto 2xl:w-2/3">
+              {upcomingConcerts.map((concert) => (
+                <Concert {...concert} />
+              ))}
+            </div>
+          </div>
+          <div className="pt-8 mt-2 mx-auto 2xl:w-2/3">
+            <h1>Tidligere konserter</h1>
+            <ul className="pt-2">
+              {pastConcerts.map((concert) => (
+                <li>
+                  <div className="flex py-1 justify-center">
+                    <p>
+                      {concert.date} - {concert.title} - {concert.location}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       )}
-      {past && (
-        <div className="pt-8 mt-2 mx-auto 2xl:w-2/3">
-          <h1>Tidligere konserter</h1>
-          <ul className="pt-2">
-            {pastConcerts.map((concert) => (
-              <li>
-                <div className="flex py-1 justify-center">
-                  <p>
-                    {concert.date} - {concert.title} - {concert.location}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+
       {/* Render other necessary components */}
     </div>
   );

@@ -11,7 +11,7 @@ h1 {
 }
 
 h2 {
-  @apply text-xl font-light;
+  @apply text-2xl font-light;
 }
 
 .navLink {

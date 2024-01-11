@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
 import { ArrowDown, ArrowRight } from "lucide-react";
