@@ -33,13 +33,11 @@ function Home({ id }: { id: string }) {
   return (
     <div className="h-full" id={id}>
       <h1 className="lg:hidden">Det Nye Norske Storband</h1>
-      <img src={homeImage} alt="" className="my-4 lg:hidden" />
-      <img src={homeImageWide} alt="" className="my-4 hidden lg:block" />
-      <div className="grid md:grid-cols-2">
-        <div className="mt-">
-          <h2 className="flex justify-center my-2 md:justify-start">
-            Neste konsert:
-          </h2>
+      <img src={homeImage} alt="" className="my-4 sm:hidden" />
+      <img src={homeImageWide} alt="" className="my-4 hidden sm:block" />
+      <div>
+        <h2 className="flex justify-center my-2">Neste konsert:</h2>
+        <div className="md:w-2/3 xl:w-1/2 mx-auto">
           <Concerts nextOnly={true} id="" />
         </div>
         <div>{/* Spotify player here */}</div>

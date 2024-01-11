@@ -32,7 +32,7 @@ function Concert({
         {image !== undefined && (
           <img src={image} alt={"Image of " + title} className="rounded-md" />
         )}
-        <div className="flex flex-wrap gap-4 sm:mt-0 sm:flex-col">
+        <div className="flex flex-wrap gap-4 sm:mt-0 md:flex-col">
           <div className="flex gap-1">
             <Calendar />
             {date}

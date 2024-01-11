@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="pt-24 px-2 sm:pt-24 sm:p-6 md:px-10 lg:px-24 xl:px-48 2xl:px-72 grid gap-12">
+      <div className="pt-24 px-2 sm:pt-24 sm:p-6 lg:px-24 xl:px-40 2xl:px-72 grid gap-12">
         <Home id="home" />
         <Music id="music" />
         <About id="about" />

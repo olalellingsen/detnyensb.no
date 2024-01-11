@@ -15,9 +15,6 @@ function Concerts({ nextOnly, past, upcoming, id }: Props) {
   const [concertData, setConcertData] = useState<DocumentData[]>([]);
   const [upcomingConcerts, setUpcomingConcerts] = useState<ConcertProps[]>([]);
   const [pastConcerts, setPastConcerts] = useState<ConcertProps[]>([]);
-  const [uniqueConcertIds, setUniqueConcertIds] = useState<Set<string>>(
-    new Set()
-  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,15 +67,9 @@ function Concerts({ nextOnly, past, upcoming, id }: Props) {
         location: concert.location,
       }));
 
-    // Use Set to keep track of unique concert IDs
-    const newUniqueConcertIds = new Set([
-      ...concertData.map((concert) => concert.id),
-    ]);
-
     // Check for new data to avoid duplicates
     setUpcomingConcerts(upcomingConcerts);
     setPastConcerts(pastConcerts);
-    setUniqueConcertIds(newUniqueConcertIds);
   }
 
   return (
@@ -100,7 +91,7 @@ function Concerts({ nextOnly, past, upcoming, id }: Props) {
       {upcoming && (
         <div>
           <h1>Kommende konserter</h1>
-          <div className="grid gap-4 sm:grid-cols-2 mt-2">
+          <div className="grid gap-4 md:grid-cols-2 mt-2 mx-auto 2xl:w-2/3">
             {upcomingConcerts.map((concert) => (
               <Concert {...concert} />
             ))}
@@ -108,15 +99,15 @@ function Concerts({ nextOnly, past, upcoming, id }: Props) {
         </div>
       )}
       {past && (
-        <div className="pt-8">
+        <div className="pt-8 mt-2 mx-auto 2xl:w-2/3">
           <h1>Tidligere konserter</h1>
           <ul className="pt-2">
             {pastConcerts.map((concert) => (
               <li>
-                <div className="flex gap-8">
-                  <p>{concert.title}</p>
-                  <p>{concert.location}</p>
-                  <p>{concert.date}</p>
+                <div className="flex py-1 justify-center">
+                  <p>
+                    {concert.date} - {concert.title} - {concert.location}
+                  </p>
                 </div>
               </li>
             ))}
