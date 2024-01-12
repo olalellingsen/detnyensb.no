@@ -35,12 +35,11 @@ function Home({ id }: { id: string }) {
       <h1 className="lg:hidden">Det Nye Norske Storband</h1>
       <img src={homeImage} alt="" className="my-4 sm:hidden" />
       <img src={homeImageWide} alt="" className="my-4 hidden sm:block" />
-      <div>
-        <div className="md:w-2/3 xl:w-1/2 mx-auto">
-          <Concerts nextOnly={true} id="" />
-        </div>
-        <div>{/* Spotify player here */}</div>
+      <div className="md:w-2/3 xl:w-1/2 mx-auto pt-12">
+        <h2 className="text-center">Neste konsert:</h2>
+        <Concerts nextOnly={true} id="" />
       </div>
+      <div>{/* Spotify player here */}</div>
     </div>
   );
 }

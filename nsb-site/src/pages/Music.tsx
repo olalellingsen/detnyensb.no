@@ -37,8 +37,8 @@ function Music({ id }: { id: string }) {
 
   return (
     <div id={id} className="h-full grid gap-2">
-      <h1>Musikk</h1>
-
+      <h1 className="border-b">Musikk</h1>
+      <br />
       {/* Albums */}
       <h2>Album</h2>
       <div className="grid gap-2 md:grid-cols-2 sm:gap-4">

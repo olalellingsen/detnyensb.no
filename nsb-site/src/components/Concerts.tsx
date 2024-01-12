@@ -76,7 +76,6 @@ function Concerts({ nextOnly, id }: Props) {
       {/* Render components using concertData */}
       {nextOnly && (
         <div>
-          <h1>Neste konsert:</h1>
           <Concert
             title={upcomingConcerts[0]?.title}
             date={upcomingConcerts[0]?.date}
@@ -91,8 +90,7 @@ function Concerts({ nextOnly, id }: Props) {
       {!nextOnly && (
         <div>
           <div>
-            <h1>Konserter</h1>
-            <h2>Kommende konserter</h2>
+            <h2>Kommende konserter:</h2>
             <div className="grid gap-4 md:grid-cols-2 mt-2 mx-auto 2xl:w-2/3">
               {upcomingConcerts.map((concert) => (
                 <Concert {...concert} />
