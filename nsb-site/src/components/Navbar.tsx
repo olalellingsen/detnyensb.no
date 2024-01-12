@@ -142,9 +142,9 @@ function Navbar() {
           </div>
           <div className="absolute bottom-4 w-full px-8">
             <div className="flex justify-between gap-4">
-              <SoMe face={true} />
-              <SoMe insta={true} />
-              <SoMe yt={true} />
+              <SoMe face={true} size={50} />
+              <SoMe insta={true} size={50} />
+              <SoMe yt={true} size={50} />
             </div>
           </div>
         </div>
