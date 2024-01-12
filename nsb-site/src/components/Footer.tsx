@@ -4,7 +4,7 @@ function Footer({ id }: { id: string }) {
   return (
     <div
       id={id}
-      className="bg-primary text-white p-8 grid gap-4 md:grid-cols-2"
+      className="bg-primary text-white pl-4 pt-4 grid gap-4 md:grid-cols-2 sm:p-8"
     >
       <Contact />
       {/* footer */}

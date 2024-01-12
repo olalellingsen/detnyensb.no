@@ -89,7 +89,7 @@ function Navbar() {
         <div className="fixed sm:hidden top-0 left-0 w-screen h-screen bg-primary">
           {/* logo and cross */}
           <div className="h-24 p-4 flex justify-between w-full">
-            <img src={logo} alt="logo" className="bandLogo" />
+            <img src={logo} alt="logo" className="w-max" />
             <div className="flex justify-end pt-2">
               <X size={50} className="stroke-white" onClick={closeMenu} />
             </div>
