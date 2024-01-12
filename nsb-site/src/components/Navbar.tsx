@@ -21,7 +21,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-24 p-4 sm:px-6 flex justify-between w-full bg-white">
+      <nav className="fixed h-24 p-4 sm:px-6 flex justify-between w-full bg-primaryBg">
         <div className="flex">
           <Link to="home" smooth={true} duration={800} offset={-100}>
             <img

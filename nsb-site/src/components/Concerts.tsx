@@ -91,7 +91,8 @@ function Concerts({ nextOnly, id }: Props) {
       {!nextOnly && (
         <div>
           <div>
-            <h1>Kommende konserter</h1>
+            <h1>Konserter</h1>
+            <h2>Kommende konserter</h2>
             <div className="grid gap-4 md:grid-cols-2 mt-2 mx-auto 2xl:w-2/3">
               {upcomingConcerts.map((concert) => (
                 <Concert {...concert} />

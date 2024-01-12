@@ -58,7 +58,7 @@ function Music({ id }: { id: string }) {
       <button onClick={() => setShowSingles(!showSingles)} className="flex">
         {showSingles ? (
           <>
-            <h2 className="underline">Lukk singler</h2>
+            <h2 className="underline">Singler</h2>
             <ArrowDown height={35} />
           </>
         ) : (

@@ -9,7 +9,7 @@ import Concerts from "./components/Concerts";
 
 function App() {
   return (
-    <>
+    <div className="bg-primaryBg">
       <Navbar />
       <div className="pt-24 px-2 sm:pt-24 sm:p-6 lg:px-24 xl:px-40 2xl:px-72 grid gap-12">
         <Home id="home" />
@@ -18,7 +18,7 @@ function App() {
         <Concerts id="concerts" />
       </div>
       <Footer id="footer" />
-    </>
+    </div>
   );
 }
 
