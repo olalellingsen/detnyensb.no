@@ -24,7 +24,6 @@ function About({ id }: { id: string }) {
         const url = await getDownloadURL(imagesRef);
         setImageUrl(url);
 
-        console.log("About text and image fetched from database");
         setBio1(bioData.P1);
         setBio2(bioData.P2);
         setBio3(bioData.P3);

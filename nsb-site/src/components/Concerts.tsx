@@ -73,7 +73,7 @@ function Concerts({ nextOnly, id }: Props) {
       })
       .map((concert) => ({
         title: concert.title,
-        date: concert.date.toDate().toLocaleDateString("no-NO"),
+        date: concert.date.toDate().toLocaleDateString(),
         location: concert.location,
       }));
 
