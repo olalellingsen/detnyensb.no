@@ -22,8 +22,24 @@ function Music({ id }: { id: string }) {
           doc.data()
         ) as DocumentData[];
 
-        setSingles(singleData.map((doc) => doc.url));
-        setAlbums(albumData.map((doc) => doc.url));
+        setSingles(
+          singleData
+            .sort((a, b) => {
+              const aid = a.id;
+              const bid = b.id;
+              return bid - aid;
+            })
+            .map((doc) => doc.url)
+        );
+        setAlbums(
+          albumData
+            .sort((a, b) => {
+              const aid = a.id;
+              const bid = b.id;
+              return bid - aid;
+            })
+            .map((doc) => doc.url)
+        );
       } catch (error) {
         console.error(
           "Error connecting to Firestore or accessing Storage:",
