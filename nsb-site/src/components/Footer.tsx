@@ -33,7 +33,9 @@ function Footer({ id }: { id: string }) {
           </p>
         </div>
       </div>
-      <p className="col-span-2 text-center">© 2023 Det Nye Norske Storband</p>
+      <p className="sm:col-span-2 text-center">
+        © 2023 Det Nye Norske Storband
+      </p>
     </div>
   );
 }
