@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
 import Concert, { ConcertProps } from "./Concert";
+import { ArrowDown, ArrowRight } from "lucide-react";
 
 interface Props {
   nextOnly?: boolean;
@@ -12,6 +13,7 @@ function Concerts({ nextOnly, id }: Props) {
   const [concertData, setConcertData] = useState<DocumentData[]>([]);
   const [upcomingConcerts, setUpcomingConcerts] = useState<ConcertProps[]>([]);
   const [pastConcerts, setPastConcerts] = useState<ConcertProps[]>([]);
+  const [showPast, setShowPast] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -97,18 +99,34 @@ function Concerts({ nextOnly, id }: Props) {
             </div>
           </div>
           <div className="pt-8 mt-2 mx-auto 2xl:w-2/3">
-            <h1>Tidligere konserter</h1>
-            <ul className="pt-2">
-              {pastConcerts.map((concert) => (
-                <li>
-                  <div className="flex py-1 justify-center">
-                    <p>
-                      {concert.date} - {concert.title} - {concert.location}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <button onClick={() => setShowPast(!showPast)} className="flex">
+              {showPast ? (
+                <>
+                  <h2 className="underline">Tidligere konserter</h2>
+                  <ArrowDown height={35} />
+                </>
+              ) : (
+                <>
+                  <h2 className="flex underline hover:mr-1">
+                    Vis tidligere konserter
+                  </h2>
+                  <ArrowRight height={35} />
+                </>
+              )}
+            </button>
+            {showPast && (
+              <ul className="pt-2">
+                {pastConcerts.map((concert) => (
+                  <li>
+                    <div className="flex py-1">
+                      <p>
+                        {concert.date} - {concert.title} - {concert.location}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       )}

@@ -19,7 +19,7 @@ h2 {
 }
 
 .soMeIcon {
-  @apply hover:cursor-pointer stroke-white;
+  @apply hover:cursor-pointer hover:scale-105 stroke-white stroke-1;
 }
 
 p {

@@ -59,29 +59,31 @@ function Music({ id }: { id: string }) {
         {showSingles ? (
           <>
             <h2 className="underline">Lukk singler</h2>
-            <ArrowDown height={30} />
+            <ArrowDown height={35} />
           </>
         ) : (
           <>
             <h2 className="flex underline hover:mr-1">Vis singler</h2>
-            <ArrowRight height={30} />
+            <ArrowRight height={35} />
           </>
         )}
       </button>
 
-      {showSingles && (
-        <div className="grid gap-2 md:grid-cols-2 md:gap-4">
-          {singles.map((single) => (
-            <iframe
-              src={single}
-              className="single"
-              height="80"
-              allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="eager"
-            ></iframe>
-          ))}
-        </div>
-      )}
+      <div
+        className={`gap-2 md:grid-cols-2 md:gap-4 ${
+          showSingles ? "grid" : "hidden"
+        }`}
+      >
+        {singles.map((single) => (
+          <iframe
+            src={single}
+            className="single"
+            height="80"
+            allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="eager"
+          ></iframe>
+        ))}
+      </div>
     </div>
   );
 }
