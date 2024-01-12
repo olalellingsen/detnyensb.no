@@ -40,7 +40,13 @@ function Concerts({ nextOnly, id }: Props) {
 
   function filterConcertData() {
     const today = new Date();
+
     const upcomingConcerts = concertData
+      .sort((a, b) => {
+        const aDate = new Date(a.date.toDate());
+        const bDate = new Date(b.date.toDate());
+        return aDate.getTime() - bDate.getTime(); // Sort by nearest date
+      })
       .filter((concert) => {
         const concertDate = new Date(concert.date.toDate());
         return concertDate > today;
@@ -56,6 +62,11 @@ function Concerts({ nextOnly, id }: Props) {
       }));
 
     const pastConcerts = concertData
+      .sort((a, b) => {
+        const aDate = new Date(a.date.toDate());
+        const bDate = new Date(b.date.toDate());
+        return bDate.getTime() - aDate.getTime(); // Sort in most recent order
+      })
       .filter((concert) => {
         const concertDate = new Date(concert.date.toDate());
         return concertDate < today;
@@ -66,7 +77,7 @@ function Concerts({ nextOnly, id }: Props) {
         location: concert.location,
       }));
 
-    // Check for new data to avoid duplicates
+    // Set the state variables
     setUpcomingConcerts(upcomingConcerts);
     setPastConcerts(pastConcerts);
   }

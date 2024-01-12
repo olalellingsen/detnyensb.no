@@ -12,9 +12,9 @@ function App() {
     <div className="bg-primaryBg">
       <Navbar />
       <div className="pt-24 px-2 sm:pt-24 sm:p-6 lg:px-24 xl:px-40 2xl:px-72 grid gap-24 mb-24">
-        <Home id="home" />
-        <About id="about" />
-        <Music id="music" />
+        {/* <Home id="home" /> */}
+        {/* <About id="about" /> */}
+        {/* <Music id="music" /> */}
         <Concerts id="concerts" />
       </div>
       <Footer id="footer" />
