@@ -44,9 +44,10 @@ function News() {
               href={newsItem.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline"
+              className="underline flex hover:gap-1"
             >
               {newsItem.linkName !== undefined && <p>{newsItem.linkName}</p>}
+              <ArrowRight height={30} />
             </a>
           )}
         </div>
