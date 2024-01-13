@@ -1,7 +1,8 @@
-import { Calendar } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import { Clock } from "lucide-react";
 import { MapPin } from "lucide-react";
 import { Ticket } from "lucide-react";
+import { useState } from "react";
 
 export interface ConcertProps {
   title?: string;
@@ -24,6 +25,7 @@ function Concert({
   ticketLink,
   image,
 }: ConcertProps) {
+  const [showDescription, setShowDescription] = useState(false);
   return (
     <div className="card grid gap-2">
       <h2 className="flex justify-start">{title}</h2>
@@ -58,9 +60,22 @@ function Concert({
               </a>
             </div>
           )}
-          {description !== "" && <p>{description}</p>}
         </div>
       </div>
+      {description !== "" && showDescription && (
+        <p className="border-t my-4 pt-2">{description}</p>
+      )}
+      {description !== "" && (
+        <button
+          onClick={() => setShowDescription(!showDescription)}
+          className={`flex justify-end underline ${
+            showDescription ? "" : "mr-1 hover:gap-1 hover:mr-0"
+          }`}
+        >
+          {showDescription ? "Skjul beskrivelse" : "Les mer"}
+          <ArrowRight className={`${showDescription ? "hidden" : ""}`} />
+        </button>
+      )}
     </div>
   );
 }

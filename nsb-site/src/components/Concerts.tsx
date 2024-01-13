@@ -93,8 +93,10 @@ function Concerts({ nextOnly, id }: Props) {
             time={upcomingConcerts[0]?.time}
             location={upcomingConcerts[0]?.location}
             locationLink={upcomingConcerts[0]?.locationLink}
-            description={upcomingConcerts[0]?.description}
-            ticketLink={upcomingConcerts[0]?.ticketLink}
+            // description={upcomingConcerts[0]?.description}
+            description="dette er en test bla bla bla hdhehehehehehe hehdheh dhehehehe ehehehd edhe eh hdehdedn2nonfoiwnfouwe hwefbwhefb"
+            // ticketLink={upcomingConcerts[0]?.ticketLink}
+            ticketLink="https://www.google.com"
           />
         </div>
       )}
