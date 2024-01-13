@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import Concerts from "../components/Concerts";
+import News from "../components/News";
 
 function Home({ id }: { id: string }) {
   const [homeImage, setHomeImage] = useState("");
@@ -9,7 +10,7 @@ function Home({ id }: { id: string }) {
   const img = ref(storage, "home.jpg");
   const imgWide = ref(storage, "homeWide.jpg");
 
-  // Fetch about text and image URL from database
+  // Fetch image URL from database
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,11 +36,18 @@ function Home({ id }: { id: string }) {
       <h1 className="lg:hidden">Det Nye Norske Storband</h1>
       <img src={homeImage} alt="" className="my-4 sm:hidden" />
       <img src={homeImageWide} alt="" className="my-4 hidden sm:block" />
-      <div className="md:w-2/3 xl:w-1/2 mx-auto pt-12">
-        <h2 className="text-center">Neste konsert:</h2>
-        <Concerts nextOnly={true} id="" />
+
+      {/* Next concert and news */}
+      <div className="grid gap-4 lg:grid-cols-2 mx-auto md:w-4/5 lg:mx-0 lg:w-full">
+        <div>
+          <h2 className="py-2">Neste konsert</h2>
+          <Concerts nextOnly={true} id="" />
+        </div>
+        <div>
+          <h2 className="py-2">Nyheter</h2>
+          <News />
+        </div>
       </div>
-      <div>{/* Spotify player here */}</div>
     </div>
   );
 }

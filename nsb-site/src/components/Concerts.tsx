@@ -59,6 +59,7 @@ function Concerts({ nextOnly, id }: Props) {
         locationLink: concert.locationLink,
         ticketLink: concert.ticketLink,
         description: concert.description,
+        image: concert.image,
       }));
 
     const pastConcerts = concertData
@@ -95,20 +96,22 @@ function Concerts({ nextOnly, id }: Props) {
             locationLink={upcomingConcerts[0]?.locationLink}
             description={upcomingConcerts[0]?.description}
             ticketLink={upcomingConcerts[0]?.ticketLink}
+            image={upcomingConcerts[0]?.image}
           />
         </div>
       )}
       {!nextOnly && (
         <div>
           <div>
+            {/* Render upcoming concerts */}
             <h2>Kommende konserter:</h2>
-            <div className="grid gap-4 md:grid-cols-2 mt-2 mx-auto 2xl:w-2/3">
+            <div className="grid gap-4 mt-2 md:w-3/4 lg:w-2/3 xl:w-1/2">
               {upcomingConcerts.map((concert) => (
                 <Concert {...concert} />
               ))}
             </div>
           </div>
-          <div className="pt-8 mt-2 mx-auto 2xl:w-2/3">
+          <div className="pt-8 mt-2">
             <button onClick={() => setShowPast(!showPast)} className="flex">
               {showPast ? (
                 <>
@@ -125,23 +128,31 @@ function Concerts({ nextOnly, id }: Props) {
               )}
             </button>
             {showPast && (
-              <ul className="pt-2">
-                {pastConcerts.map((concert) => (
-                  <li>
-                    <div className="flex py-1">
-                      <p>
-                        {concert.date} - {concert.title} - {concert.location}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <div className="grid lg:grid-cols-2 pt-2 gap-4">
+                <ul>
+                  {/* Render past concerts */}
+                  {pastConcerts.map((concert) => (
+                    <li>
+                      <div className="flex py-1">
+                        <p>
+                          {concert.date} - {concert.title} - {concert.location}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <div>
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/nsb-site-68449.appspot.com/o/about1.jpg?alt=media&token=58478fcc-2191-49e4-ac2b-b14a20a6ed74"
+                    alt="NSB"
+                    className="pt-2 md:w-2/3 lg:w-full"
+                  />
+                </div>
+              </div>
             )}
           </div>
         </div>
       )}
-
-      {/* Render other necessary components */}
     </div>
   );
 }
