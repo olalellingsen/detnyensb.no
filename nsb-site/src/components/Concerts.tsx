@@ -105,7 +105,7 @@ function Concerts({ nextOnly, id }: Props) {
           <div>
             {/* Render upcoming concerts */}
             <h2>Kommende konserter:</h2>
-            <div className="grid gap-4 mt-2">
+            <div className="grid gap-4 mt-2 md:w-3/4 lg:w-2/3 xl:w-1/2">
               {upcomingConcerts.map((concert) => (
                 <Concert {...concert} />
               ))}
