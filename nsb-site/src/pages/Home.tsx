@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import Concerts from "../components/Concerts";
+import News from "../components/News";
 
 function Home({ id }: { id: string }) {
   const [homeImage, setHomeImage] = useState("");
@@ -44,7 +45,7 @@ function Home({ id }: { id: string }) {
         </div>
         <div>
           <h2 className="py-2">Nyheter</h2>
-          <Concerts nextOnly={true} id="" />
+          <News />
         </div>
       </div>
     </div>
