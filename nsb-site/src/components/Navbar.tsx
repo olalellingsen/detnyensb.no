@@ -21,13 +21,13 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-24 p-4 sm:px-6 flex justify-between w-full bg-primaryBg">
+      <nav className="fixed h-16 sm:h-24 p-2 sm:p-4 sm:px-6 flex justify-between w-full bg-primaryBg">
         <div className="flex">
           <Link to="home" smooth={true} duration={800} offset={-100}>
             <img
               src={logo}
               alt="logo"
-              className="w-16 hover:scale-105 hover:cursor-pointer transition-transform"
+              className="w-12 sm:w-16 hover:scale-105 hover:cursor-pointer transition-transform"
             />
           </Link>
           <h1 className="pt-3.5 px-4 hidden lg:flex">
@@ -81,22 +81,22 @@ function Navbar() {
             Kontakt
           </Link>
         </div>
-        <div className="sm:hidden pt-2" onClick={() => setIsMenuOpen(true)}>
-          <Menu size={50} />
+        <div className="sm:hidden" onClick={() => setIsMenuOpen(true)}>
+          <Menu size={48} />
         </div>
       </nav>
       {isMenuOpen && (
         <div className="fixed sm:hidden top-0 left-0 w-screen h-screen bg-primary">
           {/* logo and cross */}
-          <div className="h-24 p-4 flex justify-between w-full">
-            <img src={logo} alt="logo" className="w-16" />
-            <div className="flex justify-end pt-2">
+          <div className="h-16 p-2 flex justify-between w-full">
+            <img src={logo} alt="logo" className="w-12" />
+            <div className="flex justify-end">
               <X size={50} className="stroke-white" onClick={closeMenu} />
             </div>
           </div>
 
           {/* mobile menu */}
-          <div className="p-6 pt-0">
+          <div className="p-3 pt-0">
             <ul className="text-5xl text-white grid gap-3">
               <Link
                 to="home"
