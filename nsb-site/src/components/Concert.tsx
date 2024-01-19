@@ -1,5 +1,5 @@
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, X } from "lucide-react";
 import { Clock } from "lucide-react";
 import { MapPin } from "lucide-react";
 import { Ticket } from "lucide-react";
@@ -53,15 +53,11 @@ function Concert({
   return (
     <div className="card grid gap-2">
       <h2 className="flex justify-start">{title}</h2>
-      <div className="grid sm:grid-cols-2 gap-4 py-2">
-        {/* image */}
-        {image !== undefined && image !== "" && (
-          <img
-            src={fetchedImage}
-            alt={"Image of " + title}
-            className="rounded-md"
-          />
-        )}
+      {/* image */}
+      {image !== undefined && image !== "" && (
+        <img src={fetchedImage} alt={"Image of " + title} />
+      )}
+      <div className="grid gap-4 py-2">
         <div>
           {/* date, time, location, ticketLink */}
           <div className="flex flex-wrap gap-4 ">
@@ -107,7 +103,8 @@ function Concert({
                   showDescription ? "" : "mr-1 hover:gap-1 hover:mr-0"
                 }`}
               >
-                {showDescription ? "Lukk beskrivelse" : "Les mer"}
+                <X className={`${showDescription ? "" : "hidden"}`} />
+                {showDescription ? "Lukk" : "Les mer"}
                 <ArrowRight className={`${showDescription ? "hidden" : ""}`} />
               </button>
             )}
