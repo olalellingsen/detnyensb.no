@@ -14,21 +14,27 @@ function SoMe({ face, insta, yt, size }: Props) {
     <div>
       {face && (
         <div>
-          <a href="https://www.facebook.com/DetNyeNorskeStorband">
+          <a
+            href="https://www.facebook.com/DetNyeNorskeStorband"
+            target="blank"
+          >
             <Facebook size={size} className="soMeIcon" />
           </a>
         </div>
       )}
       {insta && (
         <div>
-          <a href="https://www.instagram.com/detnyensb/">
+          <a href="https://www.instagram.com/detnyensb/" target="blank">
             <Instagram size={size} className="soMeIcon" />
           </a>
         </div>
       )}
       {yt && (
         <div>
-          <a href="https://youtube.com/@detnyenorskestorband9703?si=_wFiGCcNUFfGuNI0">
+          <a
+            href="https://youtube.com/@detnyenorskestorband9703?si=_wFiGCcNUFfGuNI0"
+            target="blank"
+          >
             <Youtube size={size} className="soMeIcon" />
           </a>
         </div>

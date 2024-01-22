@@ -62,7 +62,7 @@ function Navbar() {
           ))}
         </div>
         <div className="sm:hidden" onClick={() => setIsMenuOpen(true)}>
-          <Menu size={48} />
+          <Menu size={48} className="fill-primary stroke-primary" />
         </div>
       </nav>
       {isMenuOpen && (
