@@ -6,11 +6,11 @@ import logo2 from "../assets/logo2.png";
 import logo3 from "../assets/logo3.png";
 import { Link } from "react-scroll";
 import SoMe from "./SoMe";
-import { useRandomColor } from "../RandomColorContext";
+// import { useRandomColor } from "../RandomColorContext";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [menuOptions, setMenuOptions] = useState([
+  const [menuOptions] = useState([
     { name: "Hjem", link: "home" },
     { name: "Om oss", link: "about" },
     { name: "Musikk", link: "music" },
