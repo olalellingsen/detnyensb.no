@@ -74,6 +74,7 @@ function Concert({
               <a
                 className={locationLink !== " " ? "underline" : ""}
                 href={locationLink}
+                target="_blank"
               >
                 {location}
               </a>
@@ -82,7 +83,7 @@ function Concert({
             {ticketLink !== undefined && ticketLink !== "" && (
               <div className="flex gap-1">
                 <Ticket />
-                <a className="underline" href={ticketLink}>
+                <a className="underline" href={ticketLink} target="_blank">
                   Kjøp billetter
                 </a>
               </div>
