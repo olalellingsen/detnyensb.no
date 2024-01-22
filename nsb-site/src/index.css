@@ -7,7 +7,7 @@
 }
 
 h1 {
-  @apply text-3xl text-center;
+  @apply text-3xl text-center border-primary;
 }
 
 h2 {
@@ -32,4 +32,8 @@ p {
 
 .single {
   @apply w-full;
+}
+
+.menuOpen {
+  @apply fixed sm:hidden top-0 left-0 w-screen h-screen bg-primary;
 }
