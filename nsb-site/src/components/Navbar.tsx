@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
-
-import logo from "../assets/logo.png";
+import logo1 from "../assets/logo1.png";
+import logo2 from "../assets/logo2.png";
+import logo3 from "../assets/logo3.png";
 import { Link } from "react-scroll";
 import SoMe from "./SoMe";
+import { useRandomColor } from "../RandomColorContext";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const logos = [logo1, logo2, logo3];
+  const logo = logos[1]; // just to avoid errors
+
+  // const { randomColor, randomValue } = useRandomColor(); // random color
+  // const logo = logos[randomValue]; // random logo
 
   function closeMenu() {
     setIsMenuOpen(false);
@@ -30,7 +37,7 @@ function Navbar() {
               className="w-12 sm:w-16 hover:scale-105 hover:cursor-pointer transition-transform"
             />
           </Link>
-          <h1 className="pt-3.5 px-4 hidden lg:flex">
+          <h1 className={`pt-3.5 px-4 hidden lg:flex `}>
             Det Nye Norske Storband
           </h1>
         </div>
@@ -86,7 +93,7 @@ function Navbar() {
         </div>
       </nav>
       {isMenuOpen && (
-        <div className="fixed sm:hidden top-0 left-0 w-screen h-screen bg-primary">
+        <div className="menuOpen">
           {/* logo and cross */}
           <div className="h-16 p-2 flex justify-between w-full">
             <img src={logo} alt="logo" className="w-12" />

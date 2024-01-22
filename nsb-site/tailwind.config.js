@@ -1,11 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+
+const primaryColors = ["#bf1e2e", "#6D2121", "#1c4e50"];
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: "#bf1e2e",
-        primaryBg: "#fae8e8",
+        primary: primaryColors[2],
+        primaryBg: "#f0e9e9",
       },
     },
   },
