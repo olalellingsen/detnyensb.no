@@ -19,7 +19,7 @@ const RandomColorContext = createContext<RandomColorContextValue | undefined>(
 export const RandomColorProvider: React.FC<RandomColorContextProps> = ({
   children,
 }) => {
-  const [randomValue, setRandomValue] = useState<number>(
+  const [randomValue] = useState<number>(
     Math.floor(Math.random() * colors.length)
   );
 
