@@ -2,15 +2,12 @@ import Contact from "./Contact";
 
 function Footer({ id }: { id: string }) {
   return (
-    <div
-      id={id}
-      className="bg-primary text-white pl-4 pt-4 grid gap-4 md:grid-cols-2 sm:p-8"
-    >
+    <div id={id} className="bg-primary text-white p-6 grid gap-4 sm:px-12 sm:pt-16">
       <Contact />
       {/* footer */}
-      <div>
-        <h2>Våre samarbeidspartnere:</h2>
-        <div className="underline font-extralight grid xl:grid-cols-3">
+      <div className="py-4">
+        <h2 className="lg:text-center">Våre samarbeidspartnere:</h2>
+        <div className="underline font-extralight grid lg:flex justify-between">
           <p>
             <a href="https://www.homeworkspace.no/">Home Workspace</a>
           </p>
@@ -33,9 +30,7 @@ function Footer({ id }: { id: string }) {
           </p>
         </div>
       </div>
-      <p className="sm:col-span-2 text-center">
-        © 2023 Det Nye Norske Storband
-      </p>
+      <p className="text-center">© 2023 Det Nye Norske Storband</p>
     </div>
   );
 }
