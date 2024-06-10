@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
-import { ArrowDown, ArrowRight } from "lucide-react";
 
 function Music({ id }: { id: string }) {
   const [albums, setAlbums] = useState<string[]>([]);
@@ -71,20 +70,13 @@ function Music({ id }: { id: string }) {
       </div>
       <br />
       {/* Singles */}
-      <button onClick={() => setShowSingles(!showSingles)} className="flex">
-        {showSingles ? (
-          <>
-            <h2 className="underline">Singler</h2>
-            <ArrowDown height={35} />
-          </>
-        ) : (
-          <>
-            <h2 className="flex underline hover:mr-1">Vis singler</h2>
-            <ArrowRight height={35} />
-          </>
-        )}
+      <button
+        onClick={() => setShowSingles(!showSingles)}
+        className="button w-max mx-auto"
+      >
+        {showSingles ? <>Skjul singler</> : <>Vis singler</>}
       </button>
-
+      <br />
       <div
         className={`gap-2 md:grid-cols-2 md:gap-4 ${
           showSingles ? "grid" : "hidden"

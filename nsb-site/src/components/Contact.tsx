@@ -15,7 +15,7 @@ function Contact() {
             <p className="block sm:hidden">Send oss en epost</p>
           </a>
         </div>
-        <div className="flex gap-2 py-2">
+        <div className="flex gap-2 py-2 hover:underline">
           <Phone size={30} strokeWidth={1} />
           <a href="tel:+4797672764">
             <p>+47 97 67 27 64</p>

@@ -9,44 +9,37 @@ function Footer({ id }: { id: string }) {
       <Contact />
       {/* footer */}
       <div className="py-4">
-        <h2 className="lg:text-center">Våre samarbeidspartnere:</h2>
-        <div className="underline font-extralight grid lg:flex justify-between">
-          <p>
-            <a href="https://www.homeworkspace.no/" target="_blank">
-              Home Workspace
-            </a>
-          </p>
-          <p>
-            <a href="https://sparebankstiftelsen.no/" target="_blank">
-              Sparebankstiftelsen
-            </a>
-          </p>
-          <p>
-            <a href="https://ostnorsk.jazzinorge.no/" target="_blank">
-              Østnorsk Jazzsenter
-            </a>
-          </p>
-          <p>
-            <a href="https://jazzforum.jazzinorge.no/" target="_blank">
-              Norsk Jazzforum
-            </a>
-          </p>
-          <p>
-            <a href="https://www.kulturdirektoratet.no/" target="_blank">
-              Kulturdirektoratet
-            </a>
-          </p>
-          <p>
-            <a
-              href="https://www.oslo.kommune.no/etater-foretak-og-ombud/kulturetaten/#gref"
-              target="_blank"
-            >
-              Oslo Kommune
-            </a>
-          </p>
+        <h3>Våre samarbeidspartnere:</h3>
+        <div className="py-2 font-extralight grid">
+          <a href="https://www.homeworkspace.no/" target="_blank">
+            Home Workspace
+          </a>
+
+          <a href="https://sparebankstiftelsen.no/" target="_blank">
+            Sparebankstiftelsen
+          </a>
+
+          <a href="https://ostnorsk.jazzinorge.no/" target="_blank">
+            Østnorsk Jazzsenter
+          </a>
+
+          <a href="https://jazzforum.jazzinorge.no/" target="_blank">
+            Norsk Jazzforum
+          </a>
+
+          <a href="https://www.kulturdirektoratet.no/" target="_blank">
+            Kulturdirektoratet
+          </a>
+
+          <a
+            href="https://www.oslo.kommune.no/etater-foretak-og-ombud/kulturetaten/#gref"
+            target="_blank"
+          >
+            Oslo Kommune
+          </a>
         </div>
       </div>
-      <p className="text-center">© 2023 Det Nye Norske Storband</p>
+      <p className="text-center">© 2024 Det Nye Norske Storband</p>
     </div>
   );
 }
