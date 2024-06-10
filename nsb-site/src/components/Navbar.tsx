@@ -78,19 +78,29 @@ function Navbar() {
           ))}
         </div>
         <div className="lg:hidden" onClick={() => setIsMenuOpen(true)}>
-          <Menu size={40} strokeWidth={1} className="stroke-primary h-full" />
+          <Menu
+            size={40}
+            strokeWidth={1}
+            className="stroke-primary h-full hover:cursor-pointer"
+          />
         </div>
       </nav>
       {isMenuOpen && (
         <div className="menuOpen">
           {/* logo and cross */}
           <div className="h-16 p-2 lg:px-6 flex justify-between w-full">
-            <img src={logo} alt="logo" className="w-12" />
+            <Link to="home" smooth={true} duration={800} onClick={closeMenu}>
+              <img
+                src={logo}
+                alt="logo"
+                className="w-12 hover:cursor-pointer"
+              />
+            </Link>
             <div className="flex justify-end">
               <X
                 size={40}
                 strokeWidth={1}
-                className="stroke-white h-full"
+                className="stroke-white h-full hover:cursor-pointer"
                 onClick={closeMenu}
               />
             </div>
@@ -105,7 +115,7 @@ function Navbar() {
                   smooth={true}
                   duration={800}
                   offset={-100}
-                  className="hover:underline"
+                  className="hover:underline hover:cursor-pointer"
                   onClick={clickLink}
                 >
                   {option.name}
