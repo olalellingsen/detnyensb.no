@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
-import Concert, { ConcertProps } from "./Concert";
+import Concert, { ConcertProps } from "../components/Concert";
 import { ArrowDown, ArrowRight } from "lucide-react";
 
 interface Props {
@@ -104,8 +104,9 @@ function Concerts({ nextOnly, id }: Props) {
         <div>
           <div>
             {/* Render upcoming concerts */}
-            <h2>Kommende konserter:</h2>
-            <div className="grid gap-4 mt-2 md:w-3/4 lg:w-2/3 xl:w-1/2">
+            <h1 className="border-b">Konserter</h1>
+            <br />
+            <div className="grid gap-4 sm:w-2/3 mx-auto ">
               {upcomingConcerts.map((concert) => (
                 <Concert {...concert} />
               ))}

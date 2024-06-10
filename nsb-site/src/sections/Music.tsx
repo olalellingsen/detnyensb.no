@@ -49,7 +49,7 @@ function Music({ id }: { id: string }) {
     };
 
     fetchData();
-  }, [id]); // Add 'id' as a dependency to refetch data when 'id' changes
+  }, [id]);
 
   return (
     <div id={id} className="h-full grid gap-2">
