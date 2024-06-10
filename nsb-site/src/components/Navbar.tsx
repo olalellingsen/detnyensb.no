@@ -47,7 +47,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-16 p-2 sm:px-6 flex justify-between w-full bg-primaryBg">
+      <nav className="fixed h-16 p-2 lg:px-6 flex justify-between w-full bg-primaryBg">
         <Link to="home" smooth={true} duration={800}>
           <img
             src={logo}
@@ -78,21 +78,26 @@ function Navbar() {
           ))}
         </div>
         <div className="lg:hidden" onClick={() => setIsMenuOpen(true)}>
-          <Menu size={48} className="fill-primary stroke-primary" />
+          <Menu size={40} strokeWidth={1} className="stroke-primary h-full" />
         </div>
       </nav>
       {isMenuOpen && (
         <div className="menuOpen">
           {/* logo and cross */}
-          <div className="h-16 p-2 flex justify-between w-full">
+          <div className="h-16 p-2 lg:px-6 flex justify-between w-full">
             <img src={logo} alt="logo" className="w-12" />
             <div className="flex justify-end">
-              <X size={50} className="stroke-white" onClick={closeMenu} />
+              <X
+                size={40}
+                strokeWidth={1}
+                className="stroke-white h-full"
+                onClick={closeMenu}
+              />
             </div>
           </div>
 
           {/* mobile menu */}
-          <div className="p-3 pt-0">
+          <div className="p-3 pt-0 text-center font-extralight">
             <ul className="text-5xl text-white grid gap-3">
               {menuOptions.map((option) => (
                 <Link
