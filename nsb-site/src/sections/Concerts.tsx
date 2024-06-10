@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
-import Concert, { ConcertProps } from "./Concert";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import Concert, { ConcertProps } from "../components/Concert";
 
 interface Props {
   nextOnly?: boolean;
@@ -102,33 +101,27 @@ function Concerts({ nextOnly, id }: Props) {
       )}
       {!nextOnly && (
         <div>
-          <div>
+          <h1 className="border-b">Konserter</h1>
+          <br />
+          <div className="sm:w-2/3 mx-auto grid gap-8">
             {/* Render upcoming concerts */}
-            <h2>Kommende konserter:</h2>
-            <div className="grid gap-4 mt-2 md:w-3/4 lg:w-2/3 xl:w-1/2">
+            <div className="grid gap-4">
               {upcomingConcerts.map((concert) => (
                 <Concert {...concert} />
               ))}
             </div>
-          </div>
-          <div className="pt-8 mt-2">
-            <button onClick={() => setShowPast(!showPast)} className="flex">
+            <button
+              onClick={() => setShowPast(!showPast)}
+              className="button w-max mx-auto"
+            >
               {showPast ? (
-                <>
-                  <h2 className="underline">Tidligere konserter</h2>
-                  <ArrowDown height={35} />
-                </>
+                <>Skjul tidligere konserter</>
               ) : (
-                <>
-                  <h2 className="flex underline hover:mr-1">
-                    Vis tidligere konserter
-                  </h2>
-                  <ArrowRight height={35} />
-                </>
+                <>Vis tidligere konserter</>
               )}
             </button>
-            {showPast && (
-              <div className="grid lg:grid-cols-2 pt-2 gap-4">
+            <div>
+              {showPast && (
                 <ul>
                   {/* Render past concerts */}
                   {pastConcerts.map((concert) => (
@@ -141,15 +134,8 @@ function Concerts({ nextOnly, id }: Props) {
                     </li>
                   ))}
                 </ul>
-                <div>
-                  <img
-                    src="https://firebasestorage.googleapis.com/v0/b/nsb-site-68449.appspot.com/o/about1.jpg?alt=media&token=58478fcc-2191-49e4-ac2b-b14a20a6ed74"
-                    alt="NSB"
-                    className="pt-2 md:w-2/3 lg:w-full"
-                  />
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       )}

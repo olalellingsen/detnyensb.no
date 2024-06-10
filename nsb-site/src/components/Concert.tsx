@@ -89,15 +89,17 @@ function Concert({
               </div>
             )}
             <div>
-              <p
-                className={`${
-                  showDescription || description == "" ? "hidden" : ""
-                }`}
-              >
-                {description?.slice(0, 150) + "..."}
-              </p>
+              {description !== undefined && (
+                <p
+                  className={`${
+                    showDescription || description == "" ? "hidden" : ""
+                  }`}
+                >
+                  {description?.slice(0, 150) + "..."}
+                </p>
+              )}
             </div>
-            {description !== "" && (
+            {description !== undefined && (
               <button
                 onClick={() => setShowDescription(!showDescription)}
                 className={`flex underline ${
