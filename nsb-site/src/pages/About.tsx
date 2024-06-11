@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import Members from "./Members";
 
 function About({ id }: { id: string }) {
   const [bio1, setBio1] = useState("");
