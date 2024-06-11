@@ -1,8 +1,5 @@
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { ArrowRight, Calendar, X } from "lucide-react";
-import { Clock } from "lucide-react";
-import { MapPin } from "lucide-react";
-import { Ticket } from "lucide-react";
+import { ArrowRight, Calendar, X, Clock, MapPin, Ticket } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export interface ConcertProps {
@@ -27,36 +24,34 @@ function Concert({
   image,
 }: ConcertProps) {
   const [showDescription, setShowDescription] = useState(false);
-  const storage = getStorage();
-  const img = ref(storage, "Concerts/" + image);
-  const [fetchedImage, setFetchedImage] = useState("");
+  const [fetchedImage, setFetchedImage] = useState<string | null>(null);
 
-  // Fetch image URL from database
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        // Fetch image URL from Firebase Storage
-        const url = await getDownloadURL(img);
-        setFetchedImage(url);
-      } catch (error) {
-        console.error(
-          "Error connecting to Firestore or accessing Storage:",
-          error
-        );
+      if (image) {
+        try {
+          const storage = getStorage();
+          const imgRef = ref(storage, `Concerts/${image}`);
+          // Fetch image URL from Firebase Storage
+          const url = await getDownloadURL(imgRef);
+          setFetchedImage(url);
+        } catch (error) {
+          console.error(
+            "Error connecting to Firestore or accessing Storage:",
+            error
+          );
+        }
       }
     };
 
-    // Call the function to fetch data
     fetchData();
-  }, [img]); // Dependency on img to re-fetch data when the image changes
+  }, [image]);
 
   return (
     <div className="card grid gap-2">
       <h2 className="flex justify-start">{title}</h2>
       {/* image */}
-      {image !== undefined && image !== "" && (
-        <img src={fetchedImage} alt={"Image of " + title} />
-      )}
+      {fetchedImage && <img src={fetchedImage} alt={"Image of " + title} />}
       <div className="grid gap-4 py-2">
         <div>
           {/* date, time, location, ticketLink */}
@@ -80,7 +75,7 @@ function Concert({
               </a>
             </div>
 
-            {ticketLink !== undefined && ticketLink !== "" && (
+            {ticketLink && (
               <div className="flex gap-1">
                 <Ticket />
                 <a className="underline" href={ticketLink} target="_blank">
@@ -89,17 +84,17 @@ function Concert({
               </div>
             )}
             <div>
-              {description !== undefined && (
+              {description && (
                 <p
                   className={`${
-                    showDescription || description == "" ? "hidden" : ""
+                    showDescription || description === "" ? "hidden" : ""
                   }`}
                 >
-                  {description?.slice(0, 150) + "..."}
+                  {description.slice(0, 150) + "..."}
                 </p>
               )}
             </div>
-            {description !== undefined && (
+            {description && (
               <button
                 onClick={() => setShowDescription(!showDescription)}
                 className={`flex underline ${

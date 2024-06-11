@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import Members from "./Members";
 
 function About({ id }: { id: string }) {
   const [bio1, setBio1] = useState("");
@@ -42,7 +43,7 @@ function About({ id }: { id: string }) {
   return (
     <div className="h-full" id={id}>
       <h1 className="border-b">Om oss</h1>
-      <div className="pt-4 grid gap-4 mx-auto md:w-4/5 xl:w-2/3">
+      <div className="pt-4 grid gap-4">
         <img src={imageUrl} alt="About picture" />
         <p>{bio1}</p>
         <p>{bio2}</p>

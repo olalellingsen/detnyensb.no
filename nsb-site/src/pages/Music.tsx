@@ -60,6 +60,7 @@ function Music({ id }: { id: string }) {
         {albums.map((album) => (
           <iframe
             src={album}
+            key={album}
             className="album"
             width="100%"
             height="380"
@@ -85,6 +86,7 @@ function Music({ id }: { id: string }) {
         {singles.map((single) => (
           <iframe
             src={single}
+            key={single}
             className="single"
             height="80"
             allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"

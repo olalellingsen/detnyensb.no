@@ -1,4 +1,4 @@
-import Concerts from "../sections/Concerts";
+import Concerts from "../pages/Concerts";
 import News from "./News";
 
 function NewsAndConcert() {

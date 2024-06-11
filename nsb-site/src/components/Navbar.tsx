@@ -1,27 +1,20 @@
 import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
-import logo1 from "../assets/logo1.png";
-import logo2 from "../assets/logo2.png";
-import logo3 from "../assets/logo3.png";
+import logo from "../assets/logo2.png";
 import { Link } from "react-scroll";
 import SoMe from "./SoMe";
-// import { useRandomColor } from "../RandomColorContext";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [menuOptions] = useState([
     { name: "Hjem", link: "home" },
     { name: "Om oss", link: "about" },
+    { name: "Musikere", link: "members" },
     { name: "Musikk", link: "music" },
     { name: "Konserter", link: "concerts" },
     { name: "Kontakt", link: "footer" },
   ]);
-  const logos = [logo1, logo2, logo3];
-  const logo = logos[1]; // just to avoid errors
-
-  // const { randomColor, randomValue } = useRandomColor(); // random color
-  // const logo = logos[randomValue]; // random logo
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -48,7 +41,7 @@ function Navbar() {
   return (
     <>
       <nav className="fixed h-16 p-2 lg:px-6 flex justify-between w-full bg-primaryBg">
-        <Link to="home" smooth={true} duration={800}>
+        <Link to="home">
           <img
             src={logo}
             alt="logo"
@@ -68,8 +61,7 @@ function Navbar() {
           {menuOptions.map((option) => (
             <Link
               to={option.link}
-              smooth={true}
-              duration={800}
+              key={option.name}
               offset={-100}
               className="navLink"
             >
@@ -107,13 +99,11 @@ function Navbar() {
           </div>
 
           {/* mobile menu */}
-          <div className="p-3 pt-0 text-center font-extralight">
-            <ul className="text-5xl text-white grid gap-3">
+          <div className="pt-8 text-center font-extralight">
+            <ul className="text-5xl text-white grid gap-4">
               {menuOptions.map((option) => (
                 <Link
                   to={option.link}
-                  smooth={true}
-                  duration={800}
                   offset={-100}
                   className="hover:underline hover:cursor-pointer"
                   onClick={clickLink}
@@ -123,8 +113,8 @@ function Navbar() {
               ))}
             </ul>
           </div>
-          <div className="absolute bottom-4 w-full px-8">
-            <div className="flex justify-between gap-4">
+          <div className="absolute bottom-6 w-full">
+            <div className="flex justify-center gap-8">
               <SoMe face={true} size={50} />
               <SoMe insta={true} size={50} />
               <SoMe yt={true} size={50} />
