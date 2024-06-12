@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import LazyImage from "../components/LazyImage";
+import aboutImg from "..//assets/images/about.jpg";
 
-function About({ id }: { id: string }) {
+function About() {
   const [bio1, setBio1] = useState("");
   const [bio2, setBio2] = useState("");
   const [bio3, setBio3] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-
-  const storage = getStorage();
-  const imagesRef = ref(storage, "about.jpg");
 
   // Fetch about text and image URL from database
   useEffect(() => {
@@ -19,10 +16,6 @@ function About({ id }: { id: string }) {
         // Fetch text data from Firestore
         const querySnapshot = await getDocs(collection(db, "About"));
         const bioData = querySnapshot.docs.map((doc) => doc.data())[0];
-
-        // Fetch image URL from Firebase Storage
-        const url = await getDownloadURL(imagesRef);
-        setImageUrl(url);
 
         setBio1(bioData.P1);
         setBio2(bioData.P2);
@@ -37,13 +30,13 @@ function About({ id }: { id: string }) {
 
     // Call the function to fetch data
     fetchData();
-  }, [imagesRef]); // Dependency on imagesRef to re-fetch data when the image changes
+  }, []); // Dependency on imagesRef to re-fetch data when the image changes
 
   return (
-    <div className="h-full" id={id}>
+    <div className="mainContent">
       <h1 className="border-b">Om oss</h1>
       <div className="pt-4 grid gap-4">
-        <img src={imageUrl} alt="About picture" />
+        <LazyImage src={aboutImg} alt="About picture" />
         <p>{bio1}</p>
         <p>{bio2}</p>
         <p>{bio3}</p>

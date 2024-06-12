@@ -39,7 +39,7 @@ p {
 }
 
 .mainContent {
-  @apply px-2 lg:px-24 xl:px-40 2xl:px-72 grid gap-12 sm:gap-20 my-10;
+  @apply pt-24 px-2 lg:px-24 xl:px-40 2xl:px-72 pb-8;
 }
 
 .button {
@@ -51,4 +51,7 @@ p {
 }
 .memberSection {
   @apply grid gap-2 sm:gap-4 grid-cols-2 md:grid-cols-4 mb-8;
+}
+.primaryBg {
+  @apply bg-gray-100;
 }

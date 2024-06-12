@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
+import LazyImage from "../components/LazyImage";
 
 interface Member {
   name: string;
@@ -14,7 +15,7 @@ interface Member {
   sectionOrder: number;
 }
 
-function Members({ id }: { id: string }) {
+function Members() {
   const [members, setMembers] = useState<Member[]>([]);
   const [trumpetSection, setTrumpetSection] = useState<Member[]>([]);
   const [tromboneSection, setTromboneSection] = useState<Member[]>([]);
@@ -85,7 +86,7 @@ function Members({ id }: { id: string }) {
   }, [members]);
 
   return (
-    <div id={id}>
+    <div className="mainContent">
       <h1 className="border-b">Musikere</h1>
       <br />
       <h2>Saxofon</h2>
@@ -93,7 +94,7 @@ function Members({ id }: { id: string }) {
         {saxSection.map((member) => (
           <div className="member" key={member.name}>
             {member.imageUrl1 && (
-              <img src={member.imageUrl1} alt={member.name} loading="lazy" />
+              <LazyImage src={member.imageUrl1} alt={member.name} />
             )}
             <p>{member.name}</p>
             <p className="text-black/50">{member.instrument}</p>
@@ -106,7 +107,11 @@ function Members({ id }: { id: string }) {
         {trumpetSection.map((member) => (
           <div key={member.name} className="member">
             {member.imageUrl1 && (
-              <img src={member.imageUrl1} alt={member.name} loading="lazy" />
+              <LazyImage
+                key={member.name}
+                src={member.imageUrl1}
+                alt={member.name}
+              />
             )}
             <p>{member.name}</p>
             <p className="text-black/50">{member.instrument}</p>
@@ -119,7 +124,7 @@ function Members({ id }: { id: string }) {
         {tromboneSection.map((member) => (
           <div key={member.name} className="member">
             {member.imageUrl1 && (
-              <img src={member.imageUrl1} alt={member.name} loading="lazy" />
+              <LazyImage src={member.imageUrl1} alt={member.name} />
             )}
             <p>{member.name}</p>
             <p className="text-black/50">{member.instrument}</p>
@@ -132,7 +137,7 @@ function Members({ id }: { id: string }) {
         {rhythmSection.map((member) => (
           <div key={member.name} className="member">
             {member.imageUrl1 && (
-              <img src={member.imageUrl1} alt={member.name} loading="lazy" />
+              <LazyImage src={member.imageUrl1} alt={member.name} />
             )}
             <p>{member.name}</p>
             <p className="text-black/50">{member.instrument}</p>
@@ -146,7 +151,7 @@ function Members({ id }: { id: string }) {
           .map((member) => (
             <div key={member.name} className="member">
               {member.imageUrl1 && (
-                <img src={member.imageUrl1} alt={member.name} loading="lazy" />
+                <LazyImage src={member.imageUrl1} alt={member.name} />
               )}
               <p>{member.name}</p>
             </div>

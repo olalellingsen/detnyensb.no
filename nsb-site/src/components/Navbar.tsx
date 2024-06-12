@@ -2,18 +2,17 @@ import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
 import logo from "../assets/logo2.png";
-import { Link } from "react-scroll";
+import { Link } from "react-router-dom";
 import SoMe from "./SoMe";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [menuOptions] = useState([
-    { name: "Hjem", link: "home" },
-    { name: "Om oss", link: "about" },
-    { name: "Musikere", link: "members" },
-    { name: "Musikk", link: "music" },
-    { name: "Konserter", link: "concerts" },
-    { name: "Kontakt", link: "footer" },
+    { label: "Hjem", path: "/" },
+    { label: "Om oss", path: "/about" },
+    { label: "Musikere", path: "/members" },
+    { label: "Utgivelser", path: "/music" },
+    { label: "Konserter", path: "/concerts" },
   ]);
 
   useEffect(() => {
@@ -40,8 +39,8 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-16 p-2 lg:px-6 flex justify-between w-full bg-primaryBg">
-        <Link to="home">
+      <nav className="fixed h-16 p-2 lg:px-6 flex justify-between w-full primaryBg z-10">
+        <Link to="/">
           <img
             src={logo}
             alt="logo"
@@ -57,15 +56,10 @@ function Navbar() {
           </h1>
         </div>
 
-        <div className="hidden lg:flex gap-8 pt-2 text-lg">
+        <div className="hidden lg:flex gap-6 pt-2 text-lg">
           {menuOptions.map((option) => (
-            <Link
-              to={option.link}
-              key={option.name}
-              offset={-100}
-              className="navLink"
-            >
-              {option.name}
+            <Link to={option.path} key={option.label} className="navLink">
+              {option.label}
             </Link>
           ))}
         </div>
@@ -78,10 +72,10 @@ function Navbar() {
         </div>
       </nav>
       {isMenuOpen && (
-        <div className="menuOpen">
+        <div className="menuOpen z-50">
           {/* logo and cross */}
           <div className="h-16 p-2 lg:px-6 flex justify-between w-full">
-            <Link to="home" smooth={true} duration={800} onClick={closeMenu}>
+            <Link to="/" onClick={closeMenu}>
               <img
                 src={logo}
                 alt="logo"
@@ -103,12 +97,11 @@ function Navbar() {
             <ul className="text-5xl text-white grid gap-4">
               {menuOptions.map((option) => (
                 <Link
-                  to={option.link}
-                  offset={-100}
+                  to={option.path}
                   className="hover:underline hover:cursor-pointer"
                   onClick={clickLink}
                 >
-                  {option.name}
+                  {option.label}
                 </Link>
               ))}
             </ul>

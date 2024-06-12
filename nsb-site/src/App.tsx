@@ -1,26 +1,27 @@
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./pages/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Music from "./pages/Music";
-import Footer from "./pages/Footer";
-import Concerts from "./pages/Concerts";
-import NewsAndConcert from "./components/NewsAndConcert";
 import Members from "./pages/Members";
+import Music from "./pages/Music";
+import Concerts from "./pages/Concerts";
 
 function App() {
   return (
-    <div className="bg-primaryBg">
+    <BrowserRouter>
       <Navbar />
-      <Home id="home" />
-      <div className="mainContent">
-        <NewsAndConcert />
-        <About id="about" />
-        <Members id="members" />
-        <Music id="music" />
-        <Concerts id="concerts" />
+      <div className="primaryBg">
+        <Routes>
+          <Route path="/" Component={Home} />
+          <Route path="/about" Component={About} />
+          <Route path="/members" Component={Members} />
+          <Route path="/music" Component={Music} />
+          <Route path="/concerts" Component={Concerts} />
+        </Routes>
       </div>
-      <Footer id="footer" />
-    </div>
+      <Footer />
+    </BrowserRouter>
   );
 }
 

@@ -1,11 +1,8 @@
 import Contact from "../components/Contact";
 
-function Footer({ id }: { id: string }) {
+function Footer() {
   return (
-    <div
-      id={id}
-      className="bg-primary text-white p-6 grid gap-4 sm:px-12 sm:pt-16"
-    >
+    <div className="bg-primary text-white p-6 grid gap-4 sm:px-12 sm:pt-16">
       <Contact />
       {/* footer */}
       <div className="py-4">

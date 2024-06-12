@@ -5,10 +5,9 @@ import Concert, { ConcertProps } from "../components/Concert";
 
 interface Props {
   nextOnly?: boolean;
-  id: string;
 }
 
-function Concerts({ nextOnly, id }: Props) {
+function Concerts({ nextOnly }: Props) {
   const [concertData, setConcertData] = useState<DocumentData[]>([]);
   const [upcomingConcerts, setUpcomingConcerts] = useState<ConcertProps[]>([]);
   const [pastConcerts, setPastConcerts] = useState<ConcertProps[]>([]);
@@ -31,7 +30,7 @@ function Concerts({ nextOnly, id }: Props) {
     };
 
     fetchData();
-  }, [id]); // Add 'id' as a dependency to refetch data when 'id' changes
+  }, []);
 
   useEffect(() => {
     filterConcertData();
@@ -83,25 +82,25 @@ function Concerts({ nextOnly, id }: Props) {
   }
 
   return (
-    <div id={id}>
-      {/* Render components using concertData */}
+    <>
+      {/* for the home page */}
       {nextOnly && (
-        <div>
-          <Concert
-            title={upcomingConcerts[0]?.title}
-            date={upcomingConcerts[0]?.date}
-            time={upcomingConcerts[0]?.time}
-            location={upcomingConcerts[0]?.location}
-            locationLink={upcomingConcerts[0]?.locationLink}
-            description={upcomingConcerts[0]?.description}
-            ticketLink={upcomingConcerts[0]?.ticketLink}
-            image={upcomingConcerts[0]?.image}
-          />
-        </div>
+        <Concert
+          title={upcomingConcerts[0]?.title}
+          date={upcomingConcerts[0]?.date}
+          time={upcomingConcerts[0]?.time}
+          location={upcomingConcerts[0]?.location}
+          locationLink={upcomingConcerts[0]?.locationLink}
+          description={upcomingConcerts[0]?.description}
+          ticketLink={upcomingConcerts[0]?.ticketLink}
+          image={upcomingConcerts[0]?.image}
+        />
       )}
+
+      {/* for the concerts page */}
       {!nextOnly && (
-        <div>
-          <h1 className="border-b">Konserter</h1>
+        <div className="mainContent">
+          <h1 className="border-b">Kommende konserter</h1>
           <br />
           <div className="sm:w-2/3 mx-auto grid gap-8">
             {/* Render upcoming concerts */}
@@ -139,7 +138,7 @@ function Concerts({ nextOnly, id }: Props) {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
