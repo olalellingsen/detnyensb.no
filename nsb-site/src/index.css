@@ -55,3 +55,7 @@ p {
 .primaryBg {
   @apply bg-gray-100;
 }
+
+.placeholderAnimation {
+  @apply bg-gray-300 animate-pulse;
+}
