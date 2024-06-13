@@ -39,7 +39,7 @@ p {
 }
 
 .mainContent {
-  @apply pt-24 px-2 lg:px-24 xl:px-40 2xl:px-72 pb-8;
+  @apply pt-24 px-2 lg:w-4/5 xl:w-[1000px] mx-auto pb-8;
 }
 
 .button {
