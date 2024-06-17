@@ -6,12 +6,14 @@ import About from "./pages/About";
 import Members from "./pages/Members";
 import Music from "./pages/Music";
 import Concerts from "./pages/Concerts";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <div className="primaryBg">
+        <ScrollToTop />
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/about" Component={About} />

@@ -9,8 +9,6 @@ function About() {
   const [bio2, setBio2] = useState("");
   const [bio3, setBio3] = useState("");
 
-  window.scrollTo(0, 0);
-
   // Fetch about text and image URL from database
   useEffect(() => {
     const fetchData = async () => {

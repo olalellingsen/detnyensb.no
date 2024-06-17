@@ -24,8 +24,6 @@ function Members() {
   const [rhythmSection, setRhythmSection] = useState<Member[]>([]);
   const [showPlaceholder, setShowPlaceholder] = useState(true);
 
-  window.scrollTo(0, 0);
-
   useEffect(() => {
     const fetchData = async () => {
       try {

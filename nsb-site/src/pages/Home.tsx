@@ -6,8 +6,6 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { Link } from "react-router-dom";
 
 function Home() {
-  window.scrollTo(0, 0);
-
   const [videoUrl, setVideoUrl] = useState("");
 
   useEffect(() => {
@@ -64,7 +62,6 @@ function Home() {
           width="100%"
           height="500"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
         ></iframe>
         <br />
         <div className="flex justify-center">
