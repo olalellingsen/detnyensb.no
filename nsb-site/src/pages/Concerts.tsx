@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
 import Concert, { ConcertProps } from "../components/Concert";
-import placeholderImg from "../assets/placeholder.jpg";
 
 interface Props {
   nextOnly?: boolean;
