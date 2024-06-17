@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore"; // Import DocumentData
 import { db } from "../firebase";
 import Concert, { ConcertProps } from "../components/Concert";
+import placeholderImg from "../assets/placeholder.jpg";
 
 interface Props {
   nextOnly?: boolean;
@@ -103,6 +104,16 @@ function Concerts({ nextOnly }: Props) {
           <h1 className="border-b">Kommende konserter</h1>
           <br />
           <div className="sm:w-2/3 mx-auto grid gap-8">
+            {/* placeholders */}
+            {upcomingConcerts.length === 0 && (
+              <div>
+                <div className="bg-gray-300 animate-pulse rounded-lg h-72 my-4"></div>
+                <div className="bg-gray-300 animate-pulse rounded-lg h-72 my-4"></div>
+                <div className="bg-gray-300 animate-pulse rounded-lg h-72 my-4"></div>
+                <div className="bg-gray-300 animate-pulse rounded-lg h-72 my-4"></div>
+              </div>
+            )}
+
             {/* Render upcoming concerts */}
             <div className="grid gap-4">
               {upcomingConcerts.map((concert) => (
@@ -111,7 +122,7 @@ function Concerts({ nextOnly }: Props) {
             </div>
             <button
               onClick={() => setShowPast(!showPast)}
-              className="button w-max mx-auto"
+              className="w-max mx-auto"
             >
               {showPast ? (
                 <>Skjul tidligere konserter</>

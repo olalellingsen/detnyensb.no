@@ -24,6 +24,8 @@ function Members() {
   const [rhythmSection, setRhythmSection] = useState<Member[]>([]);
   const [showPlaceholder, setShowPlaceholder] = useState(true);
 
+  window.scrollTo(0, 0);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -92,10 +94,11 @@ function Members() {
       <h1 className="border-b">Musikere</h1>
       <br />
 
+      <h2>Saxofon</h2>
       {/* Placeholder images */}
       {showPlaceholder && (
-        <div className="memberSection h-screen">
-          {[...Array(15)].map((_, index) => (
+        <div className="memberSection">
+          {[...Array(5)].map((_, index) => (
             <div key={index}>
               <img src={placeholderImg} className="animate-pulse" />
               <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
@@ -104,8 +107,6 @@ function Members() {
           ))}
         </div>
       )}
-
-      <h2>Saxofon</h2>
 
       <div className="memberSection">
         {saxSection.map((member) => (
@@ -131,6 +132,19 @@ function Members() {
       </div>
 
       <h2>Trompet</h2>
+      {/* Placeholder images */}
+      {showPlaceholder && (
+        <div className="memberSection">
+          {[...Array(4)].map((_, index) => (
+            <div key={index}>
+              <img src={placeholderImg} className="animate-pulse" />
+              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
+              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="memberSection">
         {trumpetSection.map((member) => (
           <div key={member.name} className="member">
@@ -139,6 +153,8 @@ function Members() {
                 key={member.name}
                 src={member.imageUrl1}
                 alt={member.name}
+                triggerOnce={false}
+                threshold={0.2}
               />
             )}
             <p>{member.name}</p>
@@ -148,6 +164,19 @@ function Members() {
       </div>
 
       <h2>Trombone</h2>
+      {/* Placeholder images */}
+      {showPlaceholder && (
+        <div className="memberSection">
+          {[...Array(4)].map((_, index) => (
+            <div key={index}>
+              <img src={placeholderImg} className="animate-pulse" />
+              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
+              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="memberSection">
         {tromboneSection.map((member) => (
           <div key={member.name} className="member">
@@ -156,6 +185,8 @@ function Members() {
                 key={member.name}
                 src={member.imageUrl1}
                 alt={member.name}
+                triggerOnce={false}
+                threshold={0.2}
               />
             )}
             <p>{member.name}</p>
@@ -165,6 +196,19 @@ function Members() {
       </div>
 
       <h2>Kompet</h2>
+      {/* Placeholder images */}
+      {showPlaceholder && (
+        <div className="memberSection">
+          {[...Array(4)].map((_, index) => (
+            <div key={index}>
+              <img src={placeholderImg} className="animate-pulse" />
+              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
+              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="memberSection">
         {rhythmSection.map((member) => (
           <div key={member.name} className="member">
@@ -173,6 +217,8 @@ function Members() {
                 key={member.name}
                 src={member.imageUrl1}
                 alt={member.name}
+                triggerOnce={false}
+                threshold={0.2}
               />
             )}
             <p>{member.name}</p>
@@ -191,6 +237,8 @@ function Members() {
                   key={member.name}
                   src={member.imageUrl1}
                   alt={member.name}
+                  triggerOnce={false}
+                  threshold={0.2}
                 />
               )}
               <p>{member.name}</p>

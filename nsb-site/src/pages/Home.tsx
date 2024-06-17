@@ -1,14 +1,53 @@
-import homeImage from "../assets/images/home.jpg";
+import { useEffect, useState } from "react";
+// import homeImage from "../assets/images/home.jpg";
 import News from "../components/News";
 import Concerts from "./Concerts";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import { Link } from "react-router-dom";
 
 function Home() {
+  window.scrollTo(0, 0);
+
+  const [videoUrl, setVideoUrl] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const storage = getStorage();
+        const videoUrl = await getDownloadURL(ref(storage, "Videos/promo.mp4"));
+        setVideoUrl(videoUrl);
+      } catch (error) {
+        console.error(
+          "Error connecting to Firestore or accessing Storage:",
+          error
+        );
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
-      <img src={homeImage} alt="" className="object-cover h-screen w-full" />
+      {/* <img
+        src={homeImage}
+        alt="Home"
+        className="object-cover h-screen w-full"
+      /> */}
 
-      <div className="px-2 md:px-24 xl:px-40 2xl:px-72 pb-8">
-        <div className="grid lg:grid-cols-2 gap-4 ">
+      <div className="h-screen w-full bg-black">
+        {videoUrl && (
+          <video
+            src={videoUrl}
+            autoPlay
+            muted
+            loop
+            className="object-cover h-screen w-full"
+          />
+        )}
+      </div>
+
+      <div className="p-2 lg:w-4/5 xl:w-[1000px] mx-auto pb-8">
+        <div className="grid lg:grid-cols-2 gap-4">
           <div>
             <h2 className="py-2 text-center lg:text-start">Neste konsert</h2>
             <Concerts nextOnly={true} />
@@ -18,14 +57,21 @@ function Home() {
             <News />
           </div>
         </div>
-
         <br />
-
+        <h2 className="py-2 text-center lg:text-start">Spotify</h2>
         <iframe
-          src="https://www.youtube.com/embed/DC63I9B3K9g?autoplay=1&mute=1"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          className="w-full aspect-video rounded-lg"
+          src="https://open.spotify.com/embed/artist/07RkGtZNwFOTFyVFEw4cMY?utm_source=generator&theme=0"
+          width="100%"
+          height="500"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
         ></iframe>
+        <br />
+        <div className="flex justify-center">
+          <Link to="/music">
+            <button>Se alle utgivelser</button>
+          </Link>
+        </div>
       </div>
     </>
   );

@@ -1,9 +1,16 @@
 import { useInView } from "react-intersection-observer";
 
-function LazyImage({ src, alt }: { src: string; alt: string }) {
+interface LazyImageProps {
+  src: string;
+  alt: string;
+  triggerOnce: boolean;
+  threshold?: number;
+}
+
+function LazyImage({ src, alt, triggerOnce, threshold }: LazyImageProps) {
   const { ref, inView } = useInView({
-    threshold: 0,
-    triggerOnce: true,
+    threshold: threshold || 0,
+    triggerOnce: triggerOnce,
   });
 
   return (

@@ -11,6 +11,9 @@ interface Media {
 function Music() {
   const [albums, setAlbums] = useState<Media[]>([]);
   const [singles, setSingles] = useState<Media[]>([]);
+  const [showPlaceholder, setShowPlaceholder] = useState(true);
+
+  window.scrollTo(0, 0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +52,7 @@ function Music() {
       newMedia[index].isLoaded = true;
       return newMedia;
     });
+    setShowPlaceholder(false);
   };
 
   return (
@@ -59,7 +63,7 @@ function Music() {
       <h2>Album</h2>
       <div className="grid gap-2 md:grid-cols-2">
         {/* Placeholder for loading animation */}
-        {albums.length === 0 && (
+        {showPlaceholder && (
           <>
             <iframe
               className="album animate-pulse bg-gray-300 rounded-lg"
@@ -92,7 +96,7 @@ function Music() {
       <h2>Singler</h2>
       <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
         {/* Placeholder for loading animation */}
-        {singles.length === 0 && (
+        {showPlaceholder && (
           <>
             <iframe
               className="single animate-pulse bg-gray-300 rounded-lg"
