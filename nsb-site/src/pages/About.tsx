@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import aboutImg from "..//assets/images/about.jpg";
-import Slideshow from "../components/Slideshow";
 
 function About() {
   const [bio1, setBio1] = useState("");
@@ -41,13 +40,6 @@ function About() {
           <p>{bio2}</p>
           <p>{bio3}</p>
         </div>
-        <Slideshow />
-
-        <iframe
-          src="https://www.youtube.com/embed/DC63I9B3K9g?autoplay=1&mute=1"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          className="w-full aspect-video"
-        ></iframe>
       </div>
     </div>
   );

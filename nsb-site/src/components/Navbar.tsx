@@ -11,6 +11,7 @@ function Navbar() {
     { label: "Hjem", path: "/" },
     { label: "Om oss", path: "/about" },
     { label: "Musikere", path: "/members" },
+    { label: "Media", path: "/media" },
     { label: "Utgivelser", path: "/music" },
     { label: "Konserter", path: "/concerts" },
   ]);

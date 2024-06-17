@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-// import homeImage from "../assets/images/home.jpg";
+import homeImage from "../assets/images/home.jpg";
 import News from "../components/News";
 import Concerts from "./Concerts";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
@@ -24,15 +24,16 @@ function Home() {
 
     fetchData();
   }, []);
+
   return (
     <>
-      {/* <img
+      <img
         src={homeImage}
         alt="Home"
-        className="object-cover h-screen w-full"
-      /> */}
+        className="object-cover h-screen w-full sm:hidden"
+      />
 
-      <div className="h-screen w-full bg-black">
+      <div className="h-screen w-full bg-black hidden sm:block">
         {videoUrl && (
           <video
             src={videoUrl}
