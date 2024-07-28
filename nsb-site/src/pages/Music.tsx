@@ -53,7 +53,7 @@ function Music() {
 
   return (
     <div className="grid gap-2 mainContent">
-      <h1 className="border-b">Utgivelser</h1>
+      <h1>Utgivelser</h1>
       <br />
       {/* Albums */}
       <h2>Album</h2>

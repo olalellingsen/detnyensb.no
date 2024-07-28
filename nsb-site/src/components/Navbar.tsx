@@ -40,7 +40,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-16 p-2 lg:px-6 flex justify-between w-full primaryBg z-10">
+      <nav className="fixed h-16 p-2 lg:px-6 flex justify-between w-full bg-primaryBg z-10">
         <Link to="/">
           <img
             src={logo}

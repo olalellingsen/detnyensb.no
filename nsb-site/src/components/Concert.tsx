@@ -1,9 +1,11 @@
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { ArrowRight, Calendar, X, Clock, MapPin, Ticket } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export interface ConcertProps {
+  id: string;
   title?: string;
+  subtitle?: string;
   image?: string;
   date?: string;
   time?: string;
@@ -15,7 +17,9 @@ export interface ConcertProps {
 
 function Concert({
   title,
+  subtitle,
   date,
+  id,
   time,
   location,
   locationLink,
@@ -23,7 +27,6 @@ function Concert({
   ticketLink,
   image,
 }: ConcertProps) {
-  const [showDescription, setShowDescription] = useState(false);
   const [fetchedImage, setFetchedImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -48,70 +51,28 @@ function Concert({
   }, [image]);
 
   return (
-    <div className="card grid gap-2">
-      <h2 className="flex justify-start">{title}</h2>
-      {/* image */}
+    <div className="bg-primary text-white">
       {fetchedImage && <img src={fetchedImage} alt={"Image of " + title} />}
-      <div className="grid gap-4 py-2">
-        <div>
-          {/* date, time, location, ticketLink */}
-          <div className="flex flex-wrap gap-4 ">
-            <div className="flex gap-1">
-              <Calendar />
-              {date}
-            </div>
-            <div className="flex gap-1">
-              <Clock />
-              {time}
-            </div>
-            <div className="flex gap-1">
-              <MapPin />
-              <a
-                className={locationLink !== " " ? "underline" : ""}
-                href={locationLink}
-                target="_blank"
-              >
-                {location}
-              </a>
-            </div>
 
-            {ticketLink && (
-              <div className="flex gap-1">
-                <Ticket />
-                <a className="underline" href={ticketLink} target="_blank">
-                  Kjøp billetter
-                </a>
-              </div>
-            )}
-            <div>
-              {description && (
-                <p
-                  className={`${
-                    showDescription || description === "" ? "hidden" : ""
-                  }`}
-                >
-                  {description.slice(0, 150) + "..."}
-                </p>
-              )}
-            </div>
-            {description && (
-              <button
-                onClick={() => setShowDescription(!showDescription)}
-                className={`flex underline ${
-                  showDescription ? "" : "mr-1 hover:gap-1 hover:mr-0"
-                }`}
-              >
-                <X className={`${showDescription ? "" : "hidden"}`} />
-                {showDescription ? "Lukk" : "Les mer"}
-                <ArrowRight className={`${showDescription ? "hidden" : ""}`} />
-              </button>
-            )}
-          </div>
+      <div className="p-4 grid gap-4">
+        <p>{date}</p>
+        {/* <p>Kl {time}</p> */}
+
+        <h2 className="flex justify-start">{title}</h2>
+
+        {subtitle && <h3>{subtitle}</h3>}
+
+        <div className="flex gap-4">
+          {ticketLink && (
+            <a href={ticketLink} target="_blank">
+              <button className="btn2">Kjøp billetter</button>
+            </a>
+          )}
+          <Link to={`/concert/${id}`} className="underline my-2">
+            Les mer
+          </Link>
         </div>
       </div>
-      {description !== "" && showDescription && (
-        <p className="border-t my-4 pt-2">{description}</p>
-      )}
     </div>
   );
 }

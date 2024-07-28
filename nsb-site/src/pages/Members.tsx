@@ -1,8 +1,13 @@
-import { useEffect, useState } from "react";
-import { collection, getDocs, DocumentData } from "firebase/firestore";
+import { useEffect, useState, useRef } from "react";
+import {
+  collection,
+  getDocs,
+  DocumentData,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
-import LazyImage from "../components/LazyImage";
 import placeholderImg from "../assets/placeholder.jpg";
 
 interface Member {
@@ -16,233 +21,296 @@ interface Member {
   sectionOrder: number;
 }
 
+const sectionPaths = {
+  sax: "Members/Sax/Sax",
+  trumpet: "Members/Trumpet/Trumpet",
+  trombone: "Members/Trombone/Trombone",
+  rhythm: "Members/RhythmSection/RhythmSection",
+  conductor: "Members/Conductor/Conductor",
+};
+
 function Members() {
-  const [members, setMembers] = useState<Member[]>([]);
+  const [saxSection, setSaxSection] = useState<Member[]>([]);
   const [trumpetSection, setTrumpetSection] = useState<Member[]>([]);
   const [tromboneSection, setTromboneSection] = useState<Member[]>([]);
-  const [saxSection, setSaxSection] = useState<Member[]>([]);
   const [rhythmSection, setRhythmSection] = useState<Member[]>([]);
-  const [showPlaceholder, setShowPlaceholder] = useState(true);
+  const [conductor, setConductor] = useState<Member>();
+
+  const saxRef = useRef<HTMLDivElement>(null);
+  const trumpetRef = useRef<HTMLDivElement>(null);
+  const tromboneRef = useRef<HTMLDivElement>(null);
+  const rhythmRef = useRef<HTMLDivElement>(null);
+  const conductorRef = useRef<HTMLDivElement>(null);
+
+  const [showSaxPlaceholder, setShowSaxPlaceholder] = useState(true);
+  const [showTrumpetPlaceholder, setShowTrumpetPlaceholder] = useState(true);
+  const [showTrombonePlaceholder, setShowTrombonePlaceholder] = useState(true);
+  const [showRhythmPlaceholder, setShowRhythmPlaceholder] = useState(true);
+
+  const fetchData = async (
+    path: string,
+    setSection: (data: Member[]) => void
+  ) => {
+    try {
+      const memberQuery = query(collection(db, path), orderBy("order"));
+      const querySnapshot = await getDocs(memberQuery);
+      const storage = getStorage();
+
+      const memberData: Member[] = await Promise.all(
+        querySnapshot.docs.map(async (doc: DocumentData) => {
+          const data = doc.data() as Member;
+          const imageUrl1 = data.img1
+            ? await getDownloadURL(
+                ref(storage, `Portraits/${data.img1}`)
+              ).catch(() => "")
+            : "";
+          return { ...data, imageUrl1 };
+        })
+      );
+
+      setSection(memberData);
+    } catch (error) {
+      console.error(
+        "Error connecting to Firestore or accessing Storage:",
+        error
+      );
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "Members"));
-        const storage = getStorage();
-
-        const memberData: Member[] = await Promise.all(
-          querySnapshot.docs.map(async (doc: DocumentData) => {
-            const data = doc.data() as Member;
-
-            const imageUrl1 = data.img1
-              ? await getDownloadURL(
-                  ref(storage, `Portraits/${data.img1}`)
-                ).catch(() => "")
-              : "";
-            // const imageUrl2 = data.img2
-            //   ? await getDownloadURL(
-            //       ref(storage, `Portraits/${data.img2}`)
-            //     ).catch(() => "")
-            //   : "";
-
-            return { ...data, imageUrl1 };
-          })
-        );
-
-        setMembers(memberData);
-      } catch (error) {
-        console.error(
-          "Error connecting to Firestore or accessing Storage:",
-          error
-        );
-      }
+    const observerCallback = (
+      entries: IntersectionObserverEntry[],
+      observer: IntersectionObserver
+    ) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          switch (entry.target.id) {
+            case "sax-section":
+              fetchData(sectionPaths.sax, setSaxSection);
+              observer.unobserve(entry.target);
+              break;
+            case "trumpet-section":
+              fetchData(sectionPaths.trumpet, setTrumpetSection);
+              observer.unobserve(entry.target);
+              break;
+            case "trombone-section":
+              fetchData(sectionPaths.trombone, setTromboneSection);
+              observer.unobserve(entry.target);
+              break;
+            case "rhythm-section":
+              fetchData(sectionPaths.rhythm, setRhythmSection);
+              observer.unobserve(entry.target);
+              break;
+            case "conductor-section":
+              fetchData(sectionPaths.conductor, (data) =>
+                setConductor(data[0])
+              );
+              observer.unobserve(entry.target);
+              break;
+            default:
+              break;
+          }
+        }
+      });
     };
 
-    fetchData();
+    const observerOptions = {
+      root: null,
+      rootMargin: "200px",
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+
+    if (saxRef.current) observer.observe(saxRef.current);
+    if (trumpetRef.current) observer.observe(trumpetRef.current);
+    if (tromboneRef.current) observer.observe(tromboneRef.current);
+    if (rhythmRef.current) observer.observe(rhythmRef.current);
+    if (conductorRef.current) observer.observe(conductorRef.current);
+
+    return () => {
+      if (saxRef.current) observer.unobserve(saxRef.current);
+      if (trumpetRef.current) observer.unobserve(trumpetRef.current);
+      if (tromboneRef.current) observer.unobserve(tromboneRef.current);
+      if (rhythmRef.current) observer.unobserve(rhythmRef.current);
+      if (conductorRef.current) observer.unobserve(conductorRef.current);
+    };
   }, []);
-
-  useEffect(() => {
-    const sortMembers = () => {
-      const sax = members
-        .filter((member) => member.section === "Sax")
-        .sort((a, b) => a.sectionOrder - b.sectionOrder);
-      setSaxSection(sax);
-
-      const trumpet = members
-        .filter((member) => member.section === "Trompet")
-        .sort((a, b) => a.sectionOrder - b.sectionOrder);
-      setTrumpetSection(trumpet);
-
-      const trombone = members
-        .filter((member) => member.section === "Trombone")
-        .sort((a, b) => a.sectionOrder - b.sectionOrder);
-      setTromboneSection(trombone);
-
-      const rhythm = members
-        .filter((member) => member.section === "Komp")
-        .sort((a, b) => a.sectionOrder - b.sectionOrder);
-      setRhythmSection(rhythm);
-    };
-
-    sortMembers();
-  }, [members]);
 
   return (
     <div className="mainContent">
-      <h1 className="border-b">Musikere</h1>
+      <h1>Musikere</h1>
       <br />
 
-      <h2>Saxofon</h2>
-      {/* Placeholder images */}
-      {showPlaceholder && (
-        <div className="memberSection">
-          {[...Array(5)].map((_, index) => (
-            <div key={index}>
-              <img src={placeholderImg} className="animate-pulse" />
-              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
-              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* sax */}
+      <section
+        id="sax-section"
+        ref={saxRef}
+        style={{ minHeight: window.innerHeight }}
+      >
+        <h2>Saxofon</h2>
+        {showSaxPlaceholder && (
+          <div className="memberSection">
+            {[...Array(4)].map((_, index) => (
+              <div key={index}>
+                <img src={placeholderImg} className="animate-pulse" />
+                <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
+                <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
+              </div>
+            ))}
+          </div>
+        )}
 
-      <div className="memberSection">
-        {saxSection.map((member) => (
-          <div
-            className={`
-          ${
-            showPlaceholder ? "opacity-0" : "opactiy-100"
-          }  member transition-opacity duration-[2000ms] ease-in-out`}
-            key={member.name}
-          >
-            {member.imageUrl1 && (
+        <div className="memberSection">
+          {saxSection.map((member) => (
+            <div
+              className={`${
+                showSaxPlaceholder ? "opacity-0" : "opacity-100"
+              } member transition-opacity ease-in-out duration-1000`}
+              key={member.name}
+            >
               <img
                 src={member.imageUrl1}
                 alt={member.name}
-                key={member.name}
-                onLoad={() => setShowPlaceholder(false)}
+                onLoad={() => setShowSaxPlaceholder(false)}
               />
-            )}
-            <p>{member.name}</p>
-            <p className="text-black/50">{member.instrument}</p>
-          </div>
-        ))}
-      </div>
-
-      <h2>Trompet</h2>
-      {/* Placeholder images */}
-      {showPlaceholder && (
-        <div className="memberSection">
-          {[...Array(4)].map((_, index) => (
-            <div key={index}>
-              <img src={placeholderImg} className="animate-pulse" />
-              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
-              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="memberSection">
-        {trumpetSection.map((member) => (
-          <div key={member.name} className="member">
-            {member.imageUrl1 && (
-              <LazyImage
-                key={member.name}
-                src={member.imageUrl1}
-                alt={member.name}
-                triggerOnce={false}
-                threshold={0.2}
-              />
-            )}
-            <p>{member.name}</p>
-            <p className="text-black/50">{member.instrument}</p>
-          </div>
-        ))}
-      </div>
-
-      <h2>Trombone</h2>
-      {/* Placeholder images */}
-      {showPlaceholder && (
-        <div className="memberSection">
-          {[...Array(4)].map((_, index) => (
-            <div key={index}>
-              <img src={placeholderImg} className="animate-pulse" />
-              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
-              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="memberSection">
-        {tromboneSection.map((member) => (
-          <div key={member.name} className="member">
-            {member.imageUrl1 && (
-              <LazyImage
-                key={member.name}
-                src={member.imageUrl1}
-                alt={member.name}
-                triggerOnce={false}
-                threshold={0.2}
-              />
-            )}
-            <p>{member.name}</p>
-            <p className="text-black/50">{member.instrument}</p>
-          </div>
-        ))}
-      </div>
-
-      <h2>Kompet</h2>
-      {/* Placeholder images */}
-      {showPlaceholder && (
-        <div className="memberSection">
-          {[...Array(4)].map((_, index) => (
-            <div key={index}>
-              <img src={placeholderImg} className="animate-pulse" />
-              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
-              <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="memberSection">
-        {rhythmSection.map((member) => (
-          <div key={member.name} className="member">
-            {member.imageUrl1 && (
-              <LazyImage
-                key={member.name}
-                src={member.imageUrl1}
-                alt={member.name}
-                triggerOnce={false}
-                threshold={0.2}
-              />
-            )}
-            <p>{member.name}</p>
-            <p className="text-black/50">{member.instrument}</p>
-          </div>
-        ))}
-      </div>
-      <h2>Musikalsk leder</h2>
-      <div className="memberSection">
-        {members
-          .filter((member) => member.section === "Musikalsk leder")
-          .map((member) => (
-            <div key={member.name} className="member">
-              {member.imageUrl1 && (
-                <LazyImage
-                  key={member.name}
-                  src={member.imageUrl1}
-                  alt={member.name}
-                  triggerOnce={false}
-                  threshold={0.2}
-                />
-              )}
               <p>{member.name}</p>
+              <p className="text-black/50">{member.instrument}</p>
             </div>
           ))}
-      </div>
+        </div>
+      </section>
+
+      {/* trumpet */}
+      <section
+        id="trumpet-section"
+        ref={trumpetRef}
+        style={{ minHeight: "400px" }}
+      >
+        <h2>Trompet</h2>
+        {showTrumpetPlaceholder && (
+          <div className="memberSection">
+            {[...Array(4)].map((_, index) => (
+              <div key={index}>
+                <img src={placeholderImg} className="animate-pulse" />
+                <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
+                <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="memberSection">
+          {trumpetSection.map((member) => (
+            <div
+              className={`${
+                showTrumpetPlaceholder ? "opacity-0" : "opacity-100"
+              } member transition-opacity ease-in-out duration-1000`}
+              key={member.name}
+            >
+              <img
+                src={member.imageUrl1}
+                alt={member.name}
+                onLoad={() => setShowTrumpetPlaceholder(false)}
+              />
+              <p>{member.name}</p>
+              <p className="text-black/50">{member.instrument}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* trombone */}
+      <section
+        id="trombone-section"
+        ref={tromboneRef}
+        style={{ minHeight: "400px" }}
+      >
+        <h2>Trombone</h2>
+        {showTrombonePlaceholder && (
+          <div className="memberSection">
+            {[...Array(4)].map((_, index) => (
+              <div key={index}>
+                <img src={placeholderImg} className="animate-pulse" />
+                <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
+                <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="memberSection">
+          {tromboneSection.map((member) => (
+            <div
+              className={`${
+                showTrombonePlaceholder ? "opacity-0" : "opacity-100"
+              } member transition-opacity ease-in-out duration-1000`}
+              key={member.name}
+            >
+              <img
+                src={member.imageUrl1}
+                alt={member.name}
+                onLoad={() => setShowTrombonePlaceholder(false)}
+              />
+              <p>{member.name}</p>
+              <p className="text-black/50">{member.instrument}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* rhythm section */}
+      <section
+        id="rhythm-section"
+        ref={rhythmRef}
+        style={{ minHeight: "400px" }}
+      >
+        <h2>Kompet</h2>
+        {showRhythmPlaceholder && (
+          <div className="memberSection">
+            {[...Array(4)].map((_, index) => (
+              <div key={index}>
+                <img src={placeholderImg} className="animate-pulse" />
+                <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-2/3"></div>
+                <div className="h-4 my-2 bg-gray-300 animate-pulse rounded mx-auto w-1/3"></div>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="memberSection">
+          {rhythmSection.map((member) => (
+            <div
+              className={`${
+                showRhythmPlaceholder ? "opacity-0" : "opacity-100"
+              } member transition-opacity ease-in-out duration-1000`}
+              key={member.name}
+            >
+              <img
+                src={member.imageUrl1}
+                alt={member.name}
+                onLoad={() => setShowRhythmPlaceholder(false)}
+              />
+              <p>{member.name}</p>
+              <p className="text-black/50">{member.instrument}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* cunductor */}
+      <section id="conductor-section" ref={conductorRef}>
+        <h2>Musikalsk leder</h2>
+        <div className="memberSection">
+          {conductor && (
+            <div key={conductor.name} className="member">
+              {conductor.imageUrl1 && (
+                <img src={conductor.imageUrl1} alt={conductor.name} />
+              )}
+              <p>{conductor.name}</p>
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

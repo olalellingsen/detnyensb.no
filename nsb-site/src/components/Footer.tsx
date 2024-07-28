@@ -1,4 +1,4 @@
-import Contact from "../components/Contact";
+import Contact from "./Contact";
 
 function Footer() {
   return (
@@ -7,7 +7,7 @@ function Footer() {
       {/* footer */}
       <div className="py-4">
         <h3>Våre samarbeidspartnere:</h3>
-        <div className="py-2 font-extralight grid">
+        <div className="py-2 font-extralight grid w-max">
           <a href="https://www.homeworkspace.no/" target="_blank">
             Home Workspace
           </a>

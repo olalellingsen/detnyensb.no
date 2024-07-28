@@ -32,7 +32,7 @@ function About() {
 
   return (
     <div className="mainContent">
-      <h1 className="border-b">Om oss</h1>
+      <h1>Om oss</h1>
       <div className="grid gap-8">
         <div className="pt-4 grid gap-4">
           <img src={aboutImg} alt="About picture" />
