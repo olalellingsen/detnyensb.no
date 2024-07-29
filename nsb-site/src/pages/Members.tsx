@@ -9,16 +9,14 @@ import {
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
 import placeholderImg from "../assets/placeholder.jpg";
+import { Link } from "react-router-dom";
 
 interface Member {
   name: string;
   section: string;
   instrument: string;
   img1?: string;
-  img2?: string;
   imageUrl1?: string;
-  imageUrl2?: string;
-  sectionOrder: number;
 }
 
 const sectionPaths = {
@@ -171,11 +169,14 @@ function Members() {
               } member transition-opacity ease-in-out duration-1000`}
               key={member.name}
             >
-              <img
-                src={member.imageUrl1}
-                alt={member.name}
-                onLoad={() => setShowSaxPlaceholder(false)}
-              />
+              <Link to={`/members/Sax/${member.name}`}>
+                <img
+                  className="hover:scale-[1.02] transition-transform"
+                  src={member.imageUrl1}
+                  alt={member.name}
+                  onLoad={() => setShowSaxPlaceholder(false)}
+                />
+              </Link>
               <p>{member.name}</p>
               <p className="text-black/50">{member.instrument}</p>
             </div>
@@ -209,11 +210,14 @@ function Members() {
               } member transition-opacity ease-in-out duration-1000`}
               key={member.name}
             >
-              <img
-                src={member.imageUrl1}
-                alt={member.name}
-                onLoad={() => setShowTrumpetPlaceholder(false)}
-              />
+              <Link to={`/members/Trumpet/${member.name}`}>
+                <img
+                  className="hover:scale-[1.02] transition-transform"
+                  src={member.imageUrl1}
+                  alt={member.name}
+                  onLoad={() => setShowTrumpetPlaceholder(false)}
+                />
+              </Link>
               <p>{member.name}</p>
               <p className="text-black/50">{member.instrument}</p>
             </div>
@@ -247,11 +251,14 @@ function Members() {
               } member transition-opacity ease-in-out duration-1000`}
               key={member.name}
             >
-              <img
-                src={member.imageUrl1}
-                alt={member.name}
-                onLoad={() => setShowTrombonePlaceholder(false)}
-              />
+              <Link to={`/members/Trombone/${member.name}`}>
+                <img
+                  className="hover:scale-[1.02] transition-transform"
+                  src={member.imageUrl1}
+                  alt={member.name}
+                  onLoad={() => setShowTrombonePlaceholder(false)}
+                />
+              </Link>
               <p>{member.name}</p>
               <p className="text-black/50">{member.instrument}</p>
             </div>
@@ -285,11 +292,14 @@ function Members() {
               } member transition-opacity ease-in-out duration-1000`}
               key={member.name}
             >
-              <img
-                src={member.imageUrl1}
-                alt={member.name}
-                onLoad={() => setShowRhythmPlaceholder(false)}
-              />
+              <Link to={`/members/RhythmSection/${member.name}`}>
+                <img
+                  className="hover:scale-[1.02] transition-transform"
+                  src={member.imageUrl1}
+                  alt={member.name}
+                  onLoad={() => setShowRhythmPlaceholder(false)}
+                />
+              </Link>
               <p>{member.name}</p>
               <p className="text-black/50">{member.instrument}</p>
             </div>
@@ -297,14 +307,20 @@ function Members() {
         </div>
       </section>
 
-      {/* cunductor */}
+      {/* conductor */}
       <section id="conductor-section" ref={conductorRef}>
         <h2>Musikalsk leder</h2>
         <div className="memberSection">
           {conductor && (
             <div key={conductor.name} className="member">
               {conductor.imageUrl1 && (
-                <img src={conductor.imageUrl1} alt={conductor.name} />
+                <Link to={`/members/Conductor/${conductor.name}`}>
+                  <img
+                    src={conductor.imageUrl1}
+                    alt={conductor.name}
+                    className="hover:scale-[1.02] transition-transform"
+                  />
+                </Link>
               )}
               <p>{conductor.name}</p>
             </div>

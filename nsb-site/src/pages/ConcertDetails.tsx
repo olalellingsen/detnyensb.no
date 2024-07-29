@@ -4,7 +4,6 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { ConcertProps } from "../components/Concert";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
-import { Clock } from "lucide-react";
 
 function ConcertDetails() {
   const { id } = useParams();

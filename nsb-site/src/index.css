@@ -11,7 +11,7 @@ h1 {
 }
 
 h2 {
-  @apply text-2xl font-light;
+  @apply text-2xl font-extralight;
 }
 
 .navLink {
@@ -23,7 +23,7 @@ h2 {
 }
 
 p {
-  @apply text-lg;
+  @apply text-lg font-light;
 }
 
 .album {

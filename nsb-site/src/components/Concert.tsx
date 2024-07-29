@@ -56,7 +56,6 @@ function Concert({
 
       <div className="p-4 grid gap-4">
         <p>{date}</p>
-        {/* <p>Kl {time}</p> */}
 
         <h2 className="flex justify-start">{title}</h2>
 
