@@ -67,7 +67,7 @@ function Concert({
               <button className="btn2">Kjøp billetter</button>
             </a>
           )}
-          <Link to={`/concert/${id}`} className="underline my-2">
+          <Link to={`/concert/${id}`} className="underline my-2 hover:no-underline">
             Les mer
           </Link>
         </div>

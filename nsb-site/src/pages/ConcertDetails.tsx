@@ -59,19 +59,21 @@ function ConcertDetails() {
         <img src={fetchedImage} alt={"Image of " + concertDetails.title} />
       )}
 
-      <div className="py-8 flex justify-between">
-        <div>
-          <h2 className="font-bold text-primary">
-            {concertDetails.date} kl {concertDetails.time}
-          </h2>
+      <div className="p-2 py-4 sm:py-8 text-center">
+        <h2 className="font-bold text-primary">
+          {concertDetails.date} kl {concertDetails.time}
+        </h2>
+        <h3>
           <a
             href={concertDetails.locationLink}
             target="blank"
             className="hover:underline text-primary"
           >
-            <p>{concertDetails.location}</p>
+            {concertDetails.location}
           </a>
-        </div>
+        </h3>
+        <br />
+
         <a href={concertDetails.ticketLink} target="blank">
           <button className="btn1">Kjøp billetter</button>
         </a>

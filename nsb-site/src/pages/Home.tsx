@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import homeImage from "../assets/images/home.jpg";
-import News from "../components/News";
+// import News from "../components/News";
 import Concerts from "./Concerts";
 import { Link } from "react-router-dom";
-import FrontPageVideo from "../components/FrontPageVideo";
+// import FrontPageVideo from "../components/FrontPageVideo";
 
 function Home() {
   const [showPopup, setShowPopup] = useState(false);
 
-  setTimeout(() => {
-    setShowPopup(true);
-  }, 2000);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowPopup(true);
+    }, 2000);
+
+    addEventListener("scroll", () => {
+      if (window.scrollY > 0) {
+        setShowPopup(false);
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -24,9 +32,9 @@ function Home() {
       <div
         className={`font-extralight ${
           showPopup ? "opacity-100" : "right-0 opacity-0"
-        } transition-all duration-1000 absolute right-0 bottom-0 xs:w-72 m-2 sm:m-6 rounded-xl p-4 text-white bg-primary shadow-xl`}
+        } transition-all duration-1000 absolute right-0 bottom-0 sm:w-72 m-2 xs:m-6 rounded-xl p-4 text-white bg-primary shadow-xl`}
       >
-        <p className="mb-2 text-sm sm:text-base">
+        <p className="mb-2">
           Alle som er registrert i vårt nyhetsbrev vil bli oppdatert om våre
           konserter, samt motta mulighet for forhåndsbestilling av billetter og
           rabatterte billetter!
@@ -35,7 +43,7 @@ function Home() {
           href="https://secure.officevisual.net/su/38079648418011?fbclid=IwAR2TDgzvcBkLk3m97aMXHIB9KYPDqfBYLPowXZnVI5RWgwogiPNc1OQ71Bc_aem_ATGPg5jUaEbZ47ia99mtFawLaKthQAfDHvnejy5Hini085kYOKgVv5wdA_hhtkmhoUk"
           target="blank"
         >
-          <button className="btn2 text-sm sm:text-base">Meld deg på her</button>
+          <button className="btn2">Meld deg på her</button>
         </a>
       </div>
 
