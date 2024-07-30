@@ -8,8 +8,8 @@ import { Instagram } from "lucide-react";
 interface Member {
   name: string;
   instrument: string;
-  img1?: string;
   imageUrl1?: string; // To store the actual image URL
+  imageUrl2?: string; // To store the actual image URL
   quote?: string;
   born?: string;
   memberSince?: string;
@@ -37,12 +37,34 @@ const MemberDetails = () => {
         if (!querySnapshot.empty) {
           const data = querySnapshot.docs[0].data() as Member;
 
-          if (data.img1) {
+          if (data.name) {
+            let img1 = data.name.split(" ")[0].toLowerCase() + "1.jpg";
+            let img2 = data.name.split(" ")[0].toLowerCase() + "2.jpg";
+
+            if (
+              img1.includes("å") ||
+              img1.includes("ø") ||
+              img1.includes("æ") ||
+              img2.includes("å") ||
+              img2.includes("ø") ||
+              img2.includes("æ")
+            ) {
+              img1 = img1.replace("å", "a");
+              img1 = img1.replace("ø", "o");
+              img1 = img1.replace("æ", "ae");
+              img2 = img2.replace("å", "a");
+              img2 = img2.replace("ø", "o");
+              img2 = img2.replace("æ", "ae");
+            }
+
             const storage = getStorage();
             const imageUrl1 = await getDownloadURL(
-              ref(storage, `Portraits/${data.img1}`)
+              ref(storage, `Portraits/${img1}`)
             );
-            setMember({ ...data, imageUrl1 });
+            const imageUrl2 = await getDownloadURL(
+              ref(storage, `Portraits/${img2}`)
+            );
+            setMember({ ...data, imageUrl1, imageUrl2 });
           } else {
             setMember(data);
           }
@@ -74,9 +96,11 @@ const MemberDetails = () => {
 
         <div>
           {member.quote && (
-            <p className="p-8 md:p-0 md:py-8 font-semibold text-primary">
-              - {member.quote}
-            </p>
+            <h2 className="p-8 md:p-0 md:py-8 font-semibold text-primary">
+              - Å spille i Det Nye Norske Storband er utrolig inspirerende,
+              kanskje mest av alt på grunn av det meget hardtarbeidende og
+              dedikerte styret og kunstneriske rådet ♥️
+            </h2>
           )}
 
           <br />

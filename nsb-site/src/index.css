@@ -53,7 +53,7 @@ p {
   @apply text-center my-2;
 }
 .memberSection {
-  @apply grid gap-2 sm:gap-4 grid-cols-2 md:grid-cols-4 mb-8;
+  @apply grid gap-2 sm:gap-4 grid-cols-2 md:grid-cols-4 mb-8 min-h-[400px];
 }
 
 .placeholderAnimation {

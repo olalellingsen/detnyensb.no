@@ -1,13 +1,16 @@
+import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 interface LazyImageProps {
-  src: string;
+  src?: string;
   alt: string;
   triggerOnce: boolean;
   threshold?: number;
 }
 
 function LazyImage({ src, alt, triggerOnce, threshold }: LazyImageProps) {
+  const [loaded, setLoaded] = useState(false);
+
   const { ref, inView } = useInView({
     threshold: threshold || 0,
     triggerOnce: triggerOnce,
@@ -20,8 +23,9 @@ function LazyImage({ src, alt, triggerOnce, threshold }: LazyImageProps) {
         alt={alt}
         loading="lazy"
         className={`${
-          inView ? "opacity-100" : "opacity-0"
+          inView && loaded ? "opacity-100" : "opacity-0"
         } transition-opacity duration-500 ease-in-out`}
+        onLoad={() => setLoaded(true)}
       />
     </div>
   );
