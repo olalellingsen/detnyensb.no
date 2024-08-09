@@ -31,7 +31,7 @@ function About() {
   }, []);
 
   return (
-    <div className="mainContent">
+    <section className="mainContent">
       <h1>Om oss</h1>
       <div className="grid gap-8">
         <div className="pt-4 grid gap-4">
@@ -41,7 +41,7 @@ function About() {
           <p>{bio3}</p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

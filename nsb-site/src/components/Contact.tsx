@@ -22,6 +22,7 @@ function Contact() {
           </a>
         </div>
       </div>
+
       {/* SoMe */}
       <div>
         <h2>Følg oss</h2>

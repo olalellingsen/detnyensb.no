@@ -15,7 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="bg-primaryBg">
+      <main className="bg-primaryBg">
         <ScrollToTop />
         <Routes>
           <Route path="/" Component={Home} />
@@ -27,7 +27,7 @@ function App() {
           <Route path="/concerts" Component={Concerts} />
           <Route path="/concert/:id" Component={ConcertDetails} />
         </Routes>
-      </div>
+      </main>
       <Footer />
     </BrowserRouter>
   );

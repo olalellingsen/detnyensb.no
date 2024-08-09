@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
-import { Instagram } from "lucide-react";
+import { Instagram, Music } from "lucide-react";
+import { ClipLoader } from "react-spinners";
 
 interface Member {
   name: string;
@@ -16,6 +17,7 @@ interface Member {
   education?: string;
   otherBands?: string;
   instagram?: string;
+  spotify?: string;
 }
 
 const MemberDetails = () => {
@@ -77,10 +79,17 @@ const MemberDetails = () => {
     fetchMember();
   }, [section, name]);
 
-  if (!member) return <div className="mainContent">Loading...</div>;
+  if (!member)
+    return (
+      <section className="mainContent">
+        <div className="w-full flex justify-center py-24">
+          <ClipLoader loading={true} size={100} />
+        </div>
+      </section>
+    );
 
   return (
-    <div className="mainContent">
+    <section className="mainContent">
       <h1 className="md:text-start">{member.name}</h1>
       <h2 className="text-center md:text-start">{member.instrument}</h2>
       <br />
@@ -94,12 +103,10 @@ const MemberDetails = () => {
           </div>
         )}
 
-        <div>
+        <section>
           {member.quote && (
             <h2 className="p-8 md:p-0 md:py-8 font-semibold text-primary">
-              - Å spille i Det Nye Norske Storband er utrolig inspirerende,
-              kanskje mest av alt på grunn av det meget hardtarbeidende og
-              dedikerte styret og kunstneriske rådet ♥️
+              - {member.quote}
             </h2>
           )}
 
@@ -128,19 +135,31 @@ const MemberDetails = () => {
             )}
           </div>
 
+          <br />
+
           {member.instagram && (
             <a
               href={`https://www.instagram.com/${member.instagram}`}
               target="blank"
-              className="hover:underline text-primary flex gap-1 mt-8 w-max"
+              className="flex gap-1 text-primary my-4 hover:underline w-min"
             >
-              <Instagram size={24} strokeWidth={1.5} />
-              {member.instagram}
+              <Instagram size={30} strokeWidth={1} className="stroke-primary" />
+              <p>{member.instagram}</p>
             </a>
           )}
-        </div>
+          {member.spotify && (
+            <a
+              href={member.spotify}
+              target="blank"
+              className="hover:underline text-primary flex gap-1 w-max"
+            >
+              <Music size={30} strokeWidth={1} className="stroke-primary" />
+              <p>Spotify</p>
+            </a>
+          )}
+        </section>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -52,12 +52,12 @@ function Music() {
   };
 
   return (
-    <div className="grid gap-2 mainContent">
+    <section className="grid gap-2 mainContent">
       <h1>Utgivelser</h1>
       <br />
       {/* Albums */}
       <h2>Album</h2>
-      <div className="grid gap-2 md:grid-cols-2">
+      <section className="grid gap-2 md:grid-cols-2">
         {/* Placeholder for loading animation */}
         {albums.length === 0 && (
           <>
@@ -86,11 +86,11 @@ function Music() {
             onLoad={() => handleLoad(setAlbums, index)}
           ></iframe>
         ))}
-      </div>
+      </section>
       <br />
       {/* Singles */}
       <h2>Singler</h2>
-      <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+      <section className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
         {/* Placeholder for loading animation */}
         {singles.length === 0 && (
           <>
@@ -123,8 +123,8 @@ function Music() {
             onLoad={() => handleLoad(setSingles, index)}
           ></iframe>
         ))}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }
 

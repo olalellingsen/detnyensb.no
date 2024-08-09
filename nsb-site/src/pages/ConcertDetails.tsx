@@ -52,14 +52,14 @@ function ConcertDetails() {
   }
 
   return (
-    <div className="mainContent">
+    <section className="mainContent grid gap-4">
       <h1>{concertDetails.title}</h1>
-      <br />
+
       {fetchedImage && (
         <img src={fetchedImage} alt={"Image of " + concertDetails.title} />
       )}
 
-      <div className="p-2 py-4 sm:py-8 text-center">
+      <div className="p-2 py-4 text-center">
         <h2 className="font-bold text-primary">
           {concertDetails.date} kl {concertDetails.time}
         </h2>
@@ -73,14 +73,21 @@ function ConcertDetails() {
           </a>
         </h3>
         <br />
-
         <a href={concertDetails.ticketLink} target="blank">
           <button className="btn1">Kjøp billetter</button>
         </a>
       </div>
 
       <p>{concertDetails.description}</p>
-    </div>
+
+      <iframe
+        src={concertDetails.spotify}
+        width="100%"
+        height="352"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
+    </section>
   );
 }
 

@@ -2,9 +2,19 @@ import Contact from "./Contact";
 
 function Footer() {
   return (
-    <div className="bg-primary text-white p-6 grid gap-4 sm:px-12 sm:pt-16">
+    <footer className="bg-primary text-white p-6 grid gap-4 sm:px-12 sm:pt-16">
       <Contact />
-      {/* footer */}
+      <br />
+      <h3>
+        Meld deg på vårt nyhetsbrev{" "}
+        <a
+          className="underline hover:no-underline"
+          href="https://secure.officevisual.net/su/38079648418011?fbclid=IwAR2TDgzvcBkLk3m97aMXHIB9KYPDqfBYLPowXZnVI5RWgwogiPNc1OQ71Bc_aem_ATGPg5jUaEbZ47ia99mtFawLaKthQAfDHvnejy5Hini085kYOKgVv5wdA_hhtkmhoUk"
+        >
+          her
+        </a>
+      </h3>
+
       <div className="py-4">
         <h3>Våre samarbeidspartnere:</h3>
         <div className="py-2 font-extralight grid w-max">
@@ -37,7 +47,7 @@ function Footer() {
         </div>
       </div>
       <p className="text-center">© 2024 Det Nye Norske Storband</p>
-    </div>
+    </footer>
   );
 }
 

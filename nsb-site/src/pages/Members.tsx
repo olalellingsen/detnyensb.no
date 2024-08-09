@@ -120,7 +120,7 @@ function Members() {
   }, []);
 
   return (
-    <div className="mainContent">
+    <section className="mainContent">
       <h1>Musikere</h1>
       <br />
 
@@ -205,7 +205,7 @@ function Members() {
           )}
         </div>
       </section>
-    </div>
+    </section>
   );
 }
 

@@ -34,7 +34,7 @@ function Slideshow() {
   }, []);
 
   return (
-    <div className="grid gap-2 sm:grid-cols-2">
+    <section className="grid gap-2 sm:grid-cols-2 py-2">
       {images.map((image) => (
         <LazyImage
           key={image.id}
@@ -43,7 +43,7 @@ function Slideshow() {
           triggerOnce={false}
         />
       ))}
-    </div>
+    </section>
   );
 }
 

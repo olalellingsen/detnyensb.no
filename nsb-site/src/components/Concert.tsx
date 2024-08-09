@@ -13,9 +13,13 @@ export interface ConcertProps {
   locationLink?: string;
   ticketLink?: string;
   description?: string;
+  spotify?: string;
+  youtube?: string;
+  next?: boolean;
 }
 
 function Concert({
+  next,
   title,
   subtitle,
   date,
@@ -51,7 +55,12 @@ function Concert({
   }, [image]);
 
   return (
-    <div className="bg-primary text-white">
+    <div
+      className={`bg-primary text-white ${
+        next ? "rounded-xl md:min-h-[425px]" : ""
+      }`}
+    >
+      {next && <h2 className="text-center py-2">Neste konsert:</h2>}
       {fetchedImage && <img src={fetchedImage} alt={"Image of " + title} />}
 
       <div className="p-4 grid gap-4">
@@ -67,7 +76,10 @@ function Concert({
               <button className="btn2">Kjøp billetter</button>
             </a>
           )}
-          <Link to={`/concert/${id}`} className="underline my-2 hover:no-underline">
+          <Link
+            to={`/concert/${id}`}
+            className="underline my-2 hover:no-underline"
+          >
             Les mer
           </Link>
         </div>
