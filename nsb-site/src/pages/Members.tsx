@@ -33,6 +33,7 @@ function Members() {
   const [tromboneSection, setTromboneSection] = useState<Member[]>([]);
   const [rhythmSection, setRhythmSection] = useState<Member[]>([]);
   const [conductor, setConductor] = useState<Member>();
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async (
     path: string,
@@ -128,9 +129,9 @@ function Members() {
       <section id="sax-section">
         <h2>Saxofon</h2>
 
-        {saxSection.length < 5 && <MemberPlaceholder _number={5} />}
+        {loading && <MemberPlaceholder _number={5} />}
 
-        <div className="memberSection">
+        <div className="memberSection" onLoad={() => setLoading(false)}>
           {saxSection.map((member) => (
             <MemberCard
               key={member.name}
@@ -138,6 +139,7 @@ function Members() {
               section="Sax"
               instrument={member.instrument}
               imageUrl1={member.imageUrl1}
+              imageUrl2={member.imageUrl2}
             />
           ))}
         </div>
@@ -154,6 +156,7 @@ function Members() {
               section="Trumpet"
               instrument={member.instrument}
               imageUrl1={member.imageUrl1}
+              imageUrl2={member.imageUrl2}
             />
           ))}
         </div>
@@ -170,6 +173,7 @@ function Members() {
               section="Trombone"
               instrument={member.instrument}
               imageUrl1={member.imageUrl1}
+              imageUrl2={member.imageUrl2}
             />
           ))}
         </div>
@@ -186,6 +190,7 @@ function Members() {
               section="RhythmSection"
               instrument={member.instrument}
               imageUrl1={member.imageUrl1}
+              imageUrl2={member.imageUrl2}
             />
           ))}
         </div>
@@ -201,6 +206,7 @@ function Members() {
               name={conductor.name}
               section="Conductor"
               imageUrl1={conductor.imageUrl1}
+              imageUrl2={conductor.imageUrl2}
             />
           )}
         </div>

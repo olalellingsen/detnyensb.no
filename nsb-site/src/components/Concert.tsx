@@ -24,10 +24,6 @@ function Concert({
   subtitle,
   date,
   id,
-  time,
-  location,
-  locationLink,
-  description,
   ticketLink,
   image,
 }: ConcertProps) {

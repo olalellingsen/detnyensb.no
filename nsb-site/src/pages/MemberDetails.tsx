@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
@@ -18,6 +18,7 @@ interface Member {
   otherBands?: string;
   instagram?: string;
   spotify?: string;
+  photoBy?: string;
 }
 
 const MemberDetails = () => {
@@ -90,6 +91,10 @@ const MemberDetails = () => {
 
   return (
     <section className="mainContent">
+      <Link to="/members" className="text-primary underline hover:no-underline">
+        <p>Tilbake til oversikten</p>
+      </Link>
+      <br />
       <h1 className="md:text-start">{member.name}</h1>
       <h2 className="text-center md:text-start">{member.instrument}</h2>
       <br />
@@ -97,9 +102,16 @@ const MemberDetails = () => {
         {member.imageUrl1 && (
           <div>
             <img src={member.imageUrl1} alt={member.name} />
-            <p className="font-extralight text-gray-500">
-              Foto: Anders Lillebø
-            </p>
+
+            {member.photoBy ? (
+              <p className="font-extralight text-gray-500">
+                Foto: {member.photoBy}
+              </p>
+            ) : (
+              <p className="font-extralight text-gray-500">
+                Foto: Anders Lillebø
+              </p>
+            )}
           </div>
         )}
 
@@ -158,6 +170,7 @@ const MemberDetails = () => {
             </a>
           )}
         </section>
+        <br />
       </div>
     </section>
   );

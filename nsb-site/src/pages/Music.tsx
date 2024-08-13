@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
+import { ClipLoader } from "react-spinners";
 
 interface Media {
   url: string;
@@ -11,6 +12,7 @@ interface Media {
 function Music() {
   const [albums, setAlbums] = useState<Media[]>([]);
   const [singles, setSingles] = useState<Media[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,47 +45,29 @@ function Music() {
     fetchData();
   }, []);
 
-  const handleLoad = (setFunc: Function, index: number) => {
-    setFunc((prev: Media[]) => {
-      const newMedia = [...prev];
-      newMedia[index].isLoaded = true;
-      return newMedia;
-    });
-  };
-
   return (
     <section className="grid gap-2 mainContent">
       <h1>Utgivelser</h1>
+
+      {loading && (
+        <section className="flex justify-center h-screen mt-24">
+          <ClipLoader loading={true} size={100} />
+        </section>
+      )}
+
       <br />
       {/* Albums */}
       <h2>Album</h2>
       <section className="grid gap-2 md:grid-cols-2">
-        {/* Placeholder for loading animation */}
-        {albums.length === 0 && (
-          <>
-            <iframe
-              className="album animate-pulse bg-gray-300 rounded-lg"
-              height="380"
-            ></iframe>
-            <iframe
-              className="album animate-pulse bg-gray-300 rounded-lg"
-              height="380"
-            ></iframe>
-          </>
-        )}
-
-        {albums.map((album, index) => (
+        {albums.map((album) => (
           <iframe
             src={album.url}
             key={album.order}
-            className={`album transition-opacity duration-500 ease-in-out ${
-              album.isLoaded ? "opacity-100" : "opacity-0"
-            }`}
             width="100%"
             height="380"
             allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
-            onLoad={() => handleLoad(setAlbums, index)}
+            onLoad={() => setLoading(false)}
           ></iframe>
         ))}
       </section>
@@ -91,36 +75,14 @@ function Music() {
       {/* Singles */}
       <h2>Singler</h2>
       <section className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
-        {/* Placeholder for loading animation */}
-        {singles.length === 0 && (
-          <>
-            <iframe
-              className="single animate-pulse bg-gray-300 rounded-lg"
-              height="152"
-            ></iframe>
-            <iframe
-              className="single animate-pulse bg-gray-300 rounded-lg"
-              height="152"
-            ></iframe>
-            <iframe
-              className="single animate-pulse bg-gray-300 rounded-lg"
-              height="152"
-            ></iframe>
-          </>
-        )}
-
-        {/* Display singles */}
-        {singles.map((single, index) => (
+        {singles.map((single) => (
           <iframe
             src={single.url}
             key={single.order}
             height="152"
-            className={`single transition-opacity duration-500 ease-in-out ${
-              single.isLoaded ? "opacity-100" : "opacity-0"
-            }`}
+            className="w-full"
             allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
-            onLoad={() => handleLoad(setSingles, index)}
           ></iframe>
         ))}
       </section>
