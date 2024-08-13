@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import aboutImg from "..//assets/images/about.jpg";
+import MembersCollage from "../components/MembersCollage";
 
 function About() {
   const [bio1, setBio1] = useState("");
@@ -40,6 +41,7 @@ function About() {
           <p>{bio2}</p>
           <p>{bio3}</p>
         </div>
+        <MembersCollage />
       </div>
     </section>
   );
