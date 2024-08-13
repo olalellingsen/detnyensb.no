@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
@@ -91,9 +91,11 @@ const MemberDetails = () => {
 
   return (
     <section className="mainContent">
-      <Link to="/members" className="text-primary underline hover:no-underline">
-        <p>Tilbake til oversikten</p>
-      </Link>
+      <div>
+        <a href="/members" className="text-primary hover:underline">
+          Tilbake til oversikten
+        </a>
+      </div>
       <br />
       <h1 className="md:text-start">{member.name}</h1>
       <h2 className="text-center md:text-start">{member.instrument}</h2>

@@ -26,7 +26,8 @@ h3 {
   @apply hover:cursor-pointer hover:scale-105 stroke-white stroke-1;
 }
 
-p {
+p,
+a {
   @apply text-lg font-light;
 }
 
