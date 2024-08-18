@@ -54,7 +54,6 @@ function Music() {
           <ClipLoader loading={true} size={100} />
         </section>
       )}
-
       <br />
       {/* Albums */}
       <h2>Album</h2>
@@ -66,7 +65,6 @@ function Music() {
             width="100%"
             height="380"
             allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
             onLoad={() => setLoading(false)}
           ></iframe>
         ))}
