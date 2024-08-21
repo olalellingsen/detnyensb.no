@@ -3,7 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { ClipLoader } from "react-spinners";
 
-interface Media {
+export interface Media {
   url: string;
   isLoaded: boolean;
   order: number;

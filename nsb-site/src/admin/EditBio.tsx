@@ -40,16 +40,15 @@ function EditBio() {
   };
 
   return (
-    <section className="my-4">
-      <h2 className="text-center">Bio</h2>
-
+    <section className="my-8">
+      <h2>Bio</h2>
       {loading && <p>Loading...</p>}
       <form onSubmit={handleSubmit}>
         <textarea
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           rows={10}
-          className="w-full p-2 rounded-md min-h-[400px]"
+          className="min-h-[400px]"
         />
         <button type="submit" className="btn1">
           Lagre

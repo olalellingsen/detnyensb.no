@@ -1,12 +1,12 @@
 import EditBio from "./EditBio";
-import EditDiscography from "./EditDiscography";
+import EditMusic from "./EditMusic";
 
 function AdminDashboard() {
   return (
     <section className="mainContent">
-      <h1>Admin Dashboard</h1>
+      <h1>Rediger innhold</h1>
       <EditBio />
-      <EditDiscography />
+      <EditMusic />
     </section>
   );
 }
