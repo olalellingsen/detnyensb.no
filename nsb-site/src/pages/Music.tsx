@@ -32,6 +32,20 @@ function Music() {
           isLoaded: false,
         })) as Media[];
 
+        albumData.forEach((album) => {
+          album.url = album.url.replace(
+            "https://open.spotify.com/album/",
+            "https://open.spotify.com/embed/album/"
+          );
+        });
+
+        singleData.forEach((single) => {
+          single.url = single.url.replace(
+            "https://open.spotify.com/track/",
+            "https://open.spotify.com/embed/track/"
+          );
+        });
+
         setAlbums(albumData.sort((a, b) => b.order - a.order));
         setSingles(singleData.sort((a, b) => b.order - a.order));
       } catch (error) {
