@@ -32,6 +32,20 @@ function Music() {
           isLoaded: false,
         })) as Media[];
 
+        albumData.forEach((album) => {
+          album.url = album.url.replace(
+            "https://open.spotify.com/album/",
+            "https://open.spotify.com/embed/album/"
+          );
+        });
+
+        singleData.forEach((single) => {
+          single.url = single.url.replace(
+            "https://open.spotify.com/track/",
+            "https://open.spotify.com/embed/track/"
+          );
+        });
+
         setAlbums(albumData.sort((a, b) => b.order - a.order));
         setSingles(singleData.sort((a, b) => b.order - a.order));
       } catch (error) {
@@ -48,7 +62,6 @@ function Music() {
   return (
     <section className="grid gap-2 mainContent">
       <h1>Utgivelser</h1>
-
       {loading && (
         <section className="flex justify-center h-screen mt-24">
           <ClipLoader loading={true} size={100} />
@@ -57,6 +70,7 @@ function Music() {
       <br />
       {/* Albums */}
       <h2>Album</h2>
+
       <section className="grid gap-2 md:grid-cols-2">
         {albums.map((album) => (
           <iframe
