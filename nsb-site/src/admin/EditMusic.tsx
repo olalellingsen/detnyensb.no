@@ -147,7 +147,7 @@ function EditMusic() {
       </button>
       {showAddAlbum && (
         <form
-          className="grid gap-2 bg-gray-300 rounded-lg p-4 my-2"
+          className="grid gap-2 border-b border-black py-4 my-2"
           onSubmit={(e) => {
             e.preventDefault();
             addAlbum();
@@ -201,7 +201,7 @@ function EditMusic() {
           {albums.map((album) => (
             <li key={album.id}>
               <form
-                className="grid bg-gray-300 rounded-lg p-4 my-2"
+                className="grid border-b border-black py-4 my-2"
                 onSubmit={(e) => {
                   e.preventDefault();
                   updateAlbum(album.id, album.url, album.order, album.title);
@@ -284,7 +284,7 @@ function EditMusic() {
 
       {showAddSingle && (
         <form
-          className="grid gap-2 bg-gray-300 rounded-lg p-4 my-2"
+          className="grid gap-2 border-b border-black py-4 my-2"
           onSubmit={(e) => {
             e.preventDefault();
             addSingle();
@@ -339,7 +339,7 @@ function EditMusic() {
           {singles.map((single) => (
             <li key={single.id}>
               <form
-                className="grid bg-gray-300 rounded-lg p-4 my-2"
+                className="grid border-b border-black py-4 my-2"
                 onSubmit={(e) => {
                   e.preventDefault();
                   updateSingle(

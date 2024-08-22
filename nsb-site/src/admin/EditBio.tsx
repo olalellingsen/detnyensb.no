@@ -40,7 +40,7 @@ function EditBio() {
   };
 
   return (
-    <section className="my-8">
+    <section>
       <h2>Bio</h2>
       {loading && <p>Loading...</p>}
       <form onSubmit={handleSubmit}>

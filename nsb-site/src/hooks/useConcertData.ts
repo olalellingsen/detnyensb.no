@@ -1,31 +1,31 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore";
 import { db } from "../firebase";
-import { ConcertProps } from "../components/Concert";
+import { Concert } from "../types";
 
 const useConcertData = () => {
   const [concertData, setConcertData] = useState<DocumentData[]>([]);
-  const [upcomingConcerts, setUpcomingConcerts] = useState<ConcertProps[]>([]);
-  const [pastConcerts, setPastConcerts] = useState<ConcertProps[]>([]);
+  const [upcomingConcerts, setUpcomingConcerts] = useState<Concert[]>([]);
+  const [pastConcerts, setPastConcerts] = useState<Concert[]>([]);
+
+  const fetchConcerts = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "Concerts"));
+      const newConcertData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Concert[];
+      setConcertData(newConcertData);
+    } catch (error) {
+      console.error(
+        "Error connecting to Firestore or accessing Storage:",
+        error
+      );
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "Concerts"));
-        const newConcertData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as DocumentData[];
-        setConcertData(newConcertData);
-      } catch (error) {
-        console.error(
-          "Error connecting to Firestore or accessing Storage:",
-          error
-        );
-      }
-    };
-
-    fetchData();
+    fetchConcerts(); // Fetch concerts initially when the component mounts
   }, []);
 
   useEffect(() => {
@@ -81,6 +81,7 @@ const useConcertData = () => {
   return {
     upcomingConcerts,
     pastConcerts,
+    fetchConcerts,
   };
 };
 
