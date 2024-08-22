@@ -1,12 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { collection, getDocs, DocumentData } from "firebase/firestore";
 import { db } from "../firebase";
 import { Concert } from "../types";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 const useConcertData = () => {
   const [concertData, setConcertData] = useState<DocumentData[]>([]);
   const [upcomingConcerts, setUpcomingConcerts] = useState<Concert[]>([]);
   const [pastConcerts, setPastConcerts] = useState<Concert[]>([]);
+
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [imageUrl, setImageUrl] = useState<string>("");
 
   const fetchConcerts = async () => {
     try {
@@ -78,10 +88,55 @@ const useConcertData = () => {
     setPastConcerts(pastConcerts);
   };
 
+  // Handle image selection
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageFile(e.target.files[0]);
+    }
+  };
+
+  // Handle image upload
+  const handleUpload = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!imageFile) return;
+
+    // Create a storage reference
+    const storage = getStorage();
+    const storageRef = ref(storage, `Concerts/${imageFile.name}`);
+    console.log(storageRef);
+
+    // Start the upload
+    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+
+    // Monitor the upload progress
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(progress);
+        console.log(`Upload is ${progress}% done`);
+      },
+      (error) => {
+        console.error("Upload failed:", error);
+      },
+      async () => {
+        // Upload completed successfully
+        const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+        setImageUrl(downloadUrl); // Store the image URL in state
+        console.log("File available at", downloadUrl);
+      }
+    );
+  };
   return {
     upcomingConcerts,
     pastConcerts,
     fetchConcerts,
+    handleFileChange,
+    handleUpload,
+    uploadProgress,
+    imageUrl,
+    imageFile,
   };
 };
 

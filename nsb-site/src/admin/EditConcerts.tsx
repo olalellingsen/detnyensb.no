@@ -14,7 +14,16 @@ import { db } from "../firebase";
 import { Concert as ConcertType } from "../types";
 
 function EditConcerts() {
-  const { upcomingConcerts, fetchConcerts } = useConcertData();
+  const {
+    upcomingConcerts,
+    fetchConcerts,
+    handleFileChange,
+    handleUpload,
+    uploadProgress,
+    imageUrl,
+    imageFile,
+  } = useConcertData();
+
   const [loading, setLoading] = useState(true);
 
   // State for the form inputs, typed according to the Concert interface
@@ -59,7 +68,7 @@ function EditConcerts() {
       locationLink,
       ticketLink,
       description,
-      image: "", // Optional image field
+      image: imageFile?.name,
       spotify: "", // Optional Spotify link
       youtube: "", // Optional YouTube link
     };
@@ -160,6 +169,25 @@ function EditConcerts() {
             onChange={(e) => setDescription(e.target.value)}
             className="h-72"
           />
+
+          {/* <input type="file" accept="image/*" onChange={handleFileChange} />
+          <button className="btn1" onClick={handleUpload}>
+            Last opp
+          </button>
+
+          {uploadProgress > 0 && <p>Upload Progress: {uploadProgress}%</p>}
+
+          {imageUrl && (
+            <div>
+              <p>Image uploaded successfully!</p>
+              <img
+                src={imageUrl}
+                alt="Uploaded file"
+                style={{ maxWidth: "300px" }}
+              />
+            </div>
+          )} */}
+
           <button className="btn1" type="submit">
             {isEditing ? "Oppdater konsert" : "Legg til konsert"}
           </button>
