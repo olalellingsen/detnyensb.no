@@ -4,7 +4,7 @@ import EditConcerts from "./EditConcerts";
 
 function AdminDashboard() {
   return (
-    <section className="mainContent grid gap-10">
+    <section className="grid gap-10">
       <h1>Rediger innhold</h1>
       <EditConcerts />
       <EditBio />

@@ -63,6 +63,8 @@ const useConcertData = () => {
         location: concert.location,
         locationLink: concert.locationLink,
         ticketLink: concert.ticketLink,
+        spotifyLink: concert.spotify,
+        youtubeLink: concert.youtube,
         description: concert.description,
         image: concert.image,
       }));

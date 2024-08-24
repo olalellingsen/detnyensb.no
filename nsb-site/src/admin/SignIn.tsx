@@ -7,12 +7,11 @@ import {
 } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { User } from "firebase/auth";
-import { useNavigate } from "react-router-dom"; // Assuming you're using react-router
+import AdminDashboard from "./AdminDashboard";
 
 function SignIn() {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
-  const navigate = useNavigate();
 
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -24,7 +23,6 @@ function SignIn() {
         // User is signed in
         setUser(user);
         setIsSignedIn(true);
-        checkIfAdmin(user); // Check if the user is an authorized admin
       } else {
         // User is signed out
         setUser(null);
@@ -43,7 +41,6 @@ function SignIn() {
         console.log("User >>>", user);
         setUser(user);
         setIsSignedIn(true);
-        checkIfAdmin(user); // Check if the user is an authorized admin
       })
       .catch((error) => {
         alert(error.message);
@@ -61,35 +58,30 @@ function SignIn() {
       });
   };
 
-  const checkIfAdmin = (user: User) => {
-    const adminUids = [
-      "rwriCJSXkSTjhZUHwRwNOy6LwD43",
-      "Bpfhe9nVk1ZOaZATcQbNBFWPmii2",
-    ];
-    if (adminUids.includes(user.uid)) {
-      navigate("/admin/dashboard"); // Redirect to admin dashboard after login
-    } else {
-      alert("You are not authorized to access the admin panel.");
-      SIGN_OUT(); // Sign out if not authorized
-    }
-  };
-
   return (
     <section className="mainContent">
-      <div className="flex justify-center">
+      <>
         {isSignedIn ? (
-          <>
-            <p>Welcome, {user?.displayName}</p>
-            <button className="btn1" onClick={SIGN_OUT}>
-              Sign Out
-            </button>
-          </>
+          <section>
+            <div className="flex flex-wrap justify-center sm:justify-between gap-2">
+              <p className="py-2 px-4 bg-gray-300 rounded-full w-max">
+                {user?.displayName}
+              </p>
+              <button className="btn1" onClick={SIGN_OUT}>
+                Sign Out
+              </button>
+            </div>
+            <br />
+            <AdminDashboard />
+          </section>
         ) : (
-          <button className="btn1" onClick={SIGN_IN_WITH_GOOGLE}>
-            Logg inn med Google
-          </button>
+          <div className="flex justify-center">
+            <button className="btn1" onClick={SIGN_IN_WITH_GOOGLE}>
+              Logg inn med Google
+            </button>
+          </div>
         )}
-      </div>
+      </>
     </section>
   );
 }

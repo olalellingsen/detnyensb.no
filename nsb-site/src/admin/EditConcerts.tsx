@@ -33,6 +33,8 @@ function EditConcerts() {
   const [location, setLocation] = useState<string>("");
   const [locationLink, setLocationLink] = useState<string>("");
   const [ticketLink, setTicketLink] = useState<string>("");
+  const [spotifyLink, setSpotifyLink] = useState<string>("");
+  const [youtubeLink, setYoutubeLink] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false); // New state to track editing mode
   const [editingConcertId, setEditingConcertId] = useState<string | null>(null); // Holds ID of the concert being edited
@@ -44,6 +46,8 @@ function EditConcerts() {
     setLocation("");
     setLocationLink("");
     setTicketLink("");
+    setSpotifyLink("");
+    setYoutubeLink("");
     setDescription("");
     setIsEditing(false);
     setEditingConcertId(null);
@@ -68,9 +72,9 @@ function EditConcerts() {
       locationLink,
       ticketLink,
       description,
-      image: imageFile?.name,
-      spotify: "", // Optional Spotify link
-      youtube: "", // Optional YouTube link
+      // image: imageFile?.name,
+      spotify: spotifyLink,
+      youtube: youtubeLink,
     };
 
     try {
@@ -94,13 +98,15 @@ function EditConcerts() {
 
   // Function to prepopulate the form with the selected concert details for editing
   const editConcert = (concert: ConcertType) => {
+    setIsEditing(true);
     setTitle(concert.title);
-    setConcertDate(concert.date.toDate().getDate().toString());
+    setConcertDate("");
     setLocation(concert.location);
     setLocationLink(concert.locationLink || "");
     setTicketLink(concert.ticketLink || "");
+    setSpotifyLink(concert.spotify || "");
+    setYoutubeLink(concert.youtube || "");
     setDescription(concert.description || "");
-    setIsEditing(true);
     setEditingConcertId(concert.id || null);
   };
 
@@ -163,43 +169,48 @@ function EditConcerts() {
             value={ticketLink}
             onChange={(e) => setTicketLink(e.target.value)}
           />
+          <input
+            type="text"
+            placeholder="Link til Spotify"
+            value={spotifyLink}
+            onChange={(e) => setSpotifyLink(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Link til YouTube"
+            value={youtubeLink}
+            onChange={(e) => setYoutubeLink(e.target.value)}
+          />
           <textarea
             placeholder="Beskrivelse"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="h-72"
           />
-
-          {/* <input type="file" accept="image/*" onChange={handleFileChange} />
-          <button className="btn1" onClick={handleUpload}>
-            Last opp
-          </button>
-
-          {uploadProgress > 0 && <p>Upload Progress: {uploadProgress}%</p>}
-
-          {imageUrl && (
-            <div>
-              <p>Image uploaded successfully!</p>
-              <img
-                src={imageUrl}
-                alt="Uploaded file"
-                style={{ maxWidth: "300px" }}
-              />
-            </div>
-          )} */}
-
-          <button className="btn1" type="submit">
-            {isEditing ? "Oppdater konsert" : "Legg til konsert"}
-          </button>
-          {isEditing && (
-            <button
-              className="btn1 bg-gray-400 mt-2"
-              type="button"
-              onClick={resetForm}
-            >
-              Avbryt redigering
+          {/* <div className="bg-white p-4 rounded-lg">
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+            <button className="btn1" onClick={handleUpload}>
+              Last opp
             </button>
-          )}
+
+            {uploadProgress > 0 && <p>Upload Progress: {uploadProgress}%</p>}
+          </div> */}
+
+          <div className="flex flex-wrap gap-2">
+            <button className="btn1" type="submit">
+              {isEditing ? "Oppdater konsert" : "Legg til konsert"}
+            </button>
+
+            {isEditing && (
+              <button
+                className="btn1 bg-red-400"
+                type="button"
+                onClick={resetForm}
+              >
+                Avbryt redigering
+              </button>
+            )}
+          </div>
         </form>
       </div>
 
@@ -216,7 +227,7 @@ function EditConcerts() {
           {upcomingConcerts.map((concert) => (
             <div key={concert.id}>
               <Concert {...concert} />
-              <div className="flex p-2 gap-2 bg-primary pl-4">
+              <div className="flex flex-wrap p-2 gap-2 bg-primary pl-4">
                 <button
                   className="btn1 bg-yellow-500 hover:bg-yellow-700"
                   onClick={() => editConcert(concert)}

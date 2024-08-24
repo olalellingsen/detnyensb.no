@@ -33,6 +33,7 @@ function Music() {
         })) as Media[];
 
         albumData.forEach((album) => {
+          // convert Spotify URL to embed URL
           album.url = album.url.replace(
             "https://open.spotify.com/album/",
             "https://open.spotify.com/embed/album/"

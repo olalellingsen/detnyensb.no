@@ -2,15 +2,13 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { ConcertProps } from "../components/Concert";
+import { Concert } from "../types";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 function ConcertDetails() {
   const { id } = useParams();
   const [fetchedImage, setFetchedImage] = useState<string | null>(null);
-  const [concertDetails, setConcertDetails] = useState<ConcertProps | null>(
-    null
-  );
+  const [concertDetails, setConcertDetails] = useState<Concert | null>(null);
 
   useEffect(() => {
     const fetchConcertDetails = async () => {
@@ -27,8 +25,14 @@ function ConcertDetails() {
             ...data,
             date: data.date.toDate().toLocaleDateString(), // Convert to readable date string
             time: data.date.toDate().toLocaleTimeString().slice(0, -3), // Convert to readable time string
+
+            // Convert Spotify URL to embed URL
+            spotify: data.spotify.replace(
+              "https://open.spotify.com/artist/",
+              "https://open.spotify.com/embed/artist/"
+            ),
           };
-          setConcertDetails(concertData as ConcertProps);
+          setConcertDetails(concertData as Concert);
 
           if (data.image) {
             const storage = getStorage();
@@ -61,7 +65,7 @@ function ConcertDetails() {
 
       <div className="p-2 py-4 text-center">
         <h2 className="font-bold text-primary">
-          {concertDetails.date} kl {concertDetails.time}
+          {concertDetails.date.toString()} kl {concertDetails.time}
         </h2>
         <h3>
           <a
@@ -80,13 +84,23 @@ function ConcertDetails() {
 
       <p>{concertDetails.description}</p>
 
-      <iframe
-        src={concertDetails.spotify}
-        width="100%"
-        height="352"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-      ></iframe>
+      {concertDetails.spotify && (
+        <iframe
+          src={concertDetails.spotify}
+          width="100%"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+      )}
+
+      {concertDetails.youtube && (
+        <iframe
+          src={concertDetails.youtube}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          className="w-full aspect-video py-2"
+        ></iframe>
+      )}
     </section>
   );
 }
