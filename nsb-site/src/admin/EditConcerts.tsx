@@ -17,11 +17,11 @@ function EditConcerts() {
   const {
     upcomingConcerts,
     fetchConcerts,
-    handleFileChange,
-    handleUpload,
-    uploadProgress,
-    imageUrl,
-    imageFile,
+    // handleFileChange,
+    // handleUpload,
+    // uploadProgress,
+    // imageUrl,
+    // imageFile,
   } = useConcertData();
 
   const [loading, setLoading] = useState(true);
