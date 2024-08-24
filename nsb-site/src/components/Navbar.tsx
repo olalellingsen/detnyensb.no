@@ -98,6 +98,7 @@ function Navbar() {
             <ul className="text-5xl text-white grid gap-4">
               {menuOptions.map((option) => (
                 <Link
+                  key={option.label}
                   to={option.path}
                   className="hover:underline hover:cursor-pointer"
                   onClick={clickLink}

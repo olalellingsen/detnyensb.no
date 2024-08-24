@@ -3,7 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { ClipLoader } from "react-spinners";
 
-interface Media {
+export interface Media {
   url: string;
   isLoaded: boolean;
   order: number;
@@ -33,6 +33,7 @@ function Music() {
         })) as Media[];
 
         albumData.forEach((album) => {
+          // convert Spotify URL to embed URL
           album.url = album.url.replace(
             "https://open.spotify.com/album/",
             "https://open.spotify.com/embed/album/"
@@ -62,16 +63,15 @@ function Music() {
   return (
     <section className="grid gap-2 mainContent">
       <h1>Utgivelser</h1>
-
       {loading && (
         <section className="flex justify-center h-screen mt-24">
           <ClipLoader loading={true} size={100} />
         </section>
       )}
-
       <br />
       {/* Albums */}
       <h2>Album</h2>
+
       <section className="grid gap-2 md:grid-cols-2">
         {albums.map((album) => (
           <iframe
@@ -80,7 +80,6 @@ function Music() {
             width="100%"
             height="380"
             allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
             onLoad={() => setLoading(false)}
           ></iframe>
         ))}

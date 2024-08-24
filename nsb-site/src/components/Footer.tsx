@@ -6,12 +6,12 @@ function Footer() {
       <Contact />
       <br />
       <h3>
-        Meld deg på vårt nyhetsbrev{" "}
         <a
           className="underline hover:no-underline"
+          target="_blank"
           href="https://secure.officevisual.net/su/38079648418011?fbclid=IwAR2TDgzvcBkLk3m97aMXHIB9KYPDqfBYLPowXZnVI5RWgwogiPNc1OQ71Bc_aem_ATGPg5jUaEbZ47ia99mtFawLaKthQAfDHvnejy5Hini085kYOKgVv5wdA_hhtkmhoUk"
         >
-          her
+          <button className="btn2">Nyhetsbrev</button>
         </a>
       </h3>
 

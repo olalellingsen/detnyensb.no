@@ -3,7 +3,6 @@ import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { Link } from "react-router-dom";
 
 function MembersCollage() {
-  const [images, setImages] = useState<string[]>([]);
   const [displayImages, setDisplayImages] = useState<string[]>([]);
 
   const fetchData = async () => {
@@ -15,15 +14,14 @@ function MembersCollage() {
       const result = await listAll(storageRef);
 
       // Get URLs for each image
-      const urlPromises: Promise<string>[] = result.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
+      const urlPromises: Promise<string>[] = result.items
+        .filter((imageRef) => !imageRef.name.includes("aksel")) // pga bakgrunn
+        .filter((imageRef) => imageRef.name.includes("2"))
+        .map((imageRef) => getDownloadURL(imageRef));
 
       // Resolve all URLs
       const urls: string[] = await Promise.all(urlPromises);
-      setImages(urls);
 
-      // Initially set 4 random images
       setDisplayImages(selectRandomImages(urls, 16));
     } catch (error) {
       console.error("Error fetching images from Storage:", error);
@@ -40,16 +38,6 @@ function MembersCollage() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (images.length > 0) {
-      const interval = setInterval(() => {
-        setDisplayImages(selectRandomImages(images, 16));
-      }, 5000); // Change every 5 seconds
-
-      return () => clearInterval(interval); // Cleanup interval on component unmount
-    }
-  }, [images]);
-
   return (
     <section className="justify-center">
       <div className="grid grid-cols-4 md:grid-cols-8">
@@ -58,7 +46,7 @@ function MembersCollage() {
             key={index}
             src={url}
             alt={`Member ${index}`}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
             loading="lazy"
           />
         ))}

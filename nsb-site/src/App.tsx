@@ -10,6 +10,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import Media from "./pages/Media";
 import ConcertDetails from "./pages/ConcertDetails";
 import MemberDetails from "./pages/MemberDetails";
+import SignIn from "./admin/SignIn";
+import AdminDashboard from "./admin/AdminDashboard";
 
 function App() {
   return (
@@ -26,6 +28,10 @@ function App() {
           <Route path="/music" Component={Music} />
           <Route path="/concerts" Component={Concerts} />
           <Route path="/concert/:id" Component={ConcertDetails} />
+
+          {/* Admin Routes */}
+          <Route path="/admin" Component={SignIn} />
+          <Route path="/admin/dashboard" Component={AdminDashboard} />
         </Routes>
       </main>
       <Footer />

@@ -1,22 +1,7 @@
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-export interface ConcertProps {
-  id: string;
-  title?: string;
-  subtitle?: string;
-  image?: string;
-  date?: string;
-  time?: string;
-  location?: string;
-  locationLink?: string;
-  ticketLink?: string;
-  description?: string;
-  spotify?: string;
-  youtube?: string;
-  next?: boolean;
-}
+import { Concert as ConcertType } from "../types";
 
 function Concert({
   next,
@@ -26,7 +11,7 @@ function Concert({
   id,
   ticketLink,
   image,
-}: ConcertProps) {
+}: ConcertType) {
   const [fetchedImage, setFetchedImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -60,7 +45,7 @@ function Concert({
       {fetchedImage && <img src={fetchedImage} alt={"Image of " + title} />}
 
       <div className="p-4 grid gap-4">
-        <p>{date}</p>
+        <p>{date.toString()}</p>
 
         <h2 className="flex justify-start">{title}</h2>
 
