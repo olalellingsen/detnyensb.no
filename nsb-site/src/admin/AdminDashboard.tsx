@@ -1,5 +1,6 @@
 import EditBio from "./EditBio";
 import EditMusic from "./EditMusic";
+import EditNews from "./EditNews";
 // import EditConcerts from "./EditConcerts";
 
 function AdminDashboard() {
@@ -8,6 +9,7 @@ function AdminDashboard() {
       <h1>Rediger innhold</h1>
       {/* <EditConcerts /> */}
       <EditBio />
+      <EditNews />
       <EditMusic />
     </section>
   );

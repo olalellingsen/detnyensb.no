@@ -7,7 +7,6 @@ function Contact() {
     <div className="grid gap-8 sm:flex justify-between">
       {/* contact */}
       <div>
-        <h2>Kontakt</h2>
         <div className="flex gap-2 py-2">
           <Mail size={30} strokeWidth={1} />
           <a className="hover:underline" href={`mailto:${emailAddress}`}>
@@ -25,8 +24,7 @@ function Contact() {
 
       {/* SoMe */}
       <div>
-        <h2>Følg oss</h2>
-        <div className="flex gap-8 py-4">
+        <div className="flex gap-8">
           <SoMe face={true} size={40} />
           <SoMe insta={true} size={40} />
           <SoMe yt={true} size={40} />

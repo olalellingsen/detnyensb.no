@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.card {
-  @apply bg-primary rounded-lg shadow-xl text-white p-2;
-}
-
 h1 {
   @apply text-3xl text-center border-primary;
 }

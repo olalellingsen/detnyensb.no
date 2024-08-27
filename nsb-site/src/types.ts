@@ -15,3 +15,11 @@ export interface Concert {
   youtube?: string;
   next?: boolean;
 }
+
+export interface NewsItem {
+  id: string;
+  title: string;
+  text: string;
+  url?: string;
+  linkName?: string;
+}

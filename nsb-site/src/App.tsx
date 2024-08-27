@@ -12,6 +12,7 @@ import ConcertDetails from "./pages/ConcertDetails";
 import MemberDetails from "./pages/MemberDetails";
 import SignIn from "./admin/SignIn";
 import AdminDashboard from "./admin/AdminDashboard";
+import NewsDetails from "./pages/NewsDetails";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/music" Component={Music} />
           <Route path="/concerts" Component={Concerts} />
           <Route path="/concert/:id" Component={ConcertDetails} />
+          <Route path="/news/:id" Component={NewsDetails} />
 
           {/* Admin Routes */}
           <Route path="/admin" Component={SignIn} />

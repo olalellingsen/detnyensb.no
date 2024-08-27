@@ -68,7 +68,7 @@ function SignIn() {
                 {user?.displayName}
               </p>
               <button className="btn1" onClick={SIGN_OUT}>
-                Sign Out
+                Logg ut
               </button>
             </div>
             <br />

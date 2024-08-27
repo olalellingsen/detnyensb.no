@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import homeImage from "../assets/images/home.jpg";
-// import News from "../components/News";
+import NewsCards from "../components/NewsCards";
 import { Link } from "react-router-dom";
 import NextConcert from "../components/NextConcert";
 import { X } from "lucide-react";
@@ -50,31 +50,37 @@ function Home() {
         </div>
       </aside>
 
-      <section className="pt-8 px-2 lg:w-4/5 xl:w-[1000px] mx-auto pb-8 grid gap-8 md:grid-cols-2">
-        <div>
-          <NextConcert />
+      <section>
+        <div className="pt-8 px-2 lg:w-4/5 xl:w-[1000px] mx-auto pb-8 grid gap-8 md:grid-cols-2">
+          <div>
+            <NextConcert />
 
-          <div className="flex justify-center py-4">
-            <Link to="/concerts">
-              <button className="btn1">Se alle konserter</button>
-            </Link>
+            <div className="flex justify-center py-4">
+              <Link to="/concerts">
+                <button className="btn1">Se alle konserter</button>
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <iframe
+              src="https://open.spotify.com/embed/artist/07RkGtZNwFOTFyVFEw4cMY?utm_source=generator&theme=0"
+              width="100%"
+              height={425}
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            ></iframe>
+
+            <div className="flex justify-center py-4">
+              <Link to="/music">
+                <button className="btn1">Se alle utgivelser</button>
+              </Link>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div>
-          <iframe
-            src="https://open.spotify.com/embed/artist/07RkGtZNwFOTFyVFEw4cMY?utm_source=generator&theme=0"
-            width="100%"
-            height={425}
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          ></iframe>
-
-          <div className="flex justify-center py-4">
-            <Link to="/music">
-              <button className="btn1">Se alle utgivelser</button>
-            </Link>
-          </div>
-        </div>
+      <section className="bg-primary/20 pb-8">
+        <NewsCards />
       </section>
     </>
   );

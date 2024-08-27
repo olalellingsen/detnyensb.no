@@ -37,8 +37,8 @@ function Concert({
 
   return (
     <div
-      className={`bg-primary text-white ${
-        next ? "rounded-xl md:min-h-[425px]" : ""
+      className={`text-white ${
+        next ? "bg-stone-900 rounded-xl md:min-h-[425px]" : "bg-primary"
       }`}
     >
       {next && <h2 className="text-center py-2">Neste konsert:</h2>}
