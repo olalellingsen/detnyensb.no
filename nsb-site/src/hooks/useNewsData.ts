@@ -26,6 +26,10 @@ const useNewsData = () => {
     fetchNewsData();
   }, []);
 
+  const getNewsItem = (id: string) => {
+    return newsData.find((newsItem) => newsItem.id === id);
+  };
+
   const addNewsItem = async (newsItem: NewsItem) => {
     const docRef = await addDoc(collection(db, "News"), newsItem);
     setNewsData([...newsData, { ...newsItem, id: docRef.id }]);
@@ -45,7 +49,7 @@ const useNewsData = () => {
     );
   };
 
-  return { newsData, addNewsItem, deleteNewsItem, updateNewsItem };
+  return { newsData, addNewsItem, deleteNewsItem, updateNewsItem, getNewsItem };
 };
 
 export default useNewsData;

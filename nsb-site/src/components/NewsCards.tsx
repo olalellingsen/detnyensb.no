@@ -10,7 +10,7 @@ function NewsCards() {
       <br />
       <div className="flex overflow-x-scroll lg:flex-wrap gap-4 lg:px-8">
         {newsData.map((newsItem, index) => (
-          <Link to={`/news/${newsItem}`} key={index}>
+          <Link to={`/news/${newsItem.id}`} key={index}>
             <div className="bg-primary rounded-lg shadow-xl text-white hover:bg-primary/90 transition-all p-4 h-full w-[260px] xs:w-[320px] sm:w-[400px]">
               {/* <img src="" alt="" /> */}
               <h2 className="py-2">{newsItem.title}</h2>
