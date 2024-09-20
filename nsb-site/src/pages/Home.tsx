@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import homeImage from "../assets/images/home.jpg";
-import NewsCards from "../components/NewsCards";
+// import NewsCards from "../components/NewsCards";
 import { Link } from "react-router-dom";
 import NextConcert from "../components/NextConcert";
 import { X } from "lucide-react";
@@ -79,9 +79,9 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-primary/20 pb-8">
+      {/* <section className="bg-primary/20 pb-8">
         <NewsCards />
-      </section>
+      </section> */}
     </>
   );
 }
