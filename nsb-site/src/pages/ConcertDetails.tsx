@@ -3,11 +3,9 @@ import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { Concert } from "../types";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 function ConcertDetails() {
   const { id } = useParams();
-  const [fetchedImage, setFetchedImage] = useState<string | null>(null);
   const [concertDetails, setConcertDetails] = useState<Concert | null>(null);
 
   useEffect(() => {
@@ -33,15 +31,6 @@ function ConcertDetails() {
             ),
           };
           setConcertDetails(concertData as Concert);
-
-          if (data.image) {
-            const storage = getStorage();
-            const imgRef = ref(storage, `Concerts/${data.image}`);
-            const url = await getDownloadURL(imgRef);
-            setFetchedImage(url);
-          }
-        } else {
-          console.error("No such document!");
         }
       } catch (error) {
         console.error("Error fetching concert details:", error);
@@ -59,8 +48,11 @@ function ConcertDetails() {
     <section className="mainContent grid gap-4">
       <h1>{concertDetails.title}</h1>
 
-      {fetchedImage && (
-        <img src={fetchedImage} alt={"Image of " + concertDetails.title} />
+      {concertDetails.imageURL && (
+        <img
+          src={concertDetails.imageURL}
+          alt={"Image of " + concertDetails.title}
+        />
       )}
 
       <div className="p-2 py-4 text-center">

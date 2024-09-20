@@ -10,6 +10,13 @@ function Concerts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Stop the loader once the concert data has been loaded (whether it's empty or not)
+    if (upcomingConcerts || pastConcerts) {
+      setLoading(false);
+    }
+  }, [upcomingConcerts, pastConcerts]);
+
+  useEffect(() => {
     if (showPast && pastConcertsRef.current) {
       pastConcertsRef.current.scrollIntoView({ behavior: "smooth" });
     } else if (!showPast) {
@@ -22,28 +29,33 @@ function Concerts() {
       <h1>Kommende konserter</h1>
       <br />
 
+      {/* Show the loading spinner */}
       {loading && (
         <section className="flex justify-center h-screen mt-24">
           <ClipLoader loading={true} size={100} />
         </section>
       )}
 
-      {/* Render upcoming concerts */}
-      {upcomingConcerts.length === 1 && (
-        <section onLoad={() => setLoading(false)}>
-          <Concert {...upcomingConcerts[0]} key={upcomingConcerts[0].id} />
-        </section>
-      )}
-
-      {upcomingConcerts.length > 1 && (
-        <section
-          className="grid gap-4 sm:grid-cols-2"
-          onLoad={() => setLoading(false)}
-        >
-          {upcomingConcerts.map((concert) => (
-            <Concert {...concert} key={concert.id} />
-          ))}
-        </section>
+      {/* Render when not loading */}
+      {!loading && (
+        <>
+          {/* Render upcoming concerts */}
+          {upcomingConcerts.length === 0 ? (
+            <section className="flex justify-center my-20">
+              <h3>Det er ingen kommende konserter</h3>
+            </section>
+          ) : upcomingConcerts.length === 1 ? (
+            <section>
+              <Concert {...upcomingConcerts[0]} key={upcomingConcerts[0].id} />
+            </section>
+          ) : (
+            <section className="grid gap-4 sm:grid-cols-2">
+              {upcomingConcerts.map((concert) => (
+                <Concert {...concert} key={concert.id} />
+              ))}
+            </section>
+          )}
+        </>
       )}
 
       <br />
@@ -57,14 +69,18 @@ function Concerts() {
           )}
         </button>
       </div>
+
       <br />
-      <section>
-        {showPast && (
-          <div>
-            <h2>Tidligere konserter</h2>
-            <br />
-            {/* Render past concerts */}
-            {pastConcerts.map((concert) => (
+
+      {/* Render past concerts */}
+      {showPast && (
+        <section>
+          <h2>Tidligere konserter</h2>
+          <br />
+          {pastConcerts.length === 0 ? (
+            <p>No past concerts</p>
+          ) : (
+            pastConcerts.map((concert) => (
               <div
                 className="mt-4 flex flex-col md:flex-row gap-2 md:gap-4 border-b border-gray-300"
                 key={concert.id}
@@ -73,10 +89,10 @@ function Concerts() {
                 <h3 className="basis-3/6">{concert.title}</h3>
                 <h3 className="basis-2/6">{concert.location}</h3>
               </div>
-            ))}
-          </div>
-        )}
-      </section>
+            ))
+          )}
+        </section>
+      )}
     </section>
   );
 }

@@ -1,14 +1,31 @@
+import { useState, useEffect } from "react";
 import Concert from "./Concert";
 import useConcertData from "../hooks/useConcertData";
 import ClipLoader from "react-spinners/ClipLoader";
 
 function NextConcert() {
   const { upcomingConcerts } = useConcertData();
+  const [loading, setLoading] = useState(true);
 
-  if (upcomingConcerts.length === 0) {
+  useEffect(() => {
+    if (upcomingConcerts) {
+      // Stop the loader once the data has been fetched (even if there are no concerts)
+      setLoading(false);
+    }
+  }, [upcomingConcerts]);
+
+  if (loading) {
     return (
       <div className="flex justify-center pt-20 min-h-[500px]">
         <ClipLoader loading={true} size={100} />
+      </div>
+    );
+  }
+
+  if (upcomingConcerts.length === 0) {
+    return (
+      <div className="flex justify-center pt-20 min-h-[425px] bg-gray-200 rounded-xl">
+        <h3>Det er ingen kommende konserter</h3>
       </div>
     );
   }
@@ -24,7 +41,7 @@ function NextConcert() {
       locationLink={upcomingConcerts[0].locationLink}
       description={upcomingConcerts[0].description}
       ticketLink={upcomingConcerts[0].ticketLink}
-      image={upcomingConcerts[0].image}
+      imageURL={upcomingConcerts[0].imageURL}
     />
   );
 }

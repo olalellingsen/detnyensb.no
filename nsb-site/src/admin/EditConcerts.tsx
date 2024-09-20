@@ -14,15 +14,7 @@ import { db } from "../firebase";
 import { Concert as ConcertType } from "../types";
 
 function EditConcerts() {
-  const {
-    upcomingConcerts,
-    fetchConcerts,
-    // handleFileChange,
-    // handleUpload,
-    // uploadProgress,
-    // imageUrl,
-    // imageFile,
-  } = useConcertData();
+  const { upcomingConcerts, fetchConcerts } = useConcertData();
 
   const [loading, setLoading] = useState(true);
 
@@ -30,12 +22,14 @@ function EditConcerts() {
   const [title, setTitle] = useState<string>("");
   const [concertDate, setConcertDate] = useState<string>("");
   const [concertTime, setConcertTime] = useState<string>("");
+  const [concertTimestamp, setConcertTimestamp] = useState<Timestamp>();
   const [location, setLocation] = useState<string>("");
   const [locationLink, setLocationLink] = useState<string>("");
   const [ticketLink, setTicketLink] = useState<string>("");
   const [spotifyLink, setSpotifyLink] = useState<string>("");
   const [youtubeLink, setYoutubeLink] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [imageURL, setImageURL] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false); // New state to track editing mode
   const [editingConcertId, setEditingConcertId] = useState<string | null>(null); // Holds ID of the concert being edited
 
@@ -43,6 +37,7 @@ function EditConcerts() {
   const resetForm = () => {
     setTitle("");
     setConcertDate("");
+    setConcertTimestamp(undefined);
     setLocation("");
     setLocationLink("");
     setTicketLink("");
@@ -51,6 +46,7 @@ function EditConcerts() {
     setDescription("");
     setIsEditing(false);
     setEditingConcertId(null);
+    setImageURL("");
   };
 
   // Function to handle adding/updating a concert in Firestore
@@ -58,21 +54,18 @@ function EditConcerts() {
   const handleConcertSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // Create a JavaScript Date object
-    const dateTime = new Date(concertDate + "T" + concertTime);
-
-    // Convert to Firestore Timestamp
-    const concertTimestamp = Timestamp.fromDate(dateTime);
+    // Convert the date and time to a Firestore Timestamp
+    const concertDateTime = new Date(`${concertDate}T${concertTime}`);
+    setConcertTimestamp(Timestamp.fromDate(concertDateTime));
 
     const concertData: Omit<ConcertType, "id"> = {
       title,
-      date: concertTimestamp, // Store the timestamp in Firestore format
-      time: concertTime, // Optional: If you want to store time separately
+      date: concertTimestamp!,
       location,
       locationLink,
       ticketLink,
       description,
-      // image: imageFile?.name,
+      imageURL,
       spotify: spotifyLink,
       youtube: youtubeLink,
     };
@@ -100,7 +93,7 @@ function EditConcerts() {
   const editConcert = (concert: ConcertType) => {
     setIsEditing(true);
     setTitle(concert.title);
-    setConcertDate("");
+    setConcertTimestamp(concert.date);
     setLocation(concert.location);
     setLocationLink(concert.locationLink || "");
     setTicketLink(concert.ticketLink || "");
@@ -108,6 +101,7 @@ function EditConcerts() {
     setYoutubeLink(concert.youtube || "");
     setDescription(concert.description || "");
     setEditingConcertId(concert.id || null);
+    setImageURL(concert.imageURL || "");
   };
 
   // Function to delete a concert from Firestore
@@ -181,20 +175,18 @@ function EditConcerts() {
             value={youtubeLink}
             onChange={(e) => setYoutubeLink(e.target.value)}
           />
+          <input
+            type="text"
+            placeholder="Link til bilde"
+            value={imageURL}
+            onChange={(e) => setImageURL(e.target.value)}
+          />
           <textarea
             placeholder="Beskrivelse"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="h-72"
           />
-          {/* <div className="bg-white p-4 rounded-lg">
-            <input type="file" accept="image/*" onChange={handleFileChange} />
-            <button className="btn1" onClick={handleUpload}>
-              Last opp
-            </button>
-
-            {uploadProgress > 0 && <p>Upload Progress: {uploadProgress}%</p>}
-          </div> */}
 
           <div className="flex flex-wrap gap-2">
             <button className="btn1" type="submit">

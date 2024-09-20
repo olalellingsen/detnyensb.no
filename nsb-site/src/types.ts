@@ -5,6 +5,7 @@ export interface Concert {
   title: string;
   subtitle?: string;
   image?: string;
+  imageURL?: string;
   date: Timestamp;
   time?: string;
   location: string;

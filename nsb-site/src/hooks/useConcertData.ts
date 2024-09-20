@@ -1,22 +1,29 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { collection, getDocs, DocumentData } from "firebase/firestore";
+import { useState, useEffect } from "react";
+// import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import {
+  collection,
+  getDocs,
+  DocumentData,
+  Timestamp,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import { Concert } from "../types";
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+
+// import {
+//   getDownloadURL,
+//   getStorage,
+//   ref,
+//   uploadBytesResumable,
+// } from "firebase/storage";
 
 const useConcertData = () => {
   const [concertData, setConcertData] = useState<DocumentData[]>([]);
   const [upcomingConcerts, setUpcomingConcerts] = useState<Concert[]>([]);
   const [pastConcerts, setPastConcerts] = useState<Concert[]>([]);
 
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [uploadProgress, setUploadProgress] = useState<number>(0);
-  const [imageUrl, setImageUrl] = useState<string>("");
+  // const [imageFile, setImageFile] = useState<File | null>(null);
+  // const [uploadProgress, setUploadProgress] = useState<number>(0);
+  // const [imageUrl, setImageUrl] = useState<string>("");
 
   const fetchConcerts = async () => {
     try {
@@ -43,46 +50,53 @@ const useConcertData = () => {
   }, [concertData]); // Update the filtered data whenever concertData changes
 
   const filterConcertData = () => {
-    const today = new Date();
+    const today = Timestamp.now().toDate(); // Get today's date
 
     const upcomingConcerts = concertData
-      .sort((a, b) => {
-        const aDate = new Date(a.date.toDate());
-        const bDate = new Date(b.date.toDate());
-        return aDate.getTime() - bDate.getTime(); // Sort by nearest date
-      })
       .filter((concert) => {
-        const concertDate = new Date(concert.date.toDate());
-        return concertDate > today;
+        // Ensure each concert has a valid `date` field before proceeding
+        if (concert.date && concert.date.toDate) {
+          const concertDate = concert.date.toDate();
+          return concertDate > today; // Filter for upcoming concerts
+        }
+        return false;
+      })
+      .sort((a, b) => {
+        const aDate = a.date.toDate(); // Convert `Timestamp` to `Date`
+        const bDate = b.date.toDate();
+        return aDate.getTime() - bDate.getTime(); // Sort by nearest date first
       })
       .map((concert) => ({
         id: concert.id,
         title: concert.title.toString(),
-        date: concert.date.toDate().toLocaleDateString(),
-        time: concert.date.toDate().toLocaleTimeString().slice(0, -3),
+        date: concert.date, // Keeping the original `Timestamp` for now
         location: concert.location,
         locationLink: concert.locationLink,
         ticketLink: concert.ticketLink,
         spotifyLink: concert.spotify,
         youtubeLink: concert.youtube,
         description: concert.description,
-        image: concert.image,
+        imageURL: concert.imageURL,
       }));
 
     const pastConcerts = concertData
-      .sort((a, b) => {
-        const aDate = new Date(a.date.toDate());
-        const bDate = new Date(b.date.toDate());
-        return bDate.getTime() - aDate.getTime(); // Sort in most recent order
-      })
       .filter((concert) => {
-        const concertDate = new Date(concert.date.toDate());
-        return concertDate < today;
+        // Ensure each concert has a valid `date` field before proceeding
+        if (concert.date && concert.date.toDate) {
+          const concertDate = concert.date.toDate();
+          return concertDate < today; // Filter for past concerts
+        }
+        return false;
+      })
+      .sort((a, b) => {
+        const aDate = a.date.toDate(); // Convert `Timestamp` to `Date`
+        const bDate = b.date.toDate();
+        return bDate.getTime() - aDate.getTime(); // Sort by most recent date first
       })
       .map((concert) => ({
         id: concert.id,
         title: concert.title,
-        date: concert.date.toDate().toLocaleDateString(),
+        date: concert.date, // Keeping the original `Timestamp` for now
         location: concert.location,
       }));
 
@@ -90,55 +104,55 @@ const useConcertData = () => {
     setPastConcerts(pastConcerts);
   };
 
-  // Handle image selection
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImageFile(e.target.files[0]);
-    }
-  };
+  // // Handle image selection
+  // const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files[0]) {
+  //     setImageFile(e.target.files[0]);
+  //   }
+  // };
 
-  // Handle image upload
-  const handleUpload = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!imageFile) return;
+  // // Handle image upload
+  // const handleUpload = async (e: FormEvent) => {
+  //   e.preventDefault();
+  //   if (!imageFile) return;
 
-    // Create a storage reference
-    const storage = getStorage();
-    const storageRef = ref(storage, `Concerts/${imageFile.name}`);
-    console.log(storageRef);
+  //   // Create a storage reference
+  //   const storage = getStorage();
+  //   const storageRef = ref(storage, `Concerts/${imageFile.name}`);
+  //   console.log(storageRef);
 
-    // Start the upload
-    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+  //   // Start the upload
+  //   const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
-    // Monitor the upload progress
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setUploadProgress(progress);
-        console.log(`Upload is ${progress}% done`);
-      },
-      (error) => {
-        console.error("Upload failed:", error);
-      },
-      async () => {
-        // Upload completed successfully
-        const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
-        setImageUrl(downloadUrl); // Store the image URL in state
-        console.log("File available at", downloadUrl);
-      }
-    );
-  };
+  //   // Monitor the upload progress
+  //   uploadTask.on(
+  //     "state_changed",
+  //     (snapshot) => {
+  //       const progress =
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //       setUploadProgress(progress);
+  //       console.log(`Upload is ${progress}% done`);
+  //     },
+  //     (error) => {
+  //       console.error("Upload failed:", error);
+  //     },
+  //     async () => {
+  //       // Upload completed successfully
+  //       const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+  //       setImageUrl(downloadUrl); // Store the image URL in state
+  //       console.log("File available at", downloadUrl);
+  //     }
+  //   );
+  // };
   return {
     upcomingConcerts,
     pastConcerts,
     fetchConcerts,
-    handleFileChange,
-    handleUpload,
-    uploadProgress,
-    imageUrl,
-    imageFile,
+    // handleFileChange,
+    // handleUpload,
+    // uploadProgress,
+    // imageUrl,
+    // imageFile,
   };
 };
 
