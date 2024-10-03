@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 
 import {
   addDoc,
@@ -115,6 +115,13 @@ function EditConcerts() {
       alert("Failed to delete concert. Please try again.");
     }
   };
+
+  // Set loading to false when the upcomingConcerts data is fetched
+  useEffect(() => {
+    if (upcomingConcerts !== undefined) {
+      setLoading(false);
+    }
+  }, [upcomingConcerts]);
 
   return (
     <section>

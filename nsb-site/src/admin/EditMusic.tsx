@@ -193,7 +193,7 @@ function EditMusic() {
           setEditAlbums((prev) => !prev);
         }}
       >
-        <h3>Endre album</h3>
+        <h3>Rediger album</h3>
         {editAlbums ? <ChevronDown size={30} /> : <ChevronRight size={30} />}
       </button>
       {editAlbums && (
@@ -331,7 +331,7 @@ function EditMusic() {
           setEditSingles((prev) => !prev);
         }}
       >
-        <h3>Endre singler</h3>
+        <h3>Rediger singler</h3>
         {editSingles ? <ChevronDown size={30} /> : <ChevronRight size={30} />}
       </button>
       {editSingles && (

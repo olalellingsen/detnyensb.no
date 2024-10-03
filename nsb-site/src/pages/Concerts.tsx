@@ -85,7 +85,9 @@ function Concerts() {
                 className="mt-4 flex flex-col md:flex-row gap-2 md:gap-4 border-b border-gray-300"
                 key={concert.id}
               >
-                <h3 className="basis-1/6">{concert.date.toString()}</h3>
+                <h3 className="basis-1/6">
+                  {concert.date.toDate().toLocaleDateString()}
+                </h3>
                 <h3 className="basis-3/6">{concert.title}</h3>
                 <h3 className="basis-2/6">{concert.location}</h3>
               </div>
