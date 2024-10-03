@@ -22,7 +22,6 @@ function EditConcerts() {
   const [title, setTitle] = useState<string>("");
   const [concertDate, setConcertDate] = useState<string>("");
   const [concertTime, setConcertTime] = useState<string>("");
-  const [concertTimestamp, setConcertTimestamp] = useState<Timestamp>();
   const [location, setLocation] = useState<string>("");
   const [locationLink, setLocationLink] = useState<string>("");
   const [ticketLink, setTicketLink] = useState<string>("");
@@ -37,7 +36,7 @@ function EditConcerts() {
   const resetForm = () => {
     setTitle("");
     setConcertDate("");
-    setConcertTimestamp(undefined);
+    setConcertTime("");
     setLocation("");
     setLocationLink("");
     setTicketLink("");
@@ -50,17 +49,16 @@ function EditConcerts() {
   };
 
   // Function to handle adding/updating a concert in Firestore
-
   const handleConcertSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // Convert the date and time to a Firestore Timestamp
+    // Convert the date and time to a Firestore Timestamp directly without setting state
     const concertDateTime = new Date(`${concertDate}T${concertTime}`);
-    setConcertTimestamp(Timestamp.fromDate(concertDateTime));
+    const concertTimestamp = Timestamp.fromDate(concertDateTime);
 
     const concertData: Omit<ConcertType, "id"> = {
       title,
-      date: concertTimestamp!,
+      date: concertTimestamp,
       location,
       locationLink,
       ticketLink,
@@ -93,7 +91,6 @@ function EditConcerts() {
   const editConcert = (concert: ConcertType) => {
     setIsEditing(true);
     setTitle(concert.title);
-    setConcertTimestamp(concert.date);
     setLocation(concert.location);
     setLocationLink(concert.locationLink || "");
     setTicketLink(concert.ticketLink || "");
