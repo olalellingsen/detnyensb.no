@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from "../firebase";
-import { Instagram, Music } from "lucide-react";
+import { Globe, Instagram, Music } from "lucide-react";
 import { ClipLoader } from "react-spinners";
 
 interface Member {
@@ -19,6 +19,7 @@ interface Member {
   instagram?: string;
   spotify?: string;
   photoBy?: string;
+  website?: string;
 }
 
 const MemberDetails = () => {
@@ -150,27 +151,43 @@ const MemberDetails = () => {
           </div>
 
           <br />
-
-          {member.instagram && (
-            <a
-              href={`https://www.instagram.com/${member.instagram}`}
-              target="blank"
-              className="flex gap-1 text-primary my-4 hover:underline w-min"
-            >
-              <Instagram size={30} strokeWidth={1} className="stroke-primary" />
-              <p>{member.instagram}</p>
-            </a>
-          )}
-          {member.spotify && (
-            <a
-              href={member.spotify}
-              target="blank"
-              className="hover:underline text-primary flex gap-1 w-max"
-            >
-              <Music size={30} strokeWidth={1} className="stroke-primary" />
-              <p>Spotify</p>
-            </a>
-          )}
+          <br />
+          <div className="grid gap-4">
+            {member.instagram && (
+              <a
+                href={`https://www.instagram.com/${member.instagram}`}
+                target="blank"
+                className="hover:underline text-primary flex gap-1 w-max"
+              >
+                <Instagram
+                  size={30}
+                  strokeWidth={1}
+                  className="stroke-primary"
+                />
+                <p>{member.instagram}</p>
+              </a>
+            )}
+            {member.website && (
+              <a
+                href={`https://www.${member.website}`}
+                target="blank"
+                className="hover:underline text-primary flex gap-1 w-max"
+              >
+                <Globe size={30} strokeWidth={1} className="stroke-primary" />
+                <p>{member.website}</p>
+              </a>
+            )}
+            {member.spotify && (
+              <a
+                href={member.spotify}
+                target="blank"
+                className="hover:underline text-primary flex gap-1 w-max"
+              >
+                <Music size={30} strokeWidth={1} className="stroke-primary" />
+                <p>Spotify</p>
+              </a>
+            )}
+          </div>
         </section>
         <br />
       </div>
