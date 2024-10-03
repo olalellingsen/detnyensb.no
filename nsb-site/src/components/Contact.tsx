@@ -2,7 +2,7 @@ import { Mail, Phone } from "lucide-react";
 import SoMe from "./SoMe";
 
 function Contact() {
-  const emailAddress = "detnyenorskestorband@gmail.com";
+  const emailAddress = "post@detnyensb.no";
   return (
     <div className="grid gap-8 sm:flex justify-between">
       {/* contact */}
