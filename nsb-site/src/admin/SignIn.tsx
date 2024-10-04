@@ -64,8 +64,8 @@ function SignIn() {
         {isSignedIn ? (
           <section>
             <div className="flex flex-wrap justify-center sm:justify-between gap-2">
-              <p className="py-2 px-4 bg-gray-300 rounded-full w-max">
-                {user?.displayName}
+              <p className="py-2 px-4 bg-gray-300 dark:bg-zinc-800 rounded-full w-max">
+                Bruker: {" " + user?.displayName}
               </p>
               <button className="btn1" onClick={SIGN_OUT}>
                 Logg ut

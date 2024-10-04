@@ -40,7 +40,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed h-16 p-2 lg:px-6 flex justify-between w-full bg-primaryBg z-10">
+      <nav className="fixed h-16 p-2 lg:px-6 flex justify-between w-full z-10">
         <Link to="/">
           <img
             src={logo}
@@ -68,7 +68,7 @@ function Navbar() {
           <Menu
             size={40}
             strokeWidth={1}
-            className="stroke-primary h-full hover:cursor-pointer"
+            className="stroke-primary dark:stroke-gray-300 h-full hover:cursor-pointer"
           />
         </div>
       </nav>
@@ -95,7 +95,7 @@ function Navbar() {
 
           {/* mobile menu */}
           <div className="pt-8 text-center font-extralight">
-            <ul className="text-5xl text-white grid gap-4">
+            <ul className="text-5xl text-white dark:text-gray-300 grid gap-4">
               {menuOptions.map((option) => (
                 <Link
                   key={option.label}

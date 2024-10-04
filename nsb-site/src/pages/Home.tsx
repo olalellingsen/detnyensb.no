@@ -26,7 +26,7 @@ function Home() {
       <aside
         className={`font-extralight ${
           showPopup ? "opacity-100" : "right-0 opacity-0"
-        } transition-all duration-1000 absolute right-0 bottom-0 sm:w-72 m-2 xs:m-6 rounded-xl p-4 text-white bg-primary shadow-xl`}
+        } transition-all duration-1000 absolute right-0 bottom-0 sm:w-72 m-2 xs:m-6 rounded-xl p-4 text-white bg-primary dark:bg-primaryDark shadow-xl`}
       >
         <X
           className="absolute top-0 right-0 m-1 cursor-pointer hover:scale-110"

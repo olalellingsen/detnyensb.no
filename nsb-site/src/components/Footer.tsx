@@ -2,7 +2,7 @@ import Contact from "./Contact";
 
 function Footer() {
   return (
-    <footer className="bg-primary text-white p-6 grid gap-4 sm:px-12 sm:pt-16">
+    <footer className="bg-primary dark:bg-zinc-800 text-white dark:text-gray-300 p-6 grid gap-4 sm:px-12 sm:pt-16">
       <Contact />
       <br />
       <h3>

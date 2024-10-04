@@ -85,7 +85,7 @@ const MemberDetails = () => {
     return (
       <section className="mainContent">
         <div className="w-full flex justify-center py-24">
-          <ClipLoader loading={true} size={100} />
+          <ClipLoader loading={true} size={100} color="#1c4e50" />
         </div>
       </section>
     );
@@ -93,7 +93,10 @@ const MemberDetails = () => {
   return (
     <section className="mainContent">
       <div>
-        <a href="/members" className="text-primary hover:underline">
+        <a
+          href="/members"
+          className="text-primary dark:text-primaryDark hover:underline"
+        >
           Tilbake til oversikten
         </a>
       </div>
@@ -120,7 +123,7 @@ const MemberDetails = () => {
 
         <section>
           {member.quote && (
-            <h2 className="p-8 md:p-0 md:py-8 font-semibold text-primary">
+            <h2 className="p-8 md:p-0 md:py-8 font-semibold text-primary dark:text-primaryDark">
               - {member.quote}
             </h2>
           )}
@@ -157,12 +160,12 @@ const MemberDetails = () => {
               <a
                 href={`https://www.instagram.com/${member.instagram}`}
                 target="blank"
-                className="hover:underline text-primary flex gap-1 w-max"
+                className="hover:underline text-primary dark:text-primaryDark flex gap-1 w-max"
               >
                 <Instagram
                   size={30}
                   strokeWidth={1}
-                  className="stroke-primary"
+                  className="stroke-primary dark:stroke-primaryDark"
                 />
                 <p>{member.instagram}</p>
               </a>
@@ -171,9 +174,13 @@ const MemberDetails = () => {
               <a
                 href={`https://www.${member.website}`}
                 target="blank"
-                className="hover:underline text-primary flex gap-1 w-max"
+                className="hover:underline text-primary dark:text-primaryDark flex gap-1 w-max"
               >
-                <Globe size={30} strokeWidth={1} className="stroke-primary" />
+                <Globe
+                  size={30}
+                  strokeWidth={1}
+                  className="stroke-primary dark:stroke-primaryDark"
+                />
                 <p>{member.website}</p>
               </a>
             )}
@@ -181,9 +188,13 @@ const MemberDetails = () => {
               <a
                 href={member.spotify}
                 target="blank"
-                className="hover:underline text-primary flex gap-1 w-max"
+                className="hover:underline text-primary dark:text-primaryDark flex gap-1 w-max"
               >
-                <Music size={30} strokeWidth={1} className="stroke-primary" />
+                <Music
+                  size={30}
+                  strokeWidth={1}
+                  className="stroke-primary dark:stroke-primaryDark"
+                />
                 <p>Spotify</p>
               </a>
             )}

@@ -11,7 +11,7 @@ function NewsDetails() {
     return (
       <section className="mainContent">
         <div className="w-full flex justify-center py-24">
-          <ClipLoader loading={true} size={100} />
+          <ClipLoader loading={true} size={100} color="#1c4e50" />
         </div>
       </section>
     );

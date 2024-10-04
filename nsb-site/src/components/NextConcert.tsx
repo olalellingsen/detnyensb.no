@@ -17,14 +17,14 @@ function NextConcert() {
   if (loading) {
     return (
       <div className="flex justify-center pt-20 min-h-[500px]">
-        <ClipLoader loading={true} size={100} />
+        <ClipLoader loading={true} size={100} color="#1c4e50" />
       </div>
     );
   }
 
   if (upcomingConcerts.length === 0) {
     return (
-      <div className="flex justify-center pt-20 min-h-[425px] bg-gray-200 rounded-xl">
+      <div className="flex justify-center pt-20 min-h-[425px] bg-gray-200 dark:bg-zinc-800 rounded-xl">
         <h3>Det er ingen kommende konserter</h3>
       </div>
     );

@@ -18,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <main className="bg-primaryBg">
+      <main>
         <ScrollToTop />
         <Routes>
           <Route path="/" Component={Home} />

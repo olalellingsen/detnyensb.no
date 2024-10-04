@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+main {
+  @apply bg-primaryBg dark:bg-primaryBgDark text-black dark:text-gray-300;
+}
+
+nav {
+  @apply bg-primaryBg dark:bg-primaryBgDark text-black dark:text-gray-300;
+}
+
 h1 {
-  @apply text-3xl text-center border-primary;
+  @apply text-3xl text-center;
 }
 
 h2 {
@@ -16,15 +24,15 @@ h3 {
 
 input,
 textarea {
-  @apply rounded-lg p-2 w-full;
+  @apply rounded-lg p-2 w-full dark:bg-zinc-800 outline-none;
 }
 
 .navLink {
-  @apply hover:cursor-pointer hover:border-b-2 hover:border-primary hover:text-primary transition-all ease-in-out duration-200 px-1 h-min mt-1;
+  @apply hover:cursor-pointer hover:border-b-2 hover:border-primary hover:text-primary dark:hover:border-primaryDark dark:hover:text-primaryDark transition-all ease-in-out duration-200 px-1 h-min mt-1;
 }
 
 .soMeIcon {
-  @apply hover:cursor-pointer hover:scale-105 stroke-white stroke-1;
+  @apply hover:cursor-pointer hover:scale-105 dark:stroke-gray-300 stroke-white stroke-1;
 }
 
 p {
@@ -40,7 +48,7 @@ p {
 }
 
 .menuOpen {
-  @apply fixed lg:hidden top-0 left-0 w-screen h-screen bg-primary;
+  @apply fixed lg:hidden top-0 left-0 w-screen h-screen bg-primary dark:bg-primaryBgDark;
 }
 
 .mainContent {
@@ -48,10 +56,10 @@ p {
 }
 
 .btn1 {
-  @apply border border-primary w-max h-min rounded-full px-8 py-2 sm:hover:bg-primary sm:hover:text-white transition-all ease-in-out duration-200;
+  @apply text-white bg-primary dark:bg-primaryDark w-max h-min rounded-full px-8 py-2 sm:hover:bg-primary/90 dark:sm:hover:bg-primaryDark/60 sm:hover:text-white transition-all ease-in-out duration-200;
 }
 .btn2 {
-  @apply border border-primaryBg w-max h-min rounded-full px-8 py-2 sm:hover:bg-primaryBg sm:hover:text-primary transition-all ease-in-out duration-200;
+  @apply bg-gray-100 dark:bg-gray-100 text-primary w-max h-min rounded-full px-8 py-2 sm:hover:bg-gray-300  transition-all ease-in-out duration-200;
 }
 
 .member {

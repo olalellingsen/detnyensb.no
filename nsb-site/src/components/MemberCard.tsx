@@ -22,7 +22,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
         <LazyImage src={imageUrl1} alt={name} triggerOnce />
       </Link>
       <p>{name}</p>
-      <p className="text-black/50">{instrument}</p>
+      <p className="text-gray-500">{instrument}</p>
     </div>
   );
 };

@@ -65,7 +65,7 @@ function Music() {
       <h1>Utgivelser</h1>
       {loading && (
         <section className="flex justify-center h-screen mt-24">
-          <ClipLoader loading={true} size={100} />
+          <ClipLoader loading={true} size={100} color="#1c4e50" />
         </section>
       )}
       <br />

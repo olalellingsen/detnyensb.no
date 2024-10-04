@@ -81,7 +81,7 @@ function EditNews() {
         {newsData.map((newsItem, index) => (
           <div
             key={index}
-            className="bg-primary rounded-lg shadow-xl text-white h-full p-4 relative"
+            className="bg-primary dark:bg-primaryDark rounded-lg shadow-xl text-white h-full p-4 relative"
           >
             {/* <img src="" alt="" /> */}
             <h2 className="py-2">{newsItem.title}</h2>
